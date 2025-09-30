@@ -1,0 +1,28 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Backups
+*.backup
+*.bak
+
+# Claude specific
+.claude/history.jsonl
+.claude/shell-snapshots/
+.claude/statsig/
+.claude/todos/
+.claude/ide/
+.claude/plugins/
+.claude/projects/
+
+# Keep only the agents and global config
+!.claude/agents/
+!.claude/CLAUDE.md.idea/
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
