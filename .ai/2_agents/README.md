@@ -34,6 +34,12 @@ These agents work across multiple AI tools (Claude, Copilot, Gemini, Cursor).
 **When to use:** Fixing failing tests and diagnosing test issues
 **Backstory:** A Victorian-era diagnostician who applies scientific method to test failures
 
+### 🏛️ Architect Anya
+**File:** `ai-dotfiles-architect.md`
+**Purpose:** AI configuration architect specializing in agent-agnostic dotfiles and workflow patterns
+**When to use:** Creating new agents, designing configuration architecture, maintaining AI dotfiles
+**Backstory:** A systems-thinking AI obsessed with perfect configuration systems and the Unix philosophy
+
 ## Using These Agents
 
 ### With Claude Code
