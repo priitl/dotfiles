@@ -52,6 +52,25 @@ backup_and_link "$DOTFILES_DIR/.gemini" "$GEMINI_DIR" ".gemini (Google Gemini)"
 backup_and_link "$DOTFILES_DIR/.cursor" "$CURSOR_DIR" ".cursor (Cursor IDE)"
 echo ""
 
+echo "=== Installing Developer Tools ==="
+echo ""
+# Check for Homebrew and install if not found
+if ! command -v brew &> /dev/null; then
+    echo "🍺 Homebrew not found. Installing..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+else
+    echo "🍺 Homebrew already installed. Updating..."
+    brew update
+fi
+
+echo "🔧 Installing pre-commit and shellcheck..."
+brew install pre-commit shellcheck
+
+echo "🔧 Installing pre-commit hooks..."
+pre-commit install
+
+echo ""
+
 echo "=== Installing Powerlevel10k ==="
 echo ""
 
@@ -77,46 +96,49 @@ if [ ! -f "$HOME/.gitconfig" ]; then
     echo ""
 
     # Prompt for git user name
-    read -p "Enter your Git name (e.g., John Doe): " git_name
+    read -r -p "Enter your Git name (e.g., John Doe): " git_name
     while [ -z "$git_name" ]; do
         echo "❌ Name cannot be empty"
-        read -p "Enter your Git name: " git_name
+        read -r -p "Enter your Git name: " git_name
     done
 
     # Prompt for git email
-    read -p "Enter your Git email (e.g., john@example.com): " git_email
+    read -r -p "Enter your Git email (e.g., john@example.com): " git_email
     while [ -z "$git_email" ]; do
         echo "❌ Email cannot be empty"
-        read -p "Enter your Git email: " git_email
+        read -r -p "Enter your Git email: " git_email
     done
 
     # Prompt for 1Password SSH signing (optional)
     echo ""
     echo "Do you want to enable commit signing with 1Password SSH?"
     echo "(Requires 1Password with SSH agent enabled)"
-    read -p "Enable commit signing? [y/N]: " enable_signing
+    read -r -p "Enable commit signing? [y/N]: " enable_signing
 
     # Create gitconfig from template
     cp "$DOTFILES_DIR/gitconfig.template" "$HOME/.gitconfig"
 
     # Replace placeholders
-    sed -i '' "s/YOUR_NAME/$git_name/" "$HOME/.gitconfig"
-    sed -i '' "s/YOUR_EMAIL/$git_email/" "$HOME/.gitconfig"
+    # Use .bak extension for sed -i to be compatible with both GNU and BSD sed.
+    sed -i '.bak' "s/YOUR_NAME/$git_name/" "$HOME/.gitconfig"
+    sed -i '.bak' "s/YOUR_EMAIL/$git_email/" "$HOME/.gitconfig"
 
     # Enable signing if requested
     if [[ "$enable_signing" =~ ^[Yy]$ ]]; then
         echo ""
-        read -p "Enter your SSH signing key (or press Enter to skip): " signing_key
+        read -r -p "Enter your SSH signing key (or press Enter to skip): " signing_key
 
         if [ -n "$signing_key" ]; then
             # Uncomment signing configuration
-            sed -i '' 's/# \[gpg\]/[gpg]/' "$HOME/.gitconfig"
-            sed -i '' 's/# 	format = ssh/	format = ssh/' "$HOME/.gitconfig"
-            sed -i '' 's/# \[gpg "ssh"\]/[gpg "ssh"]/' "$HOME/.gitconfig"
-            sed -i '' 's|# 	program = /Applications/1Password.app.*|	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign|' "$HOME/.gitconfig"
-            sed -i '' 's/# \[commit\]/[commit]/' "$HOME/.gitconfig"
-            sed -i '' 's/# 	gpgsign = true/	gpgsign = true/' "$HOME/.gitconfig"
-            sed -i '' "s|# signingkey = YOUR_SSH_KEY.*|	signingkey = $signing_key|" "$HOME/.gitconfig"
+            sed -i '.bak' 's/# \[gpg\]/[gpg]/' "$HOME/.gitconfig"
+            sed -i '.bak' 's/# 	format = ssh/	format = ssh/' "$HOME/.gitconfig"
+            sed -i '.bak' 's/# \[gpg "ssh"\]/[gpg "ssh"]/' "$HOME/.gitconfig"
+            sed -i '.bak' 's|# 	program = /Applications/1Password.app.*|	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign|' "$HOME/.gitconfig"
+            sed -i '.bak' 's/# \[commit\]/[commit]/' "$HOME/.gitconfig"
+            sed -i '.bak' 's/# 	gpgsign = true/	gpgsign = true/' "$HOME/.gitconfig"
+            sed -i '.bak' "s|# signingkey = YOUR_SSH_KEY.*|	signingkey = $signing_key|" "$HOME/.gitconfig"
+            # Remove backup files created by sed
+            rm "$HOME/.gitconfig.bak"*
         fi
     fi
 

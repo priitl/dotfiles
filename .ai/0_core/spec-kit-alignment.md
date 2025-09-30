@@ -175,9 +175,9 @@ cp ~/.ai/3_specs/spec-template.md specs/003-dashboard/spec.md
 ## Summary: Spec-Kit Benefits
 
 ### Key Advantages
-- ✅ Simple, clean structure
-- ✅ AI-friendly (standard pattern)
-- ✅ Feature isolation
-- ✅ Works with Spec-Kit CLI
-- ✅ Git tracks all history
-- ✅ Easy to navigate and maintain
+- Simple, clean structure
+- AI-friendly (standard pattern)
+- Feature isolation
+- Works with Spec-Kit CLI
+- Git tracks all history
+- Easy to navigate and maintain
