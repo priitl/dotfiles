@@ -8,7 +8,7 @@ Agent-agnostic AI development environment configuration that works with Claude, 
 A shared core that works with **all AI tools** - write once, use everywhere:
 - **Core standards** - Personality, coding standards, decision framework, git workflow
 - **Workflows** - TDD workflow, pre-commit protocol
-- **Specialized agents** - 5 expert agents that work across all AI tools
+- **Specialized agents** - 6 expert agents that work across all AI tools
 
 ### 🛠️ Tool-Specific Configurations
 Lightweight wrappers that import the shared core:
@@ -41,7 +41,8 @@ dotfiles/
 │       ├── jira-to-spec.md             # 🌉 Valdis the Translator
 │       ├── spring-hex-tdd-developer.md # 🦖 Rex the Red-Green-Refactor
 │       ├── code-reviewer.md            # ⚖️ Judge Dredd Code
-│       └── test-fixer.md               # 🔬 Dr. Debugsworth McFixit
+│       ├── test-fixer.md               # 🔬 Dr. Debugsworth McFixit
+│       └── ai-dotfiles-architect.md    # 🏛️ Architect Anya
 │
 ├── .claude/
 │   ├── CLAUDE.md                       # Claude-specific wrapper
@@ -89,6 +90,11 @@ dotfiles/
 **Purpose:** Test failure diagnostician and fixer extraordinaire
 **When to use:** Fixing failing tests and diagnosing test issues
 **Example:** "Fix the failing integration tests in UserService"
+
+### 🏛️ Architect Anya
+**Purpose:** AI configuration architect specializing in agent-agnostic dotfiles and workflow patterns
+**When to use:** Creating new agents, designing configuration architecture, maintaining AI dotfiles
+**Example:** "Anya, create a new agent for database migrations"
 
 ## Installation
 
