@@ -6,7 +6,11 @@
 set -e
 
 DOTFILES_DIR="$HOME/Projects/dotfiles"
+AI_DIR="$HOME/.ai"
 CLAUDE_DIR="$HOME/.claude"
+COPILOT_DIR="$HOME/.copilot"
+GEMINI_DIR="$HOME/.gemini"
+CURSOR_DIR="$HOME/.cursor"
 
 echo "🤖 Installing Priit's Dotfiles..."
 echo ""
@@ -35,9 +39,17 @@ backup_and_link() {
     echo "   ✓ $name linked"
 }
 
-echo "=== Installing Claude AI Agents ==="
+echo "=== Installing Agent-Agnostic AI Core ==="
 echo ""
-backup_and_link "$DOTFILES_DIR/.claude" "$CLAUDE_DIR" ".claude"
+backup_and_link "$DOTFILES_DIR/.ai" "$AI_DIR" ".ai (agent-agnostic core)"
+echo ""
+
+echo "=== Installing Tool-Specific Configurations ==="
+echo ""
+backup_and_link "$DOTFILES_DIR/.claude" "$CLAUDE_DIR" ".claude (Claude Code)"
+backup_and_link "$DOTFILES_DIR/.copilot" "$COPILOT_DIR" ".copilot (GitHub Copilot)"
+backup_and_link "$DOTFILES_DIR/.gemini" "$GEMINI_DIR" ".gemini (Google Gemini)"
+backup_and_link "$DOTFILES_DIR/.cursor" "$CURSOR_DIR" ".cursor (Cursor IDE)"
 echo ""
 
 echo "=== Installing Powerlevel10k ==="
@@ -117,22 +129,34 @@ fi
 echo ""
 
 # Verify installation
-if [ -L "$CLAUDE_DIR" ] && [ -d "$CLAUDE_DIR" ]; then
+if [ -L "$AI_DIR" ] && [ -d "$AI_DIR" ] && [ -L "$CLAUDE_DIR" ] && [ -d "$CLAUDE_DIR" ]; then
     echo "✅ Installation complete!"
     echo ""
-    echo "📚 Available agents:"
+    echo "🎯 Agent-Agnostic AI Framework Installed:"
+    echo "   ~/.ai/            - Shared core (works with all AI tools)"
+    echo "   ~/.claude/        - Claude Code configuration"
+    echo "   ~/.copilot/       - GitHub Copilot configuration"
+    echo "   ~/.gemini/        - Google Gemini configuration"
+    echo "   ~/.cursor/        - Cursor IDE configuration"
+    echo ""
+    echo "📚 Available agents (work with all AI tools):"
     echo "   🏗️  Constructor Conway     - Bootstrap Spring Boot projects"
     echo "   🌉 Valdis the Translator  - Jira to technical specs"
     echo "   🦖 Rex the Red-Green-Refactor - TDD implementation"
     echo "   ⚖️  Judge Dredd Code       - Code reviews"
     echo "   🔬 Dr. Debugsworth McFixit - Test failure diagnosis"
     echo ""
-    echo "🚀 Quick start:"
-    echo "   1. Open Claude Code CLI"
+    echo "🚀 Quick start with Claude Code:"
+    echo "   1. Open Claude Code CLI in any project"
     echo "   2. Try: 'Bootstrap a Spring Boot project called \"demo\" with package \"com.example.demo\"'"
+    echo ""
+    echo "💡 Quick start with other tools:"
+    echo "   - GitHub Copilot: Opens instructions from ~/.copilot/instructions.md"
+    echo "   - Cursor: Opens rules from ~/.cursor/rules.md"
+    echo "   - Gemini: Opens config from ~/.gemini/config.md"
     echo ""
     echo "📖 For more info: cat ~/Projects/dotfiles/README.md"
 else
-    echo "❌ Installation failed - symlink not created correctly"
+    echo "❌ Installation failed - symlinks not created correctly"
     exit 1
 fi

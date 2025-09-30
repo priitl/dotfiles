@@ -3,26 +3,35 @@
 .AppleDouble
 .LSOverride
 
-# Backups
-*.backup
-*.bak
+# IDE
+.idea/
+.vscode/
 
-# Claude specific
+# Temporary files
+*.swp
+*.swo
+*~
+
+# Backup files created by install.sh
+*.backup.*
+
+# Claude
 .claude/history.jsonl
+.claude/file-history/
+.claude/ide/
+.claude/projects/
 .claude/shell-snapshots/
 .claude/statsig/
 .claude/todos/
-.claude/ide/
-.claude/plugins/
-.claude/projects/
 
-# Keep only the agents and global config
-!.claude/agents/
-!.claude/CLAUDE.md.idea/
+# Copilot
+.copilot/command-history-state.json
+.copilot/history-session-state/
+.copilot/logs/
+.copilot/config.json
 
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
-out/
+# Gemini
+.gemini/google_accounts.json
+.gemini/oauth_creds.json
+.gemini/settings.json
+.gemini/tmp/

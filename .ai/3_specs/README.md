@@ -1,0 +1,196 @@
+# Spec-Driven Development Templates
+
+These templates follow [GitHub Spec-Kit](https://github.com/github/spec-kit) patterns for specification-driven development.
+
+## What is Spec-Driven Development?
+
+**Specifications become executable source code** that AI agents use to build software.
+
+Traditional: Code → Documentation
+Spec-Driven: **Specification → Code**
+
+## Templates Available
+
+### 1. `spec-template.md` - Feature Specification
+What to build. Includes:
+- Requirements (functional & non-functional)
+- User stories
+- Acceptance criteria
+- Success metrics
+
+**When to use**: Starting any new feature or significant change
+
+### 2. `plan-template.md` - Implementation Plan
+How to build it. Includes:
+- Architecture overview
+- Phased approach (Research → Design → Build → Verify)
+- Risk mitigation
+- Progress tracking
+
+**When to use**: After spec is approved, before coding
+
+### 3. `tasks-template.md` - Task Breakdown
+Atomic, trackable tasks. Includes:
+- Task dependencies
+- Acceptance criteria per task
+- Status tracking (🔵🟡🟢🔴)
+- Progress summary
+
+**When to use**: Part of planning phase
+
+### 4. `constitution-template.md` - Project Constitution
+Non-negotiable project principles. Includes:
+- Core principles (quality, TDD, simplicity)
+- Tech stack
+- Coding standards
+- Prohibited/required actions
+
+**When to use**: Once per project, update as needed
+
+## Workflow
+
+### Using with Spec-Kit CLI (Optional)
+
+```bash
+# Install spec-kit CLI
+uv tool install spec-kit
+
+# In your project
+specify init
+
+# Create new feature
+specify new "Add user authentication"
+# → Creates specs/001-user-auth/ with templates
+
+# Generate plan
+specify plan
+# → AI reads spec.md + constitution.md
+# → Generates plan.md, tasks.md, research.md
+
+# Build it
+specify build
+# → AI reads tasks.md and implements
+```
+
+### Using Manually (With Your AI Agents)
+
+```bash
+# 1. Start with constitution
+cp ~/.ai/3_specs/constitution-template.md project/constitution.md
+# Edit with your project principles
+
+# 2. Create feature spec
+mkdir -p project/specs/001-user-auth/
+cp ~/.ai/3_specs/spec-template.md project/specs/001-user-auth/spec.md
+# Write requirements
+
+# 3. Ask AI to create plan
+"Read constitution.md and specs/001-user-auth/spec.md,
+then create an implementation plan using ~/.ai/3_specs/plan-template.md"
+
+# 4. Generate tasks
+"Based on the plan, create a task breakdown using
+~/.ai/3_specs/tasks-template.md"
+
+# 5. Implement with TDD
+"Delegate to Rex to implement Task 1 with TDD"
+```
+
+## Integration with Your Agents
+
+### Constructor Conway (Bootstrapper)
+- Uses constitution.md to set up project structure
+- Applies tech stack from constitution
+
+### Valdis the Translator (Jira → Spec)
+- Translates Jira tickets into spec.md format
+- Ensures all acceptance criteria captured
+
+### Rex the Red-Green-Refactor (TDD Developer)
+- Reads tasks.md for implementation requirements
+- Follows TDD workflow strictly
+- Updates task status as work progresses
+
+### Judge Dredd Code (Reviewer)
+- Reviews code against spec.md requirements
+- Validates constitution.md compliance
+- Checks acceptance criteria met
+
+### Dr. Debugsworth McFixit (Test Fixer)
+- Refers to spec.md for expected behavior
+- Ensures tests match acceptance criteria
+
+## Benefits
+
+### ✅ Clear Intent
+Spec defines WHAT to build before HOW to build it
+
+### ✅ AI-Friendly
+Structured specs are easier for AI to understand and execute
+
+### ✅ Trackable Progress
+Tasks with clear status indicators
+
+### ✅ Quality Gates
+Constitution enforces non-negotiable principles
+
+### ✅ Version Controlled
+All specs, plans, and tasks in git
+
+### ✅ Multi-Tool Compatible
+Works with Claude, Copilot, Gemini, Cursor
+
+## Examples
+
+### Example 1: Small Feature
+```
+project/
+├── constitution.md           (project principles)
+└── specs/
+    └── 001-add-search/
+        ├── spec.md           (what to build)
+        ├── plan.md           (how to build)
+        └── tasks.md          (task breakdown)
+```
+
+### Example 2: Large Feature
+```
+project/
+├── constitution.md
+└── specs/
+    └── 002-auth-system/
+        ├── spec.md
+        ├── plan.md
+        ├── tasks.md
+        ├── research.md       (technical research)
+        ├── data-model.md     (database schema)
+        └── contracts/        (API contracts)
+            ├── auth-api.yaml
+            └── user-api.yaml
+```
+
+## Best Practices
+
+### 1. Start Small
+Begin with constitution.md and one simple feature
+
+### 2. Iterate on Specs
+Specs evolve—update them as you learn
+
+### 3. Use Clarification Phase
+If spec is vague, ask AI to generate clarification questions
+
+### 4. Link Everything
+Reference spec.md from plan.md, plan.md from tasks.md
+
+### 5. Track Progress
+Update task status religiously (🔵→🟡→🟢)
+
+### 6. Version Control
+Commit specs, plans, and tasks just like code
+
+## Further Reading
+
+- [GitHub Spec-Kit Repo](https://github.com/github/spec-kit)
+- [Spec-Driven Development Blog Post](https://github.blog/ai-and-ml/generative-ai/spec-driven-development-with-ai/)
+- [Spec-Kit Documentation](https://github.com/github/spec-kit/blob/main/spec-driven.md)
