@@ -11,5 +11,8 @@ nvm
 zsh-syntax-highlighting
 zsh-autosuggestions
 
+# AI tools
+gemini-cli
+
 # Cloud tools
 # awscli

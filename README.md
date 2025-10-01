@@ -30,8 +30,9 @@ The install script dynamically builds your `.zshrc` based on installed tools:
 - ✅ Installs zsh plugins → Adds plugin sources
 
 ### 📦 Package Management
-- **apps.txt** - Homebrew CLI packages (with comment support)
-- **casks.txt** - Homebrew GUI applications (with comment support)
+- **brew_apps.txt** - Homebrew CLI packages (with comment support)
+- **brew_casks.txt** - Homebrew GUI applications (with comment support)
+- **npm_packages.txt** - Global npm packages (with comment support)
 
 ## Repository Structure
 
@@ -72,8 +73,9 @@ dotfiles/
 ├── zsh_plugins.txt                     # Oh-My-Zsh plugins list
 ├── gitignore_global                    # Global gitignore
 ├── gitconfig.template                  # Git config template
-├── apps.txt                            # Homebrew packages list
-├── casks.txt                           # Homebrew casks list
+├── brew_apps.txt                       # Homebrew packages list
+├── brew_casks.txt                      # Homebrew casks list
+├── npm_packages.txt                    # Global npm packages list
 ├── install.sh                          # Installation script
 └── README.md                           # This file
 ```
@@ -144,8 +146,9 @@ The install script will:
    - Optional: 1Password SSH commit signing
 
 3. **Optional installations** (prompted):
-   - Homebrew packages from `apps.txt` (git, docker, nvm, etc.)
-   - GUI applications from `casks.txt` (1Password, VS Code, iTerm2, etc.)
+   - Homebrew packages from `brew_apps.txt` (git, docker, nvm, etc.)
+   - GUI applications from `brew_casks.txt` (1Password, VS Code, iTerm2, etc.)
+   - Global npm packages from `npm_packages.txt`
    - SDKMAN + Java 21
    - NVM + Node.js LTS
    - Zsh plugins (syntax-highlighting, autosuggestions)
@@ -158,9 +161,9 @@ The install script will:
 
 ### Customizing Package Lists
 
-Edit `apps.txt` and `casks.txt` to customize what gets installed:
+Edit `brew_apps.txt`, `brew_casks.txt`, and `npm_packages.txt` to customize what gets installed:
 
-**apps.txt** (Homebrew CLI packages):
+**brew_apps.txt** (Homebrew CLI packages):
 ```txt
 # Core development tools
 git
@@ -173,7 +176,7 @@ docker-compose
 # Empty lines are ignored
 ```
 
-**casks.txt** (GUI applications):
+**brew_casks.txt** (GUI applications):
 ```txt
 # Development Tools
 iterm2
@@ -182,6 +185,15 @@ visual-studio-code
 # Comment out apps you don't need
 # figma
 # slack
+```
+
+**npm_packages.txt** (Global npm packages):
+```txt
+# AI development tools
+@anthropic-ai/claude-code
+
+# Comment out packages you don't want
+# @github/copilot
 ```
 
 ### Post-Installation

@@ -29,6 +29,28 @@ export ZSH="$HOME/.oh-my-zsh"
 EOF
     echo "mock gitignore" > "$TEST_DOTFILES/gitignore_global"
 
+    # Create gitconfig.template
+    cat > "$TEST_DOTFILES/gitconfig.template" <<'EOF'
+[user]
+	name = YOUR_NAME
+	email = YOUR_EMAIL
+[color]
+	ui = auto
+[core]
+	autocrlf = input
+	excludesfile = ~/.gitignore_global
+[init]
+	defaultBranch = main
+[pull]
+	rebase = true
+[fetch]
+	prune = true
+[rebase]
+	autoStash = true
+[rerere]
+	enabled = true
+EOF
+
     # Create a mock .gitconfig to skip interactive prompts in most tests
     cat > "$TEST_HOME/.gitconfig" <<'EOF'
 [user]
@@ -54,11 +76,59 @@ exit 0
 EOF
     chmod +x "$TEST_HOME/bin/pre-commit"
 
-    # Mock git command
+    # Mock git command that actually modifies .gitconfig
     cat > "$TEST_HOME/bin/git" <<'EOF'
 #!/usr/bin/env bash
-echo "mock git: $@"
-exit 0
+# Mock git command that handles config operations
+if [ "$1" = "config" ] && [ "$2" = "--global" ]; then
+    config_file="$HOME/.gitconfig"
+    key="$3"
+    value="$4"
+
+    # Simple INI-style config writer
+    case "$key" in
+        user.name)
+            sed -i '' "s/name = .*/name = $value/" "$config_file" 2>/dev/null || \
+            sed -i "s/name = .*/name = $value/" "$config_file"
+            ;;
+        user.email)
+            sed -i '' "s/email = .*/email = $value/" "$config_file" 2>/dev/null || \
+            sed -i "s/email = .*/email = $value/" "$config_file"
+            ;;
+        user.signingkey)
+            # Add signing key after email if not present
+            if ! grep -q "signingkey = " "$config_file"; then
+                sed -i '' "/email = /a\\
+	signingkey = $value" "$config_file" 2>/dev/null || \
+                sed -i "/email = /a\\	signingkey = $value" "$config_file"
+            fi
+            ;;
+        gpg.format)
+            # Add gpg section if not present
+            if ! grep -q "\[gpg\]" "$config_file"; then
+                echo -e "\n[gpg]\n	format = $value" >> "$config_file"
+            fi
+            ;;
+        gpg.ssh.program)
+            # Add under gpg section
+            if ! grep -q "program = " "$config_file"; then
+                sed -i '' "/\[gpg\]/a\\
+	program = $value" "$config_file" 2>/dev/null || \
+                sed -i "/\[gpg\]/a\\	program = $value" "$config_file"
+            fi
+            ;;
+        commit.gpgsign)
+            # Add commit section if not present
+            if ! grep -q "\[commit\]" "$config_file"; then
+                echo -e "\n[commit]\n	gpgsign = $value" >> "$config_file"
+            fi
+            ;;
+    esac
+    exit 0
+else
+    echo "mock git: $@"
+    exit 0
+fi
 EOF
     chmod +x "$TEST_HOME/bin/git"
 }

@@ -35,11 +35,19 @@ This document defines the **non-negotiable principles** for this project. All AI
 - Compliance with relevant regulations
 
 ## Technology Stack
+
+**Primary Tech Stack**: <!-- Reference to .ai/1_tech_stacks/tech-stack-{name}.md -->
+```
+tech_stack: spring-boot  # Options: spring-boot, dotfiles, python, go, etc.
+```
+
 Define your stack here:
 - Frontend:
 - Backend:
 - Database:
 - Infrastructure:
+
+**Note**: The `tech_stack` declaration is used by Decomposer Dale to load appropriate planning context from `.ai/1_tech_stacks/tech-stack-{name}.md`
 
 ## Coding Standards
 - Language version:

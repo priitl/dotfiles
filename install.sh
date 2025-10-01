@@ -238,12 +238,6 @@ fi
 
 backup_and_link "$DOTFILES_DIR/gitignore_global" "$HOME/.gitignore_global" "gitignore_global"
 
-# Configure global gitignore
-echo "🔧 Configuring global gitignore..."
-git config --global core.excludesfile "$HOME/.gitignore_global" || true
-echo "   ✓ Global gitignore configured"
-echo ""
-
 # Check if gitconfig exists
 if [ ! -f "$HOME/.gitconfig" ]; then
     echo "📝 Setting up Git configuration..."
@@ -275,49 +269,19 @@ if [ ! -f "$HOME/.gitconfig" ]; then
         read -r -p "Enter your SSH signing key (or press Enter to skip): " signing_key
     fi
 
-    # Create the .gitconfig file using a heredoc for cleanliness
-    cat > "$HOME/.gitconfig" << EOL
-[user]
-	name = $git_name
-	email = $git_email
-EOL
+    # Copy the template to ~/.gitconfig
+    cp "$DOTFILES_DIR/gitconfig.template" "$HOME/.gitconfig"
 
-    # Add signing key to [user] section if provided
+    # Set the user name and email
+    git config --global user.name "$git_name"
+    git config --global user.email "$git_email"
+
+    # Set the signing key if provided
     if [ -n "$signing_key" ]; then
-        cat >> "$HOME/.gitconfig" << EOL
-	signingkey = $signing_key
-EOL
-    fi
-
-    # Add remaining configuration
-    cat >> "$HOME/.gitconfig" << EOL
-[color]
-	ui = auto
-[core]
-	autocrlf = input
-	excludesfile = ~/.gitignore_global
-[init]
-	defaultBranch = main
-[pull]
-	rebase = true
-[fetch]
-	prune = true
-[rebase]
-	autoStash = true
-[rerere]
-	enabled = true
-EOL
-
-    # Add GPG configuration if signing is enabled
-    if [ -n "$signing_key" ]; then
-        cat >> "$HOME/.gitconfig" << EOL
-[gpg]
-	format = ssh
-[gpg "ssh"]
-	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
-[commit]
-	gpgsign = true
-EOL
+        git config --global user.signingkey "$signing_key"
+        git config --global gpg.format "ssh"
+        git config --global gpg.ssh.program "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+        git config --global commit.gpgsign "true"
     fi
 
     echo ""
@@ -328,13 +292,13 @@ else
 fi
 echo ""
 
-# Optional: Install additional packages from apps.txt
-if [ -f "$DOTFILES_DIR/apps.txt" ]; then
+# Optional: Install additional packages from brew_apps.txt
+if [ -f "$DOTFILES_DIR/brew_apps.txt" ]; then
     echo ""
-    read -r -p "📦 Install additional brew packages from apps.txt? [y/N]: " install_apps
+    read -r -p "📦 Install additional brew packages from brew_apps.txt? [y/N]: " install_apps
     if [[ "$install_apps" =~ ^[Yy]$ ]]; then
-        echo "🍺 Installing packages from apps.txt..."
-        validate_required_files "$DOTFILES_DIR/apps.txt"
+        echo "🍺 Installing packages from brew_apps.txt..."
+        validate_required_files "$DOTFILES_DIR/brew_apps.txt"
 
         while IFS= read -r line; do
             # Remove inline comments and trim whitespace
@@ -350,19 +314,19 @@ if [ -f "$DOTFILES_DIR/apps.txt" ]; then
                     FAILED_INSTALLS+=("$package")
                 fi
             fi
-        done < "$DOTFILES_DIR/apps.txt"
+        done < "$DOTFILES_DIR/brew_apps.txt"
 
         echo "   ✓ Package installation complete"
     fi
 fi
 
-# Optional: Install cask applications from casks.txt
-if [ -f "$DOTFILES_DIR/casks.txt" ]; then
+# Optional: Install cask applications from brew_casks.txt
+if [ -f "$DOTFILES_DIR/brew_casks.txt" ]; then
     echo ""
-    read -r -p "📦 Install applications from casks.txt? [y/N]: " install_casks
+    read -r -p "📦 Install applications from brew_casks.txt? [y/N]: " install_casks
     if [[ "$install_casks" =~ ^[Yy]$ ]]; then
-        echo "🍺 Installing applications from casks.txt..."
-        validate_required_files "$DOTFILES_DIR/casks.txt"
+        echo "🍺 Installing applications from brew_casks.txt..."
+        validate_required_files "$DOTFILES_DIR/brew_casks.txt"
 
         while IFS= read -r line; do
             # Remove inline comments and trim whitespace
@@ -378,7 +342,7 @@ if [ -f "$DOTFILES_DIR/casks.txt" ]; then
                     FAILED_INSTALLS+=("$cask")
                 fi
             fi
-        done < "$DOTFILES_DIR/casks.txt"
+        done < "$DOTFILES_DIR/brew_casks.txt"
 
         echo "   ✓ Application installation complete"
     fi
@@ -449,6 +413,34 @@ export NVM_DIR=\"\$HOME/.nvm\"
             nvm use --lts || true
             echo "   ✓ Node.js LTS installed"
         fi
+    fi
+fi
+
+# Optional: Install npm packages from npm_packages.txt
+if [ -f "$DOTFILES_DIR/npm_packages.txt" ] && command -v npm &> /dev/null; then
+    echo ""
+    read -r -p "📦 Install npm packages from npm_packages.txt? [y/N]: " install_npm_packages
+    if [[ "$install_npm_packages" =~ ^[Yy]$ ]]; then
+        echo "📦 Installing npm packages..."
+        validate_required_files "$DOTFILES_DIR/npm_packages.txt"
+
+        while IFS= read -r line; do
+            # Remove inline comments and trim whitespace
+            package=$(echo "$line" | sed 's/#.*//' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+            [ -z "$package" ] && continue
+
+            # Check if already installed (idempotency)
+            if npm list -g "$package" < /dev/null &>/dev/null; then
+                echo "   ✓ $package already installed"
+            else
+                echo "   📦 Installing $package..."
+                if ! npm install -g "$package" < /dev/null; then
+                    FAILED_INSTALLS+=("$package")
+                fi
+            fi
+        done < "$DOTFILES_DIR/npm_packages.txt"
+
+        echo "   ✓ npm package installation complete"
     fi
 fi
 

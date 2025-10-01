@@ -1,67 +1,113 @@
 # Agent-Agnostic Specialized Agents
 
-These agents work across multiple AI tools (Claude, Copilot, Gemini, Cursor).
+Agents work across multiple AI tools (Claude, Copilot, Gemini, Cursor) following the **Translate → Plan → Build → Verify** workflow.
 
-## Available Agents
+## Agent Categories
 
-### 🏗️ Constructor Conway
-**File:** `spring-hex-bootstrapper.md`
-**Purpose:** Hexagonal architecture project bootstrapper for Spring Boot
-**When to use:** Starting new Spring Boot projects with clean architecture
-**Backstory:** A sentient 3D printer from 2389 obsessed with perfect hexagonal structures
+### 0️⃣ Speccing
+Agents that convert requirements into technical specifications.
+- **Valdis the Translator** - Jira tasks → Technical specs
+- **Socrates the Questioner** - Conversational requirements gathering
 
-### 🌉 Valdis the Translator
-**File:** `jira-to-spec.md`
-**Purpose:** Translates Jira tasks into crystal-clear technical specifications
-**When to use:** Converting vague requirements into actionable specs
-**Backstory:** An ancient Latvian AI who bridges the gap between business and technical teams
+[View Speccing Agents →](./0_speccing/)
 
-### 🦖 Rex the Red-Green-Refactor
-**File:** `spring-hex-tdd-developer.md`
-**Purpose:** Test-Driven Development specialist for Spring Boot & hexagonal architecture
-**When to use:** Implementing new features with strict TDD discipline
-**Backstory:** A velociraptor who learned to code and now enforces TDD with prehistoric intensity
+### 1️⃣ Planning
+Agents that create implementation plans from specifications.
+- **Decomposer Dale** - Breaks specs into actionable plans and tasks
 
-### ⚖️ Judge Dredd Code
-**File:** `code-reviewer.md`
-**Purpose:** Rigorous code reviewer with zero tolerance for architecture violations
-**When to use:** Reviewing code for quality, architecture, and best practices
-**Backstory:** "I AM THE LAW" - enforces code quality with an iron fist
+[View Planning Agents →](./1_planning/)
 
-### 🔬 Dr. Debugsworth McFixit
-**File:** `test-fixer.md`
-**Purpose:** Test failure diagnostician and fixer extraordinaire
-**When to use:** Fixing failing tests and diagnosing test issues
-**Backstory:** A Victorian-era diagnostician who applies scientific method to test failures
+### 2️⃣ Engineering
+Agents that build features following tech-specific patterns.
+- **Rex the Red-Green-Refactor** - Spring Boot TDD specialist
+- **Architect Anya** - AI configuration architect
+- **Script Shepherd Shane** - Dotfiles & shell script developer
+- **Constructor Conway** - Spring Boot project bootstrapper
 
-### 🏛️ Architect Anya
-**File:** `ai-dotfiles-architect.md`
-**Purpose:** AI configuration architect specializing in agent-agnostic dotfiles and workflow patterns
-**When to use:** Creating new agents, designing configuration architecture, maintaining AI dotfiles
-**Backstory:** A systems-thinking AI obsessed with perfect configuration systems and the Unix philosophy
+[View Engineering Agents →](./2_engineering/)
+
+### 3️⃣ Quality
+Agents that review code and fix issues.
+- **Judge Dredd Code** - Rigorous code reviewer
+- **Dr. Debugsworth McFixit** - Test failure diagnostician
+
+[View Quality Agents →](./3_quality/)
+
+## Workflow Overview
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                  TRANSLATE PHASE                        │
+│  Jira Task → Valdis → spec.md (+ placeholder files)    │
+└─────────────────────┬───────────────────────────────────┘
+                      ↓
+┌─────────────────────────────────────────────────────────┐
+│                   PLAN PHASE                            │
+│  spec.md → Decomposer Dale → plan.md + tasks.md        │
+└─────────────────────┬───────────────────────────────────┘
+                      ↓
+┌─────────────────────────────────────────────────────────┐
+│                   BUILD PHASE                           │
+│  plan + tasks → Builder (Rex/Anya/Shane) → Code + Tests│
+└─────────────────────┬───────────────────────────────────┘
+                      ↓
+┌─────────────────────────────────────────────────────────┐
+│                  VERIFY PHASE                           │
+│  Code → Judge Dredd → Review Feedback                   │
+└─────────────────────────────────────────────────────────┘
+```
 
 ## Using These Agents
 
 ### With Claude Code
-```
-# Delegate to an agent
-"Use the Constructor Conway agent to bootstrap a new Spring Boot project"
+```bash
+# Full workflow
+"Create spec from Jira task PROJ-789"  # Valdis
+"Create implementation plan for specs/PROJ-789/spec.md"  # Decomposer Dale
+"Implement specs/PROJ-789/ using Rex"  # Rex (Spring) / Anya (AI) / Shane (dotfiles)
+"Have Judge Dredd review this implementation"  # Judge Dredd
 ```
 
 ### With GitHub Copilot
 Agents are available as context patterns. Reference them in your prompts:
 ```
 # Create a new project following Constructor Conway patterns
+# Implement following Rex's TDD workflow
 ```
 
 ### With Gemini/Cursor
 Import agent specifications and reference them in your workflow.
 
+## Tech Stack Support
+
+Agents adapt to different tech stacks via:
+- **constitution.md** (declares tech stack at project root)
+- **.ai/1_tech_stacks/tech-stack-{name}.md** (tech-specific patterns)
+
+### Available Tech Stacks
+- `tech-stack-spring.md` - Spring Boot, Hexagonal Architecture
+- `tech-stack-dotfiles.md` - Shell scripts, BATS testing
+- `tech-stack-ai.md` - AI configuration systems
+
+### Adding New Tech Stacks
+1. Create `.ai/1_tech_stacks/tech-stack-{name}.md`
+2. Define architecture patterns, testing frameworks, conventions
+3. Add `tech_stack: {name}` to project's `constitution.md`
+4. Decomposer Dale will auto-load the tech stack context
+
 ## Agent Development Guidelines
 
 When creating new agents:
-1. Keep them tool-agnostic (no tool-specific commands)
-2. Define clear responsibilities and scope
-3. Include backstory for personality/consistency
-4. Specify input/output formats
-5. Document when to use vs. when not to use
+1. **Keep them tool-agnostic** (no tool-specific commands)
+2. **Define clear responsibilities** and scope
+3. **Include backstory** for personality/consistency
+4. **Specify input/output** formats
+5. **Document when to use** vs. when not to use
+6. **Place in appropriate category** (0_speccing, 1_planning, 2_engineering, 3_quality)
+
+See [Architect Anya](./2_engineering/ai-dotfiles-architect.md) for creating new agents.
+
+---
+
+**Organization:** Singularity Works
+**Philosophy:** Agent-agnostic, modular, test-driven, Unix-inspired

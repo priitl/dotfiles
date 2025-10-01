@@ -14,18 +14,32 @@ I have a team of specialized AI agents in `.ai/2_agents/` for specific workflows
 When tackling complex tasks, suggest using the appropriate agent if one exists.
 Agents handle their own code quality standards - don't duplicate those rules here.
 
-Available agents:
-- **Constructor Conway** (spring-hex-bootstrapper) - Hexagonal architecture project bootstrapper
-- **Valdis the Translator** (jira-to-spec) - Translates Jira tasks into crystal-clear technical specs
-- **Rex the Red-Green-Refactor** (spring-hex-tdd-developer) - TDD specialist for Spring Boot
-- **Judge Dredd Code** (code-reviewer) - Rigorous code reviewer with zero tolerance for violations
-- **Dr. Debugsworth McFixit** (test-fixer) - Test failure diagnostician and fixer extraordinaire
+Available agents (organized by workflow phase):
 
-To use an agent with Claude Code:
+**Speccing** (Requirements → Specs):
+- **Valdis the Translator** (jira-to-spec) - Translates Jira tasks into technical specs
+- **Socrates the Questioner** (conversational-spec) - Refines vague ideas into specs through dialogue
+
+**Planning** (Specs → Implementation Plans):
+- **Decomposer Dale** (planner) - Breaks specs into actionable plans and tasks
+
+**Engineering** (Build Features):
+- **Constructor Conway** (spring-hex-bootstrapper) - Hexagonal architecture project bootstrapper
+- **Rex the Red-Green-Refactor** (spring-hex-tdd-developer) - TDD specialist for Spring Boot
+- **Script Shepherd Shane** (dotfiles-developer) - Shell script & dotfiles specialist
+- **Architect Anya** (ai-dotfiles-architect) - AI configuration architect
+
+**Quality** (Review & Fix):
+- **Judge Dredd Code** (code-reviewer) - Rigorous code reviewer with zero tolerance for violations
+- **Dr. Debugsworth McFixit** (test-fixer) - Test failure diagnostician and fixer
+
+To use agents with Claude Code:
 ```
-"Use the Constructor Conway agent to bootstrap a new Spring Boot project"
-"Delegate to Rex to implement this feature with TDD"
-"Have Judge Dredd review this PR"
+"Help me spec out migrating to Ansible"  # Socrates
+"Create spec from Jira task PROJ-789"  # Valdis
+"Create implementation plan for specs/PROJ-789/spec.md"  # Decomposer Dale
+"Implement specs/PROJ-789/ using Shane"  # Shane (dotfiles) or Rex (Spring)
+"Have Judge Dredd review this implementation"  # Judge Dredd
 ```
 
 ## Spec-Kit Integration
@@ -48,10 +62,13 @@ Follow the spec-driven development workflow when appropriate:
 
 ### Task Tool for Agent Delegation
 Use the Task tool to delegate to specialized agents:
-- Architecture decisions → architecture-agent (if available in project)
-- Complex implementations → Use Rex the Red-Green-Refactor
+- Requirements clarification → Use Socrates the Questioner
+- Planning → Use Decomposer Dale
+- Spring Boot implementation → Use Rex the Red-Green-Refactor
+- Dotfiles implementation → Use Script Shepherd Shane
+- AI config work → Use Architect Anya
 - Code reviews → Use Judge Dredd Code
-- Test fixes → Use Dr. Debugsworth McFixit
+- Test failures → Use Dr. Debugsworth McFixit
 
 ### Todo Management (TodoWrite)
 Use TodoWrite tool proactively for:

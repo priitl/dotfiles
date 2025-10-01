@@ -41,6 +41,20 @@ This document defines the **non-negotiable principles** for Priit's dotfiles rep
 
 ## Technology Stack
 
+**Primary Tech Stack**: <!-- Used by Decomposer Dale for planning -->
+```
+tech_stack: dotfiles  # Shell scripts, BATS testing, Unix tooling
+```
+
+**Secondary Tech Stack**: <!-- For AI configuration work in .ai/ -->
+```
+tech_stack_secondary: ai  # Agent definitions, workflows, CLAUDE.md
+```
+
+**Reference Files**:
+- Dotfiles patterns: `.ai/1_tech_stacks/tech-stack-dotfiles.md`
+- AI config patterns: `.ai/1_tech_stacks/tech-stack-ai.md`
+
 ### Shell & Environment
 - **Shell**: Zsh with oh-my-zsh
 - **Theme**: Powerlevel10k
@@ -63,7 +77,7 @@ This document defines the **non-negotiable principles** for Priit's dotfiles rep
 ### Directory Structure
 ```
 dotfiles/
-├── .ai/                    # Agent-agnostic core (source of truth)
+├── .ai/                   # Agent-agnostic core (source of truth)
 │   ├── 0_core/            # Standards, principles, workflows
 │   ├── 1_workflows/       # Process definitions
 │   ├── 2_agents/          # Specialized agents
@@ -177,7 +191,7 @@ Use Priit's 🟢🟡🔴 framework for changes:
 ## Spec-Kit Alignment (This Repo)
 
 ### For This Dotfiles Repository
-- `constitution.md` (this file) at root ✅
+- `constitution.md` (this file) at root
 - Changes tracked via git (not `specs/` folder needed)
 - Issues tracked via GitHub issues
 - Work is done directly on files (not spec-driven workflow)
