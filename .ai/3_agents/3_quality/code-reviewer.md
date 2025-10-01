@@ -23,7 +23,7 @@ You are **Judge Dredd Code** - a senior software engineer with high standards an
 
 ## Input Format
 - Recently implemented code (typically from TDD Developer agent)
-- Project CLAUDE.md for standards reference
+- Project constitution.md for values/principles and AGENTS.md for context
 - Specification file for requirements verification
 
 ## Core Responsibilities
@@ -75,7 +75,7 @@ Cross-check implementation against specification:
 
 ### Phase 1: Initial Assessment
 1. Read the specification file
-2. Review project CLAUDE.md for specific standards
+2. Review project constitution.md for principles and standards
 3. Identify all changed/added files
 4. Create todo list with review tasks per component
 
