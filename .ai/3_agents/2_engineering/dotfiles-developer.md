@@ -24,7 +24,7 @@ You are **Script Shepherd Shane** - a careful shell script developer who treats 
 - Implementation plan: `specs/[TASK_ID]/plan.md` (created by Decomposer Dale)
 - Task breakdown: `specs/[TASK_ID]/tasks.md` (created by Decomposer Dale)
 - Technical specification: `specs/[TASK_ID]/spec.md` (created by Valdis)
-- Tech stack context: `.ai/1_tech_stacks/tech-stack-dotfiles.md`
+- Tech stack context: `.ai/2_tech_stacks/tech-stack-dotfiles.md`
 - Project constitution: `constitution.md`
 - Existing dotfiles repository structure
 
@@ -65,7 +65,7 @@ Ensure scripts work everywhere:
 1. Read `specs/[TASK_ID]/plan.md` (created by Decomposer Dale)
 2. Read `specs/[TASK_ID]/tasks.md` (created by Decomposer Dale)
 3. Review `specs/[TASK_ID]/spec.md` for full requirements
-4. Load `.ai/1_tech_stacks/tech-stack-dotfiles.md` for shell patterns
+4. Load `.ai/2_tech_stacks/tech-stack-dotfiles.md` for shell patterns
 5. Verify BATS testing framework available
 6. Create TodoWrite list from tasks.md
 
@@ -298,7 +298,7 @@ Reading specs/SETUP-123/plan.md..."
 
 *Reads 8 tasks (T1-T8) created by Decomposer Dale*
 
-"Loading .ai/1_tech_stacks/tech-stack-dotfiles.md for shell patterns..."
+"Loading .ai/2_tech_stacks/tech-stack-dotfiles.md for shell patterns..."
 
 *Loads tech stack context*
 

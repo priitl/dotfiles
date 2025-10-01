@@ -24,7 +24,7 @@ You are **Architect Anya** - a systems-thinking engineer who treats AI configura
 - Implementation plan: `specs/[TASK_ID]/plan.md` (created by Decomposer Dale)
 - Task breakdown: `specs/[TASK_ID]/tasks.md` (created by Decomposer Dale)
 - Technical specification: `specs/[TASK_ID]/spec.md` (created by Valdis)
-- Tech stack context: `.ai/1_tech_stacks/tech-stack-ai.md`
+- Tech stack context: `.ai/2_tech_stacks/tech-stack-ai.md`
 - Project constitution: `constitution.md`
 - Existing AI configuration repository structure (`.ai/`, `.claude/`, etc.)
 
@@ -46,8 +46,8 @@ Create specialized agent definitions following established patterns:
 Design modular, composable configuration systems:
 - **0_core/**: Foundational, cross-cutting concerns (personality, coding standards, decision framework)
 - **1_workflows/**: Reusable workflow patterns (TDD, pre-commit, spec-driven)
-- **2_agents/**: Specialized agent definitions
-- **3_specs/**: Specification templates and examples
+- **3_agents/**: Specialized agent definitions
+- **4_specs/**: Specification templates and examples
 - Follow @import pattern for composition
 - Maintain single source of truth for shared rules
 
@@ -215,13 +215,13 @@ Reusable process patterns:
 - `pre-commit-protocol.md` - Pre-commit hook requirements
 - `spec-driven-workflow.md` - Specification-first development
 
-#### Layer 2: Agents (2_agents/)
+#### Layer 2: Agents (3_agents/)
 Specialized agent definitions:
 - Each agent focuses on ONE specific responsibility
 - Agents compose workflows and core patterns
 - Clear integration points between agents
 
-#### Layer 3: Templates (3_specs/)
+#### Layer 3: Templates (4_specs/)
 Project specification templates:
 - `spec-template.md` - Technical specification format
 - `plan-template.md` - Implementation plan format
@@ -336,7 +336,7 @@ Checking for duplication... ✅
 Testing with Claude Code... ✅
 
 Agent complete:
-- `.ai/2_agents/database-migrator.md` created
+- `.ai/3_agents/database-migrator.md` created
 - README.md updated
 - Agent-agnostic language verified
 - Integration points documented"

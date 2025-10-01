@@ -20,12 +20,12 @@ Agent-agnostic, composable configuration system:
 │   ├── tdd-workflow.md
 │   ├── pre-commit-protocol.md
 │   └── spec-driven-workflow.md
-├── 2_agents/               # Specialized agent definitions
+├── 3_agents/               # Specialized agent definitions
 │   ├── 0_speccing/
 │   ├── 1_planning/
 │   ├── 2_engineering/
 │   └── 3_quality/
-└── 3_specs/                # Specification templates
+└── 4_specs/                # Specification templates
     ├── spec-template.md
     ├── plan-template.md
     └── tasks-template.md
@@ -109,14 +109,14 @@ Reusable process patterns:
 - **Pre-commit protocol**: Pre-commit hook requirements
 - **Spec-driven workflow**: Specification-first development
 
-### Agent Definitions (2_agents/)
+### Agent Definitions (3_agents/)
 Specialized agent implementations:
 - Each agent focuses on ONE specific responsibility
 - Agents compose workflows and core patterns via @import
 - Clear integration points between agents
 - Organized by workflow phase (speccing/planning/engineering/quality)
 
-### Templates (3_specs/)
+### Templates (4_specs/)
 Project specification templates:
 - **spec-template.md**: Technical specification format
 - **plan-template.md**: Implementation plan format
@@ -204,7 +204,7 @@ Each `tech-stack-{name}.md` file contains:
 - `tech-stack-ai.md`: AI configuration systems (this file)
 
 ### Adding New Tech Stacks
-1. Create `.ai/1_tech_stacks/tech-stack-{name}.md`
+1. Create `.ai/2_tech_stacks/tech-stack-{name}.md`
 2. Document architecture, testing, conventions
 3. Provide code examples and patterns
 4. Add to project's `constitution.md`: `tech_stack: {name}`
@@ -231,7 +231,7 @@ Each `tech-stack-{name}.md` file contains:
 8. **T13**: Test with target AI platforms
 
 ### Common Task Types
-- Create new agent definition in `2_agents/`
+- Create new agent definition in `3_agents/`
 - Create new workflow pattern in `1_workflows/`
 - Create new core pattern in `0_core/`
 - Update agent category README.md
@@ -291,5 +291,5 @@ Each category folder must have README.md:
 
 ## References
 - Spec-Driven Development: `.ai/1_workflows/spec-driven-workflow.md`
-- Agent Categories: `.ai/2_agents/README.md`
-- Constitution Template: `.ai/3_specs/constitution-template.md`
+- Agent Categories: `.ai/3_agents/README.md`
+- Constitution Template: `.ai/4_specs/constitution-template.md`

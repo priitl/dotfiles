@@ -17,10 +17,10 @@ This document defines the **non-negotiable principles** for Priit's dotfiles rep
 - No duplication between tool configs
 
 ### 2. Single Source of Truth
-- Agents: `.ai/2_agents/` only (`.claude/agents/` is symlink)
+- Agents: `.ai/3_agents/` only (`.claude/agents/` is symlink)
 - Standards: `.ai/0_core/` defines all rules
 - Workflows: `.ai/1_workflows/` contains all processes
-- Templates: `.ai/3_specs/` for spec-driven development
+- Templates: `.ai/4_specs/` for spec-driven development
 
 ### 3. Backward Compatibility
 - Original agent filenames preserved (`spring-hex-bootstrapper.md`, not `constructor-conway.md`)
@@ -52,8 +52,8 @@ tech_stack_secondary: ai  # Agent definitions, workflows, CLAUDE.md
 ```
 
 **Reference Files**:
-- Dotfiles patterns: `.ai/1_tech_stacks/tech-stack-dotfiles.md`
-- AI config patterns: `.ai/1_tech_stacks/tech-stack-ai.md`
+- Dotfiles patterns: `.ai/2_tech_stacks/tech-stack-dotfiles.md`
+- AI config patterns: `.ai/2_tech_stacks/tech-stack-ai.md`
 
 ### Shell & Environment
 - **Shell**: Zsh with oh-my-zsh
@@ -80,8 +80,8 @@ dotfiles/
 ├── .ai/                   # Agent-agnostic core (source of truth)
 │   ├── 0_core/            # Standards, principles, workflows
 │   ├── 1_workflows/       # Process definitions
-│   ├── 2_agents/          # Specialized agents
-│   └── 3_specs/           # Spec-kit templates
+│   ├── 3_agents/          # Specialized agents
+│   └── 4_specs/           # Spec-kit templates
 ├── .claude/               # Claude wrapper (imports from .ai/)
 ├── .copilot/              # Copilot wrapper
 ├── .gemini/               # Gemini wrapper
@@ -122,7 +122,7 @@ All tool configs use `@import` to pull from `.ai/`:
 2. Commit secrets or credentials
 3. Break backward compatibility without migration guide
 4. Use `--no-verify` when committing
-5. Create tool-specific agents (keep in `.ai/2_agents/`)
+5. Create tool-specific agents (keep in `.ai/3_agents/`)
 6. Hardcode paths (use relative imports)
 
 ### AVOID
@@ -158,7 +158,7 @@ Use Priit's 🟢🟡🔴 framework for changes:
 - Fix broken links
 
 ### 🟡 Collaborative (Propose First)
-- Add new agents to `.ai/2_agents/`
+- Add new agents to `.ai/3_agents/`
 - Modify existing templates
 - Change install.sh logic
 - Add new tool support (e.g., add `.windsurf/`)
@@ -199,7 +199,7 @@ Use Priit's 🟢🟡🔴 framework for changes:
 ### For Projects Using These Dotfiles
 - Projects SHOULD create `constitution.md` using template
 - Projects SHOULD use `specs/` folder structure
-- Projects reference `~/.ai/3_specs/` templates
+- Projects reference `~/.ai/4_specs/` templates
 - See `.ai/0_core/spec-kit-alignment.md` for guidance
 
 ## Maintenance

@@ -97,7 +97,7 @@ After completing work with TodoWrite, **sync to tasks.md**:
 mkdir -p specs/001-user-auth
 
 # 2. Copy spec template
-cp ~/.ai/3_specs/spec-template.md specs/001-user-auth/spec.md
+cp ~/.ai/4_specs/spec-template.md specs/001-user-auth/spec.md
 
 # 3. Fill in requirements
 # (Or delegate to Valdis)
@@ -107,7 +107,7 @@ cp ~/.ai/3_specs/spec-template.md specs/001-user-auth/spec.md
 ```bash
 # 4. Generate plan
 "Read specs/001-user-auth/spec.md and constitution.md,
-create plan.md and tasks.md using templates from ~/.ai/3_specs/"
+create plan.md and tasks.md using templates from ~/.ai/4_specs/"
 ```
 
 ### BUILD Phase
@@ -144,9 +144,9 @@ mkdir -p specs
 **Step 2: Set up first feature**
 ```bash
 mkdir -p specs/001-feature-name
-cp ~/.ai/3_specs/spec-template.md specs/001-feature-name/spec.md
-cp ~/.ai/3_specs/plan-template.md specs/001-feature-name/plan.md
-cp ~/.ai/3_specs/tasks-template.md specs/001-feature-name/tasks.md
+cp ~/.ai/4_specs/spec-template.md specs/001-feature-name/spec.md
+cp ~/.ai/4_specs/plan-template.md specs/001-feature-name/plan.md
+cp ~/.ai/4_specs/tasks-template.md specs/001-feature-name/tasks.md
 ```
 
 ## Tool Support
@@ -166,7 +166,7 @@ specify new "Add payment processing"
 ```bash
 # Create feature manually
 mkdir -p specs/003-dashboard
-cp ~/.ai/3_specs/spec-template.md specs/003-dashboard/spec.md
+cp ~/.ai/4_specs/spec-template.md specs/003-dashboard/spec.md
 
 # Edit spec, ask AI to generate plan
 "Read specs/003-dashboard/spec.md, create plan.md and tasks.md"

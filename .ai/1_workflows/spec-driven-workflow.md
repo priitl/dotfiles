@@ -21,7 +21,7 @@ SPECIFY → PLAN → BUILD → VERIFY
 
 **Process**:
 1. Start with user story or requirement
-2. Fill out spec template (`.ai/3_specs/spec-template.md`)
+2. Fill out spec template (`.ai/4_specs/spec-template.md`)
 3. Include requirements, acceptance criteria, success metrics
 4. If vague, run clarification phase (ask AI to generate questions)
 
@@ -95,7 +95,7 @@ SPECIFY → PLAN → BUILD → VERIFY
 ### 🌉 Valdis the Translator
 **Use in**: SPECIFY phase
 **Purpose**: Convert Jira/requirements into spec.md
-**Example**: "Valdis, translate JIRA-456 into a spec using the template at .ai/3_specs/spec-template.md"
+**Example**: "Valdis, translate JIRA-456 into a spec using the template at .ai/4_specs/spec-template.md"
 
 ### 🦖 Rex the Red-Green-Refactor
 **Use in**: BUILD phase
@@ -124,7 +124,7 @@ SPECIFY → PLAN → BUILD → VERIFY
 ```bash
 # 1. SPECIFY Phase
 mkdir -p specs/001-user-auth
-cp ~/.ai/3_specs/spec-template.md specs/001-user-auth/spec.md
+cp ~/.ai/4_specs/spec-template.md specs/001-user-auth/spec.md
 
 # Edit spec.md with requirements
 # Or delegate to Valdis
@@ -260,7 +260,7 @@ Use your 🟢🟡🔴 decision framework:
 
 ## Resources
 
-- Templates: `~/.ai/3_specs/`
+- Templates: `~/.ai/4_specs/`
 - GitHub Spec-Kit: https://github.com/github/spec-kit
-- Your agents: `~/.ai/2_agents/`
+- Your agents: `~/.ai/3_agents/`
 - This workflow: `~/.ai/1_workflows/spec-driven-workflow.md`

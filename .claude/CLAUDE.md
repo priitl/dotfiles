@@ -10,7 +10,7 @@
 
 ## Specialized Agents
 
-I have a team of specialized AI agents in `.ai/2_agents/` for specific workflows.
+I have a team of specialized AI agents in `.ai/3_agents/` for specific workflows.
 When tackling complex tasks, suggest using the appropriate agent if one exists.
 Agents handle their own code quality standards - don't duplicate those rules here.
 
@@ -46,7 +46,7 @@ To use agents with Claude Code:
 
 Follow the spec-driven development workflow when appropriate:
 - Read about it: `../.ai/1_workflows/spec-driven-workflow.md`
-- Templates: `../.ai/3_specs/`
+- Templates: `../.ai/4_specs/`
 - Alignment guide: `../.ai/0_core/spec-kit-alignment.md`
 
 **When to use specs:**

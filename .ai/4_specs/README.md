@@ -76,21 +76,21 @@ specify build
 
 ```bash
 # 1. Start with constitution
-cp ~/.ai/3_specs/constitution-template.md project/constitution.md
+cp ~/.ai/4_specs/constitution-template.md project/constitution.md
 # Edit with your project principles
 
 # 2. Create feature spec
 mkdir -p project/specs/001-user-auth/
-cp ~/.ai/3_specs/spec-template.md project/specs/001-user-auth/spec.md
+cp ~/.ai/4_specs/spec-template.md project/specs/001-user-auth/spec.md
 # Write requirements
 
 # 3. Ask AI to create plan
 "Read constitution.md and specs/001-user-auth/spec.md,
-then create an implementation plan using ~/.ai/3_specs/plan-template.md"
+then create an implementation plan using ~/.ai/4_specs/plan-template.md"
 
 # 4. Generate tasks
 "Based on the plan, create a task breakdown using
-~/.ai/3_specs/tasks-template.md"
+~/.ai/4_specs/tasks-template.md"
 
 # 5. Implement with TDD
 "Delegate to Rex to implement Task 1 with TDD"

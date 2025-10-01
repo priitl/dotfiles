@@ -6,9 +6,11 @@ Agent-agnostic AI development environment configuration that works with Claude, 
 
 ### 🤖 Agent-Agnostic AI Framework (`.ai/`)
 A shared core that works with **all AI tools** - write once, use everywhere:
-- **Core standards** - Personality, coding standards, decision framework, git workflow
-- **Workflows** - TDD workflow, pre-commit protocol
-- **Specialized agents** - 6 expert agents that work across all AI tools
+- **Core standards** (`0_core/`) - Personality, coding standards, decision framework, git workflow
+- **Workflows** (`1_workflows/`) - TDD workflow, pre-commit protocol, spec-driven development
+- **Tech stacks** (`2_tech_stacks/`) - Spring Boot, dotfiles, AI configuration patterns
+- **Specialized agents** (`3_agents/`) - 9 expert agents organized by workflow phase
+- **Spec templates** (`4_specs/`) - Templates for specifications, plans, and tasks
 
 ### 🛠️ Tool-Specific Configurations
 Lightweight wrappers that import the shared core:
@@ -46,19 +48,35 @@ dotfiles/
 │   │   └── git-workflow.md             # Pre-commit discipline
 │   ├── 1_workflows/
 │   │   ├── tdd-workflow.md             # Red-Green-Refactor process
-│   │   └── pre-commit-protocol.md      # Quality gate protocol
-│   └── 2_agents/
-│       ├── README.md                   # Agent documentation
-│       ├── spring-hex-bootstrapper.md  # 🏗️ Constructor Conway
-│       ├── jira-to-spec.md             # 🌉 Valdis the Translator
-│       ├── spring-hex-tdd-developer.md # 🦖 Rex the Red-Green-Refactor
-│       ├── code-reviewer.md            # ⚖️ Judge Dredd Code
-│       ├── test-fixer.md               # 🔬 Dr. Debugsworth McFixit
-│       └── ai-dotfiles-architect.md    # 🏛️ Architect Anya
+│   │   ├── pre-commit-protocol.md      # Quality gate protocol
+│   │   └── spec-driven-workflow.md     # Spec → Plan → Build → Verify
+│   ├── 2_tech_stacks/
+│   │   ├── tech-stack-spring.md        # Spring Boot patterns
+│   │   ├── tech-stack-dotfiles.md      # Shell script patterns
+│   │   └── tech-stack-ai.md            # AI configuration patterns
+│   ├── 3_agents/
+│   │   ├── 0_speccing/                 # Requirements → Specs
+│   │   │   ├── jira-to-spec.md         # 🌉 Valdis the Translator
+│   │   │   └── conversational-spec.md  # 💭 Socrates the Questioner
+│   │   ├── 1_planning/                 # Specs → Plans
+│   │   │   └── planner.md              # 🧩 Decomposer Dale
+│   │   ├── 2_engineering/              # Plans → Code
+│   │   │   ├── spring-hex-bootstrapper.md  # 🏗️ Constructor Conway
+│   │   │   ├── spring-hex-tdd-developer.md # 🦖 Rex the Red-Green-Refactor
+│   │   │   ├── dotfiles-developer.md       # 🐑 Script Shepherd Shane
+│   │   │   └── ai-dotfiles-architect.md    # 🏛️ Architect Anya
+│   │   └── 3_quality/                  # Code → Review/Fix
+│   │       ├── code-reviewer.md        # ⚖️ Judge Dredd Code
+│   │       └── test-fixer.md           # 🔬 Dr. Debugsworth McFixit
+│   └── 4_specs/
+│       ├── spec-template.md            # Specification template
+│       ├── plan-template.md            # Implementation plan template
+│       ├── tasks-template.md           # Task breakdown template
+│       └── constitution-template.md    # Project principles template
 │
 ├── .claude/
 │   ├── CLAUDE.md                       # Claude-specific wrapper
-│   └── agents/ → ../.ai/2_agents/      # Symlink to shared agents
+│   └── agents/ → ../.ai/3_agents/      # Symlink to shared agents
 │
 ├── .copilot/
 │   └── instructions.md                 # Copilot-specific wrapper
@@ -82,35 +100,60 @@ dotfiles/
 
 ## Specialized Agents (Work with ALL AI Tools)
 
-### 🏗️ Constructor Conway
+Agents follow the **Spec → Plan → Build → Verify** workflow and are organized by phase:
+
+### 0️⃣ Speccing (Requirements → Specifications)
+
+#### 🌉 Valdis the Translator
+**Purpose:** Translate Jira tasks into crystal-clear technical specifications
+**When to use:** Converting structured Jira requirements into specs
+**Example:** "Create spec from Jira task PROJ-789"
+
+#### 💭 Socrates the Questioner
+**Purpose:** Refines vague ideas into detailed specifications through guided questions
+**When to use:** Converting rough ideas into specs (no Jira ticket needed)
+**Example:** "Help me spec out migrating to Ansible"
+
+### 1️⃣ Planning (Specifications → Implementation Plans)
+
+#### 🧩 Decomposer Dale
+**Purpose:** Breaks specs into actionable plans and tasks
+**When to use:** After creating spec.md, before implementation
+**Example:** "Create implementation plan for specs/PROJ-789/spec.md"
+
+### 2️⃣ Engineering (Plans → Code)
+
+#### 🏗️ Constructor Conway
 **Purpose:** Bootstrap Spring Boot projects with hexagonal architecture
 **When to use:** Starting new projects with clean architecture
-**Example:** "Bootstrap a Spring Boot project called 'order-service' with package 'com.example.orders'"
+**Example:** "Bootstrap a Spring Boot project called 'order-service'"
 
-### 🌉 Valdis the Translator
-**Purpose:** Translate Jira tasks into crystal-clear technical specifications
-**When to use:** Converting vague requirements into actionable specs
-**Example:** "Translate JIRA-123 into a technical specification"
-
-### 🦖 Rex the Red-Green-Refactor
+#### 🦖 Rex the Red-Green-Refactor
 **Purpose:** TDD specialist for Spring Boot & hexagonal architecture
-**When to use:** Implementing features with strict TDD discipline
-**Example:** "Implement user authentication with TDD"
+**When to use:** Implementing Spring Boot features with strict TDD discipline
+**Example:** "Implement specs/PROJ-789/ using Rex"
 
-### ⚖️ Judge Dredd Code
+#### 🐑 Script Shepherd Shane
+**Purpose:** Shell script & dotfiles specialist with BATS testing
+**When to use:** Implementing shell scripts, dotfiles, installation scripts
+**Example:** "Implement specs/ANSIBLE-001/ using Shane"
+
+#### 🏛️ Architect Anya
+**Purpose:** AI configuration architect specializing in agent-agnostic patterns
+**When to use:** Creating new agents, designing AI configuration architecture
+**Example:** "Use Anya to create a new planning agent"
+
+### 3️⃣ Quality (Code → Review/Fix)
+
+#### ⚖️ Judge Dredd Code
 **Purpose:** Rigorous code reviewer with zero tolerance for violations
 **When to use:** Reviewing code for quality, architecture, best practices
-**Example:** "Review this PR for architecture violations"
+**Example:** "Have Judge Dredd review this implementation"
 
-### 🔬 Dr. Debugsworth McFixit
+#### 🔬 Dr. Debugsworth McFixit
 **Purpose:** Test failure diagnostician and fixer extraordinaire
 **When to use:** Fixing failing tests and diagnosing test issues
-**Example:** "Fix the failing integration tests in UserService"
-
-### 🏛️ Architect Anya
-**Purpose:** AI configuration architect specializing in agent-agnostic dotfiles and workflow patterns
-**When to use:** Creating new agents, designing configuration architecture, maintaining AI dotfiles
-**Example:** "Anya, create a new agent for database migrations"
+**Example:** "Use Dr. Debugsworth to fix failing tests"
 
 ## Installation
 
@@ -221,11 +264,23 @@ After running `install.sh`:
 ### Claude Code
 Automatically reads from `~/.claude/CLAUDE.md` which imports from `~/.ai/`
 
-**Delegate to agents:**
+**Delegate to agents (full workflow):**
 ```
-"Use the Constructor Conway agent to bootstrap a new project"
-"Delegate to Rex to implement this feature with TDD"
-"Have Judge Dredd review this PR"
+# Speccing phase
+"Create spec from Jira task PROJ-789"  # Valdis
+"Help me spec out migrating to Ansible"  # Socrates
+
+# Planning phase
+"Create implementation plan for specs/PROJ-789/spec.md"  # Decomposer Dale
+
+# Engineering phase
+"Implement specs/PROJ-789/ using Rex"  # Rex (Spring Boot)
+"Implement specs/ANSIBLE-001/ using Shane"  # Shane (dotfiles)
+"Use Anya to create a new quality agent"  # Anya (AI configs)
+
+# Quality phase
+"Have Judge Dredd review this implementation"  # Judge Dredd
+"Use Dr. Debugsworth to fix failing tests"  # Dr. Debugsworth
 ```
 
 ### GitHub Copilot
@@ -402,9 +457,10 @@ com.example.orders/
 - No duplication across tool configs
 
 ### Specialized Agents
-- 5 expert agents for different workflows
+- 9 expert agents organized by workflow phase
 - Work consistently across all AI tools
-- Clear delegation patterns
+- Clear Spec → Plan → Build → Verify workflow
+- Tech stack agnostic (Spring Boot, dotfiles, AI configs)
 
 ### TDD Workflow
 - Red-Green-Refactor enforcement

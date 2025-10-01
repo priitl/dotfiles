@@ -12,7 +12,7 @@ Agents responsible for building features following tech-specific patterns and be
 
 **Workflow:**
 1. Reads `plan.md` and `tasks.md` (from Decomposer Dale)
-2. Loads `.ai/1_tech_stacks/tech-stack-spring.md` for patterns
+2. Loads `.ai/2_tech_stacks/tech-stack-spring.md` for patterns
 3. Implements following Red-Green-Refactor TDD cycle
 4. Builds domain layer, ports, adapters
 5. Writes unit, integration, and e2e tests
@@ -26,10 +26,10 @@ Agents responsible for building features following tech-specific patterns and be
 
 **Workflow:**
 1. Reads `plan.md` and `tasks.md` (from Decomposer Dale)
-2. Loads `.ai/1_tech_stacks/tech-stack-ai.md` for patterns
+2. Loads `.ai/2_tech_stacks/tech-stack-ai.md` for patterns
 3. Creates agent definitions with memorable backstories
 4. Ensures agent-agnostic language (works across Claude/Copilot/Gemini)
-5. Maintains clean separation of concerns (0_core/1_workflows/2_agents/3_specs)
+5. Maintains clean separation of concerns (0_core/1_workflows/3_agents/3_specs)
 6. Hands off to Judge Dredd for code review
 
 ### 🐑 Script Shepherd Shane
@@ -40,7 +40,7 @@ Agents responsible for building features following tech-specific patterns and be
 
 **Workflow:**
 1. Reads `plan.md` and `tasks.md` (from Decomposer Dale)
-2. Loads `.ai/1_tech_stacks/tech-stack-dotfiles.md` for patterns
+2. Loads `.ai/2_tech_stacks/tech-stack-dotfiles.md` for patterns
 3. Creates modular shell functions with BATS tests
 4. Ensures cross-platform compatibility (macOS/Linux)
 5. Implements idempotent installation scripts

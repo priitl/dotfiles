@@ -76,7 +76,7 @@ tests/
 - `.cursor` directory symlink
 - `.zshrc` file symlink
 - `.gitignore_global` file symlink
-- `.claude/agents` symlink to `.ai/2_agents`
+- `.claude/agents` symlink to `.ai/3_agents`
 
 ### 3. Backup Functionality Tests
 - Backs up existing files before symlinking

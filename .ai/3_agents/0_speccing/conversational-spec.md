@@ -67,7 +67,7 @@ Follow progressive refinement through phases:
 
 ### 3. Specification Generation
 Once enough information is gathered:
-- Create `specs/[TASK_ID]/spec.md` using `.ai/3_specs/spec-template.md`
+- Create `specs/[TASK_ID]/spec.md` using `.ai/4_specs/spec-template.md`
 - Include all extracted requirements, constraints, acceptance criteria
 - Create placeholder `plan.md` and `tasks.md` for Decomposer Dale
 - Flag remaining ambiguities in "Clarifications" section

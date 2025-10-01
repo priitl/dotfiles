@@ -385,7 +385,7 @@ INPUT
     run bash "$BATS_TEST_DIRNAME/../install.sh" <<< $'n\nn\nn\nn\nn\nn\nn\n'
     [ "$status" -eq 0 ]
     [ -L "$TEST_HOME/.claude/agents" ]
-    [ "$(readlink "$TEST_HOME/.claude/agents")" = "$TEST_HOME/.ai/2_agents" ]
+    [ "$(readlink "$TEST_HOME/.claude/agents")" = "$TEST_HOME/.ai/3_agents" ]
 }
 
 @test "installation succeeds with all symlinks created" {

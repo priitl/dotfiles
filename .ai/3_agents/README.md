@@ -82,7 +82,7 @@ Import agent specifications and reference them in your workflow.
 
 Agents adapt to different tech stacks via:
 - **constitution.md** (declares tech stack at project root)
-- **.ai/1_tech_stacks/tech-stack-{name}.md** (tech-specific patterns)
+- **.ai/2_tech_stacks/tech-stack-{name}.md** (tech-specific patterns)
 
 ### Available Tech Stacks
 - `tech-stack-spring.md` - Spring Boot, Hexagonal Architecture
@@ -90,7 +90,7 @@ Agents adapt to different tech stacks via:
 - `tech-stack-ai.md` - AI configuration systems
 
 ### Adding New Tech Stacks
-1. Create `.ai/1_tech_stacks/tech-stack-{name}.md`
+1. Create `.ai/2_tech_stacks/tech-stack-{name}.md`
 2. Define architecture patterns, testing frameworks, conventions
 3. Add `tech_stack: {name}` to project's `constitution.md`
 4. Decomposer Dale will auto-load the tech stack context

@@ -24,7 +24,7 @@ You are **Rex the Red-Green-Refactor** - a disciplined software engineer who rel
 - Implementation plan: `specs/[TASK_ID]/plan.md` (created by Decomposer Dale)
 - Task breakdown: `specs/[TASK_ID]/tasks.md` (created by Decomposer Dale)
 - Technical specification: `specs/[TASK_ID]/spec.md` (created by Valdis)
-- Tech stack context: `.ai/1_tech_stacks/tech-stack-spring.md`
+- Tech stack context: `.ai/2_tech_stacks/tech-stack-spring.md`
 - Project constitution: `constitution.md`
 - Existing codebase for reference
 
@@ -99,7 +99,7 @@ Follow hexagonal (ports and adapters) architecture strictly:
 1. Read `specs/[TASK_ID]/plan.md` (created by Decomposer Dale)
 2. Read `specs/[TASK_ID]/tasks.md` (created by Decomposer Dale)
 3. Review `specs/[TASK_ID]/spec.md` for full requirements
-4. Load `.ai/1_tech_stacks/tech-stack-spring.md` for Spring Boot patterns
+4. Load `.ai/2_tech_stacks/tech-stack-spring.md` for Spring Boot patterns
 5. Verify all dependencies are available
 6. Set up test data if needed
 7. Prepare development environment
@@ -591,7 +591,7 @@ Reading specs/PROJ-789/plan.md..."
 
 *Reads 15 tasks (T1-T15) created by Decomposer Dale*
 
-"Loading .ai/1_tech_stacks/tech-stack-spring.md for Spring Boot patterns..."
+"Loading .ai/2_tech_stacks/tech-stack-spring.md for Spring Boot patterns..."
 
 *Loads tech stack context*
 

@@ -43,7 +43,7 @@ specs/[TASK_ID]/
 └── tasks.md         # (Placeholder for planning phase)
 ```
 
-**spec.md Format** (based on `.ai/3_specs/spec-template.md`):
+**spec.md Format** (based on `.ai/4_specs/spec-template.md`):
 ```markdown
 # [Task ID]: [Brief Title]
 
@@ -113,8 +113,8 @@ As a [user type], I want to [action] so that [benefit].
 ```
 
 **Placeholder Files**:
-- `plan.md`: Copy from `.ai/3_specs/plan-template.md` with note "To be filled by Decomposer Dale"
-- `tasks.md`: Copy from `.ai/3_specs/tasks-template.md` with note "To be filled by Decomposer Dale"
+- `plan.md`: Copy from `.ai/4_specs/plan-template.md` with note "To be filled by Decomposer Dale"
+- `tasks.md`: Copy from `.ai/4_specs/tasks-template.md` with note "To be filled by Decomposer Dale"
 
 ## Output Guidelines
 
@@ -187,7 +187,7 @@ Before completing, verify:
 
 *Creates specs/PROJ-789/ directory structure*
 
-*Reads templates from ~/.ai/3_specs/*
+*Reads templates from ~/.ai/4_specs/*
 
 *Creates spec.md with Spec-Kit format*
 

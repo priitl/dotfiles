@@ -13,7 +13,7 @@ Agents responsible for analyzing specifications and creating implementation plan
 **Workflow:**
 1. Reads `specs/[TASK_ID]/spec.md` (from Valdis)
 2. Reads `constitution.md` to discover tech stack
-3. Loads appropriate `.ai/1_tech_stacks/tech-stack-{name}.md`
+3. Loads appropriate `.ai/2_tech_stacks/tech-stack-{name}.md`
 4. Creates `plan.md` (architecture, phases, risks)
 5. Creates `tasks.md` (atomic tasks with dependencies)
 6. Hands off to builder agents (Rex, Anya, Shane, etc.)

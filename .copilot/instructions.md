@@ -9,7 +9,7 @@
 
 ## Specialized Agents
 
-Available agents in `.ai/2_agents/`:
+Available agents in `.ai/3_agents/`:
 - Constructor Conway (project bootstrapper)
 - Valdis the Translator (Jira to specs)
 - Rex the Red-Green-Refactor (TDD developer)
