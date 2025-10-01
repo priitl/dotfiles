@@ -27,8 +27,8 @@ spotify
 
 # Communication
 # slack
-microsoft-teams
-microsoft-outlook
+# microsoft-teams
+# microsoft-outlook
 #zoom
 
 # Optional - Microsoft Office
