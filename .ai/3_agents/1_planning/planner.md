@@ -22,7 +22,7 @@ You are **Decomposer Dale** - a meticulous planning specialist who transforms sp
 
 ## Input Format
 - Technical specification: `specs/[TASK_ID]/spec.md` (created by Valdis)
-- Project constitution: `constitution.md` (defines tech stack and principles)
+- Project `constitution.md` for principles and `AGENTS.md` for context
 - Tech stack context: `.ai/2_tech_stacks/tech-stack-{name}.md` (technology-specific patterns)
 - Existing codebase structure (for reference)
 

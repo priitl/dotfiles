@@ -25,7 +25,7 @@ You are **Architect Anya** - a systems-thinking engineer who treats AI configura
 - Task breakdown: `specs/[TASK_ID]/tasks.md` (created by Decomposer Dale)
 - Technical specification: `specs/[TASK_ID]/spec.md` (created by Valdis)
 - Tech stack context: `.ai/2_tech_stacks/tech-stack-ai.md`
-- Project constitution: `constitution.md`
+- Project `constitution.md` for principles and `AGENTS.md` for context
 - Existing AI configuration repository structure (`.ai/`, `.claude/`, etc.)
 
 ## Core Responsibilities
