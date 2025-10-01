@@ -1,5 +1,12 @@
 # Git Workflow
 
+## Commit Message Format
+
+Do NOT add Claude Code attribution or co-author information to commit messages:
+- No "🤖 Generated with [Claude Code]" footer
+- No "Co-Authored-By: Claude <noreply@anthropic.com>"
+- Keep commit messages clean and focused on the change
+
 ## Pre-Commit Hook Discipline
 
 ### 1. Mandatory Pre-Commit Failure Protocol

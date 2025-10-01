@@ -258,14 +258,14 @@ if [ ! -f "$HOME/.gitconfig" ]; then
     # Prompt for git user name
     read -r -p "Enter your Git name (e.g., John Doe): " git_name
     while [ -z "$git_name" ]; do
-        echo "❌ Name cannot be empty"
+        echo "❌ Name cannot be empty" >&2
         read -r -p "Enter your Git name: " git_name
     done
 
     # Prompt for git email
     read -r -p "Enter your Git email (e.g., john@example.com): " git_email
     while [ -z "$git_email" ]; do
-        echo "❌ Email cannot be empty"
+        echo "❌ Email cannot be empty" >&2
         read -r -p "Enter your Git email: " git_email
     done
 
