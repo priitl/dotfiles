@@ -1,0 +1,15 @@
+# Core development tools
+git
+docker
+docker-compose
+colima
+
+# Node.js version manager
+nvm
+
+# Shell enhancements
+zsh-syntax-highlighting
+zsh-autosuggestions
+
+# Cloud tools
+# awscli

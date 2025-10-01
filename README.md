@@ -18,9 +18,20 @@ Lightweight wrappers that import the shared core:
 - **`.cursor/`** - Cursor IDE integration
 
 ### 🐚 Shell Configuration
-- **zshrc** - Zsh with oh-my-zsh, Powerlevel10k theme, Docker/Colima setup
+- **zshrc.template** - Modular Zsh configuration with oh-my-zsh & Powerlevel10k
+- **zsh_plugins.txt** - Customizable Oh-My-Zsh plugin list
 - **gitignore_global** - Global git ignore patterns
 - **gitconfig.template** - Git configuration template
+
+The install script dynamically builds your `.zshrc` based on installed tools:
+- ✅ Installs Docker/Colima → Adds Docker/Testcontainers config
+- ✅ Installs NVM → Adds NVM initialization
+- ✅ Installs SDKMAN → Adds SDKMAN initialization
+- ✅ Installs zsh plugins → Adds plugin sources
+
+### 📦 Package Management
+- **apps.txt** - Homebrew CLI packages (with comment support)
+- **casks.txt** - Homebrew GUI applications (with comment support)
 
 ## Repository Structure
 
@@ -57,9 +68,12 @@ dotfiles/
 ├── .cursor/
 │   └── rules.md                        # Cursor-specific wrapper
 │
-├── zshrc                               # Zsh configuration
+├── zshrc.template                      # Modular zsh configuration
+├── zsh_plugins.txt                     # Oh-My-Zsh plugins list
 ├── gitignore_global                    # Global gitignore
 ├── gitconfig.template                  # Git config template
+├── apps.txt                            # Homebrew packages list
+├── casks.txt                           # Homebrew casks list
 ├── install.sh                          # Installation script
 └── README.md                           # This file
 ```
@@ -101,10 +115,8 @@ dotfiles/
 ### Prerequisites
 
 - macOS (tested on macOS)
-- Zsh with oh-my-zsh
-- Powerlevel10k theme
 - At least one AI tool: Claude Code, GitHub Copilot, Cursor, or Gemini
-- Homebrew (for shell enhancements)
+- Optional: Homebrew (will be installed automatically if not present)
 
 ### Quick Start
 
@@ -118,12 +130,59 @@ cd ~/Projects/dotfiles
 ```
 
 The install script will:
-1. Install agent-agnostic AI core → `~/.ai/`
-2. Install tool-specific configs → `~/.claude/`, `~/.copilot/`, `~/.gemini/`, `~/.cursor/`
-3. Install Powerlevel10k theme (if not already installed)
-4. Backup existing dotfiles (with timestamp)
-5. Create symlinks for shell configs
-6. Create `~/.gitconfig` from template (with interactive prompts)
+1. **Install core configurations** (automatic):
+   - Agent-agnostic AI core → `~/.ai/`
+   - Tool-specific configs → `~/.claude/`, `~/.copilot/`, `~/.gemini/`, `~/.cursor/`
+   - Homebrew (if not present)
+   - Oh My Zsh (if not present)
+   - Powerlevel10k theme (if not present)
+   - Shell configurations (zshrc, gitignore_global)
+   - Essential dev tools (pre-commit, shellcheck)
+
+2. **Create gitconfig** (interactive):
+   - Prompts for git user name and email
+   - Optional: 1Password SSH commit signing
+
+3. **Optional installations** (prompted):
+   - Homebrew packages from `apps.txt` (git, docker, nvm, etc.)
+   - GUI applications from `casks.txt` (1Password, VS Code, iTerm2, etc.)
+   - SDKMAN + Java 21
+   - NVM + Node.js LTS
+   - Zsh plugins (syntax-highlighting, autosuggestions)
+   - macOS defaults (Dock, Finder, Trackpad, Dark Mode)
+
+4. **Safety features**:
+   - Backup existing files with timestamps
+   - Non-destructive symlink creation
+   - Comment support in apps.txt/casks.txt (lines starting with `#`)
+
+### Customizing Package Lists
+
+Edit `apps.txt` and `casks.txt` to customize what gets installed:
+
+**apps.txt** (Homebrew CLI packages):
+```txt
+# Core development tools
+git
+docker
+docker-compose
+
+# Comment out packages you don't want
+# awscli
+
+# Empty lines are ignored
+```
+
+**casks.txt** (GUI applications):
+```txt
+# Development Tools
+iterm2
+visual-studio-code
+
+# Comment out apps you don't need
+# figma
+# slack
+```
 
 ### Post-Installation
 
@@ -139,12 +198,7 @@ After running `install.sh`:
    p10k configure
    ```
 
-3. **Configure global gitignore**:
-   ```bash
-   git config --global core.excludesfile ~/.gitignore_global
-   ```
-
-4. **Verify AI tools can see configs**:
+3. **Verify AI tools can see configs**:
    ```bash
    # Check symlinks
    ls -la ~/.ai ~/.claude ~/.copilot ~/.gemini ~/.cursor

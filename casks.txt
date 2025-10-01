@@ -1,0 +1,35 @@
+# Security & Password Management
+1password
+1password-cli
+
+# Productivity
+rectangle
+keka
+numi
+
+# Development Tools
+iterm2
+jetbrains-toolbox
+visual-studio-code
+# insomnia
+# session-manager-plugin
+
+# Browsers
+brave-browser
+
+# Design
+# figma
+# kap
+
+# Media
+# vlc
+spotify
+
+# Communication
+# slack
+microsoft-teams
+microsoft-outlook
+#zoom
+
+# Optional - Microsoft Office
+# microsoft-excel

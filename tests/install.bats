@@ -22,6 +22,11 @@ setup() {
     echo "mock ai core" > "$TEST_DOTFILES/.ai/0_core/test.md"
     echo "mock claude config" > "$TEST_DOTFILES/.claude/CLAUDE.md"
     echo "mock zshrc" > "$TEST_DOTFILES/zshrc"
+    cat > "$TEST_DOTFILES/zshrc.template" <<'EOF'
+# Mock zshrc template
+export ZSH="$HOME/.oh-my-zsh"
+# TOOL_CONFIGS_MARKER
+EOF
     echo "mock gitignore" > "$TEST_DOTFILES/gitignore_global"
 
     # Create a mock .gitconfig to skip interactive prompts in most tests
@@ -58,6 +63,12 @@ EOF
     chmod +x "$TEST_HOME/bin/git"
 }
 
+# Helper function to provide standard "no" responses to all optional prompts
+# Current prompts: signing, apps, casks, sdkman, nvm, zsh-plugins, macos-defaults = 7 prompts
+skip_all_optional() {
+    echo -e "n\nn\nn\nn\nn\nn\nn"
+}
+
 teardown() {
     # Clean up test environment
     rm -rf "$TEST_HOME"
@@ -70,49 +81,50 @@ teardown() {
 
 @test "fails when dotfiles directory does not exist" {
     export DOTFILES_DIR="$TEST_HOME/nonexistent"
-    run bash "$BATS_TEST_DIRNAME/../install.sh" <<< $'n\n'
+    run bash "$BATS_TEST_DIRNAME/../install.sh" <<< $'n\nn\nn\nn\nn\nn\nn\n'
     [ "$status" -eq 1 ]
     [[ "$output" =~ "Error: Dotfiles directory not found" ]]
 }
 
 @test "creates symlink for .ai directory" {
-    run bash "$BATS_TEST_DIRNAME/../install.sh" <<< $'n\n'
+    run bash "$BATS_TEST_DIRNAME/../install.sh" <<< $'n\nn\nn\nn\nn\nn\nn\n'
     [ -L "$TEST_HOME/.ai" ]
     [ "$(readlink "$TEST_HOME/.ai")" = "$TEST_DOTFILES/.ai" ]
 }
 
 @test "creates symlink for .claude directory" {
-    run bash "$BATS_TEST_DIRNAME/../install.sh" <<< $'n\n'
+    run bash "$BATS_TEST_DIRNAME/../install.sh" <<< $'n\nn\nn\nn\nn\nn\nn\n'
     [ -L "$TEST_HOME/.claude" ]
     [ "$(readlink "$TEST_HOME/.claude")" = "$TEST_DOTFILES/.claude" ]
 }
 
 @test "creates symlink for .copilot directory" {
-    run bash "$BATS_TEST_DIRNAME/../install.sh" <<< $'n\n'
+    run bash "$BATS_TEST_DIRNAME/../install.sh" <<< $'n\nn\nn\nn\nn\nn\nn\n'
     [ -L "$TEST_HOME/.copilot" ]
     [ "$(readlink "$TEST_HOME/.copilot")" = "$TEST_DOTFILES/.copilot" ]
 }
 
 @test "creates symlink for .gemini directory" {
-    run bash "$BATS_TEST_DIRNAME/../install.sh" <<< $'n\n'
+    run bash "$BATS_TEST_DIRNAME/../install.sh" <<< $'n\nn\nn\nn\nn\nn\nn\n'
     [ -L "$TEST_HOME/.gemini" ]
     [ "$(readlink "$TEST_HOME/.gemini")" = "$TEST_DOTFILES/.gemini" ]
 }
 
 @test "creates symlink for .cursor directory" {
-    run bash "$BATS_TEST_DIRNAME/../install.sh" <<< $'n\n'
+    run bash "$BATS_TEST_DIRNAME/../install.sh" <<< $'n\nn\nn\nn\nn\nn\nn\n'
     [ -L "$TEST_HOME/.cursor" ]
     [ "$(readlink "$TEST_HOME/.cursor")" = "$TEST_DOTFILES/.cursor" ]
 }
 
 @test "creates symlink for zshrc" {
-    run bash "$BATS_TEST_DIRNAME/../install.sh" <<< $'n\n'
-    [ -L "$TEST_HOME/.zshrc" ]
-    [ "$(readlink "$TEST_HOME/.zshrc")" = "$TEST_DOTFILES/zshrc" ]
+    run bash "$BATS_TEST_DIRNAME/../install.sh" <<< $'n\nn\nn\nn\nn\nn\nn\n'
+    # zshrc should be a copy from template (not a symlink)
+    [ -f "$TEST_HOME/.zshrc" ]
+    [ ! -L "$TEST_HOME/.zshrc" ]
 }
 
 @test "creates symlink for gitignore_global" {
-    run bash "$BATS_TEST_DIRNAME/../install.sh" <<< $'n\n'
+    run bash "$BATS_TEST_DIRNAME/../install.sh" <<< $'n\nn\nn\nn\nn\nn\nn\n'
     [ -L "$TEST_HOME/.gitignore_global" ]
     [ "$(readlink "$TEST_HOME/.gitignore_global")" = "$TEST_DOTFILES/gitignore_global" ]
 }
@@ -121,7 +133,7 @@ teardown() {
     # Create existing file
     echo "existing content" > "$TEST_HOME/.zshrc"
 
-    run bash "$BATS_TEST_DIRNAME/../install.sh" <<< $'n\n'
+    run bash "$BATS_TEST_DIRNAME/../install.sh" <<< $'n\nn\nn\nn\nn\nn\nn\n'
     [ "$status" -eq 0 ]
 
     # Check that backup was created
@@ -138,7 +150,7 @@ teardown() {
     mkdir -p "$TEST_HOME/old_target"
     ln -s "$TEST_HOME/old_target" "$TEST_HOME/.ai"
 
-    run bash "$BATS_TEST_DIRNAME/../install.sh" <<< $'n\n'
+    run bash "$BATS_TEST_DIRNAME/../install.sh" <<< $'n\nn\nn\nn\nn\nn\nn\n'
     [ "$status" -eq 0 ]
 
     # Check that backup was created
@@ -149,21 +161,27 @@ teardown() {
 @test "backup filenames include timestamp" {
     echo "existing" > "$TEST_HOME/.zshrc"
 
-    run bash "$BATS_TEST_DIRNAME/../install.sh" <<< $'n\n'
+    run bash "$BATS_TEST_DIRNAME/../install.sh" <<< $'n\nn\nn\nn\nn\nn\nn\n'
 
     backup_file=$(find "$TEST_HOME" -name ".zshrc.backup.*" | head -n 1)
-    # Check that filename matches pattern: .zshrc.backup.YYYYMMDD_HHMMSS
-    [[ "$(basename "$backup_file")" =~ ^\.zshrc\.backup\.[0-9]{8}_[0-9]{6}$ ]]
+    # Check that filename matches pattern: .zshrc.backup.YYYYMMDD_HHMMSS.XXXXXX (mktemp format)
+    [[ "$(basename "$backup_file")" =~ ^\.zshrc\.backup\.[0-9]{8}_[0-9]{6}\. ]]
 }
 
 @test "creates .gitconfig when it doesn't exist" {
     # Remove the mock .gitconfig created in setup
     rm "$TEST_HOME/.gitconfig"
 
-    # Provide input for git name and email, skip signing
+    # Provide input for git name and email, skip signing, skip all optional installs
     run bash "$BATS_TEST_DIRNAME/../install.sh" <<'INPUT'
 Test User
 test@example.com
+n
+n
+n
+n
+n
+n
 n
 INPUT
 
@@ -178,6 +196,12 @@ INPUT
     run bash "$BATS_TEST_DIRNAME/../install.sh" <<'INPUT'
 John Doe
 john@example.com
+n
+n
+n
+n
+n
+n
 n
 INPUT
 
@@ -194,18 +218,26 @@ INPUT
 Test User
 test@example.com
 n
+n
+n
+n
+n
+n
+n
 INPUT
 
     [ -f "$TEST_HOME/.gitconfig" ]
     grep -q "\[core\]" "$TEST_HOME/.gitconfig"
-    grep -q "editor = nano" "$TEST_HOME/.gitconfig"
     grep -q "autocrlf = input" "$TEST_HOME/.gitconfig"
+    grep -q "excludesfile = ~/.gitignore_global" "$TEST_HOME/.gitconfig"
+    grep -q "defaultBranch = main" "$TEST_HOME/.gitconfig"
+    grep -q "prune = true" "$TEST_HOME/.gitconfig"
 }
 
 @test "does not overwrite existing .gitconfig" {
     echo "existing gitconfig" > "$TEST_HOME/.gitconfig"
 
-    run bash "$BATS_TEST_DIRNAME/../install.sh" <<< $'n\n'
+    run bash "$BATS_TEST_DIRNAME/../install.sh" <<< $'n\nn\nn\nn\nn\nn\nn\n'
 
     [ "$status" -eq 0 ]
     [ "$(cat "$TEST_HOME/.gitconfig")" = "existing gitconfig" ]
@@ -221,6 +253,12 @@ Test User
 test@example.com
 y
 ssh-ed25519 AAAA... test@example.com
+n
+n
+n
+n
+n
+n
 INPUT
 
     [ -f "$TEST_HOME/.gitconfig" ]
@@ -238,6 +276,12 @@ INPUT
 Valid Name
 test@example.com
 n
+n
+n
+n
+n
+n
+n
 INPUT
 
     [[ "$output" =~ "Name cannot be empty" ]]
@@ -254,6 +298,12 @@ Test User
 
 test@example.com
 n
+n
+n
+n
+n
+n
+n
 INPUT
 
     [[ "$output" =~ "Email cannot be empty" ]]
@@ -262,14 +312,14 @@ INPUT
 }
 
 @test "creates agents symlink in .claude directory" {
-    run bash "$BATS_TEST_DIRNAME/../install.sh" <<< $'n\n'
+    run bash "$BATS_TEST_DIRNAME/../install.sh" <<< $'n\nn\nn\nn\nn\nn\nn\n'
     [ "$status" -eq 0 ]
     [ -L "$TEST_HOME/.claude/agents" ]
     [ "$(readlink "$TEST_HOME/.claude/agents")" = "$TEST_HOME/.ai/2_agents" ]
 }
 
 @test "installation succeeds with all symlinks created" {
-    run bash "$BATS_TEST_DIRNAME/../install.sh" <<< $'n\n'
+    run bash "$BATS_TEST_DIRNAME/../install.sh" <<< $'n\nn\nn\nn\nn\nn\nn\n'
     [ "$status" -eq 0 ]
     [[ "$output" =~ "✅ Installation complete!" ]]
 }
@@ -279,7 +329,7 @@ INPUT
     echo "version1" > "$TEST_HOME/.zshrc"
 
     # Run install first time
-    bash "$BATS_TEST_DIRNAME/../install.sh" <<< $'n\n' > /dev/null
+    bash "$BATS_TEST_DIRNAME/../install.sh" <<< $'n\nn\nn\nn\nn\nn\nn\n' > /dev/null
 
     # Remove symlink and create new file
     rm "$TEST_HOME/.zshrc"
@@ -287,7 +337,7 @@ INPUT
 
     # Run install second time
     sleep 1  # Ensure different timestamp
-    bash "$BATS_TEST_DIRNAME/../install.sh" <<< $'n\n' > /dev/null
+    bash "$BATS_TEST_DIRNAME/../install.sh" <<< $'n\nn\nn\nn\nn\nn\nn\n' > /dev/null
 
     # Check that two backups exist with different timestamps
     backup_count=$(find "$TEST_HOME" -name ".zshrc.backup.*" | wc -l)
@@ -297,17 +347,17 @@ INPUT
 @test "installation output shows backup messages" {
     echo "existing" > "$TEST_HOME/.zshrc"
 
-    run bash "$BATS_TEST_DIRNAME/../install.sh" <<< $'n\n'
+    run bash "$BATS_TEST_DIRNAME/../install.sh" <<< $'n\nn\nn\nn\nn\nn\nn\n'
     [[ "$output" =~ "📦 Backing up existing" ]]
 }
 
 @test "installation output shows symlink creation" {
-    run bash "$BATS_TEST_DIRNAME/../install.sh" <<< $'n\n'
+    run bash "$BATS_TEST_DIRNAME/../install.sh" <<< $'n\nn\nn\nn\nn\nn\nn\n'
     [[ "$output" =~ "🔗 Creating symlink" ]]
 }
 
 @test "symlinks are valid and point to correct targets" {
-    run bash "$BATS_TEST_DIRNAME/../install.sh" <<< $'n\n'
+    run bash "$BATS_TEST_DIRNAME/../install.sh" <<< $'n\nn\nn\nn\nn\nn\nn\n'
 
     # Check .ai symlink
     [ -L "$TEST_HOME/.ai" ]
@@ -319,8 +369,13 @@ INPUT
     [ -d "$TEST_HOME/.claude" ]
     [ -e "$TEST_HOME/.claude/CLAUDE.md" ]
 
-    # Check zshrc symlink
-    [ -L "$TEST_HOME/.zshrc" ]
+    # Check zshrc - should be a copy from template (or symlink if template doesn't exist)
     [ -f "$TEST_HOME/.zshrc" ]
-    [ "$(cat "$TEST_HOME/.zshrc")" = "mock zshrc" ]
+    # If template exists, zshrc should be a regular file (copy)
+    # If template doesn't exist, zshrc should be a symlink to legacy zshrc
+    if [ -f "$TEST_DOTFILES/zshrc.template" ]; then
+        [ ! -L "$TEST_HOME/.zshrc" ]  # Not a symlink
+    else
+        [ -L "$TEST_HOME/.zshrc" ]  # Is a symlink
+    fi
 }

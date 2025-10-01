@@ -1,0 +1,30 @@
+# Oh-My-Zsh plugins to load
+# One plugin per line, comments starting with # are ignored
+# Edit this file to customize your plugin set
+
+# Core plugins (recommended)
+git
+z
+
+# Utility plugins
+alias-finder
+common-aliases
+copypath
+copyfile
+encode64
+extract
+jsontools
+urltools
+web-search
+
+# macOS specific
+macos
+
+# Development tools (comment out if not using)
+docker
+docker-compose
+node
+vscode
+
+# Environment management
+dotenv

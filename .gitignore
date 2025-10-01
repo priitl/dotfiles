@@ -23,6 +23,7 @@
 .claude/shell-snapshots/
 .claude/statsig/
 .claude/todos/
+.claude/settings.local.json
 
 # Copilot
 .copilot/command-history-state.json
