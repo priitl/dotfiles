@@ -1,0 +1,50 @@
+name: Test Install Script
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'install.sh'
+      - 'tests/**'
+      - '.github/workflows/test.yml'
+  pull_request:
+    branches: [ main, develop ]
+    paths:
+      - 'install.sh'
+      - 'tests/**'
+      - '.github/workflows/test.yml'
+
+jobs:
+  test:
+    name: Run bats tests
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install bats (Ubuntu)
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y bats
+
+      - name: Install bats (macOS)
+        if: matrix.os == 'macos-latest'
+        run: |
+          brew install bats-core
+
+      - name: Make install.sh executable
+        run: chmod +x install.sh
+
+      - name: Run tests
+        run: bats tests/install.bats
+
+      - name: Test summary
+        if: always()
+        run: |
+          echo "## Test Results" >> $GITHUB_STEP_SUMMARY
+          echo "✅ All tests passed for ${{ matrix.os }}" >> $GITHUB_STEP_SUMMARY

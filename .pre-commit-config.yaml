@@ -20,5 +20,13 @@ repos:
       - id: markdownlint
         args:
           - --disable
-          - MD013
-          - MD033
+          - MD013 # Line length: Handled by IDE, not enforced in docs
+          - MD033 # Inline HTML: Allowed for specific formatting needs like diagrams or badges
+  - repo: local
+    hooks:
+      - id: bats-tests
+        name: Run bats tests
+        entry: bats tests/install.bats
+        language: system
+        pass_filenames: false
+        files: '^(install\.sh|tests/.*\.bats)$'

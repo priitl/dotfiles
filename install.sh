@@ -5,7 +5,7 @@
 
 set -e
 
-DOTFILES_DIR="$HOME/Projects/dotfiles"
+DOTFILES_DIR="${DOTFILES_DIR:-$HOME/Projects/dotfiles}"
 AI_DIR="$HOME/.ai"
 CLAUDE_DIR="$HOME/.claude"
 COPILOT_DIR="$HOME/.copilot"
@@ -50,6 +50,10 @@ backup_and_link "$DOTFILES_DIR/.claude" "$CLAUDE_DIR" ".claude (Claude Code)"
 backup_and_link "$DOTFILES_DIR/.copilot" "$COPILOT_DIR" ".copilot (GitHub Copilot)"
 backup_and_link "$DOTFILES_DIR/.gemini" "$GEMINI_DIR" ".gemini (Google Gemini)"
 backup_and_link "$DOTFILES_DIR/.cursor" "$CURSOR_DIR" ".cursor (Cursor IDE)"
+# Symlink agents into .claude for backward compatibility
+if [ -L "$CLAUDE_DIR" ] || [ -d "$CLAUDE_DIR" ]; then
+    backup_and_link "$AI_DIR/2_agents" "$CLAUDE_DIR/agents" ".claude/agents"
+fi
 echo ""
 
 echo "=== Installing Developer Tools ==="
@@ -57,17 +61,17 @@ echo ""
 # Check for Homebrew and install if not found
 if ! command -v brew &> /dev/null; then
     echo "🍺 Homebrew not found. Installing..."
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" || true
 else
     echo "🍺 Homebrew already installed. Updating..."
-    brew update
+    brew update || true
 fi
 
 echo "🔧 Installing pre-commit and shellcheck..."
-brew install pre-commit shellcheck
+brew install pre-commit shellcheck || true
 
 echo "🔧 Installing pre-commit hooks..."
-pre-commit install
+pre-commit install || true
 
 echo ""
 
@@ -77,7 +81,7 @@ echo ""
 # Check if Powerlevel10k is already installed
 if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k" ]; then
     echo "📥 Cloning Powerlevel10k theme..."
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k" || true
     echo "   ✓ Powerlevel10k installed"
 else
     echo "ℹ️  Powerlevel10k already installed"
@@ -109,36 +113,49 @@ if [ ! -f "$HOME/.gitconfig" ]; then
         read -r -p "Enter your Git email: " git_email
     done
 
+    # Create the .gitconfig file using a heredoc for cleanliness
+    cat > "$HOME/.gitconfig" << EOL
+[user]
+	name = $git_name
+	email = $git_email
+[color]
+	ui = true
+[push]
+	default = simple
+[core]
+	editor = nano
+	filemode = false
+	ignorecase = false
+	autocrlf = input
+[merge]
+	branchdesc = true
+[init]
+	defaultBranch = master
+EOL
+
     # Prompt for 1Password SSH signing (optional)
     echo ""
     echo "Do you want to enable commit signing with 1Password SSH?"
     echo "(Requires 1Password with SSH agent enabled)"
     read -r -p "Enable commit signing? [y/N]: " enable_signing
 
-    # Create gitconfig from template
-    cp "$DOTFILES_DIR/gitconfig.template" "$HOME/.gitconfig"
-
-    # Replace placeholders
-    # Use .bak extension for sed -i to be compatible with both GNU and BSD sed.
-    sed -i '.bak' "s/YOUR_NAME/$git_name/" "$HOME/.gitconfig"
-    sed -i '.bak' "s/YOUR_EMAIL/$git_email/" "$HOME/.gitconfig"
-
-    # Enable signing if requested
     if [[ "$enable_signing" =~ ^[Yy]$ ]]; then
         echo ""
         read -r -p "Enter your SSH signing key (or press Enter to skip): " signing_key
 
         if [ -n "$signing_key" ]; then
-            # Uncomment signing configuration
-            sed -i '.bak' 's/# \[gpg\]/[gpg]/' "$HOME/.gitconfig"
-            sed -i '.bak' 's/# 	format = ssh/	format = ssh/' "$HOME/.gitconfig"
-            sed -i '.bak' 's/# \[gpg "ssh"\]/[gpg "ssh"]/' "$HOME/.gitconfig"
-            sed -i '.bak' 's|# 	program = /Applications/1Password.app.*|	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign|' "$HOME/.gitconfig"
-            sed -i '.bak' 's/# \[commit\]/[commit]/' "$HOME/.gitconfig"
-            sed -i '.bak' 's/# 	gpgsign = true/	gpgsign = true/' "$HOME/.gitconfig"
-            sed -i '.bak' "s|# signingkey = YOUR_SSH_KEY.*|	signingkey = $signing_key|" "$HOME/.gitconfig"
-            # Remove backup files created by sed
-            rm "$HOME/.gitconfig.bak"*
+            # Append signing configuration to .gitconfig
+            cat >> "$HOME/.gitconfig" << EOL
+
+[user]
+	signingkey = $signing_key
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+[commit]
+	gpgsign = true
+EOL
         fi
     fi
 

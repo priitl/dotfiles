@@ -5,7 +5,12 @@ fi
 
 export ZSH="$HOME/.oh-my-zsh"
 export TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE=/var/run/docker.sock
-export TESTCONTAINERS_HOST_OVERRIDE=$(colima ls -j | jq -r '.address')
+
+# Cache colima host address to speed up shell startup
+if [ -z "$TESTCONTAINERS_HOST_OVERRIDE" ]; then
+    export TESTCONTAINERS_HOST_OVERRIDE=$(colima ls -j | jq -r '.address')
+fi
+
 export DOCKER_HOST="unix://${HOME}/.colima/default/docker.sock"
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
