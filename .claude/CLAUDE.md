@@ -57,6 +57,7 @@ Follow the spec-driven development workflow when appropriate:
 **Spec locations:**
 - Project specs: `specs/NNN-feature/` (spec.md, plan.md, tasks.md)
 - Constitution: `constitution.md` at project root
+- More context: `AGENTS.md` at project root
 
 ## Claude-Specific Features
 
@@ -81,13 +82,6 @@ Use TodoWrite tool proactively for:
 ```
 "Update specs/NNN-feature/tasks.md with completed tasks from TodoWrite"
 ```
-
-### Commit & PR Workflow
-- Create commits with proper format (see git-workflow.md)
-- Include Co-Authored-By: Claude <noreply@anthropic.com>
-- Never use --no-verify flag
-- Push branches with -u flag when needed
-- Create PRs using gh pr create
 
 ### Code References
 When referencing code, use `file_path:line_number` format:
