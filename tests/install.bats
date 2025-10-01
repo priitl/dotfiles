@@ -345,6 +345,7 @@ INPUT
     rm "$TEST_HOME/.gitconfig"
 
     run bash "$BATS_TEST_DIRNAME/../install.sh" <<'INPUT'
+Y
 
 Valid Name
 test@example.com
