@@ -15,6 +15,13 @@ CURSOR_DIR="$HOME/.cursor"
 echo "🤖 Installing Priit's Dotfiles..."
 echo ""
 
+# Ask about backups
+echo "Do you want to create backups of existing files before symlinking?"
+echo "(Backups will be saved with timestamp: file.backup.YYYYMMDD_HHMMSS)"
+read -r -p "Create backups? [Y/n]: " CREATE_BACKUPS
+CREATE_BACKUPS=${CREATE_BACKUPS:-Y}
+echo ""
+
 # Ask for sudo password upfront if needed
 SUDO_KEEPALIVE_PID=""
 if [[ "$INSTALL_PACKAGES" == "true" ]] || [[ "$INSTALL_MACOS_DEFAULTS" == "true" ]]; then
@@ -58,9 +65,14 @@ backup_and_link() {
     fi
 
     if [ -e "$target" ] || [ -L "$target" ]; then
-        BACKUP="$target.backup.$(date +%Y%m%d_%H%M%S)"
-        echo "📦 Backing up existing $name to: $BACKUP"
-        mv "$target" "$BACKUP"
+        if [[ "$CREATE_BACKUPS" =~ ^[Yy]$ ]]; then
+            BACKUP="$target.backup.$(date +%Y%m%d_%H%M%S)"
+            echo "📦 Backing up existing $name to: $BACKUP"
+            mv "$target" "$BACKUP"
+        else
+            echo "⚠️  Removing existing $name (no backup)"
+            rm -rf "$target"
+        fi
     fi
 
     echo "🔗 Creating symlink: $target -> $source"
@@ -289,6 +301,36 @@ if [ ! -f "$HOME/.gitconfig" ]; then
 else
     echo "ℹ️  Skipping .gitconfig (already exists)"
     echo "   Template available at: $DOTFILES_DIR/gitconfig.template"
+fi
+echo ""
+
+echo "=== Installing Helper Scripts ==="
+echo ""
+
+# Install init-project-agents.sh to PATH
+if [ -f "$DOTFILES_DIR/scripts/init-project-agents.sh" ]; then
+    # Create local bin directory if it doesn't exist
+    mkdir -p "$HOME/.local/bin"
+
+    # Symlink the script
+    if [ -L "$HOME/.local/bin/init-project-agents" ] || [ -f "$HOME/.local/bin/init-project-agents" ]; then
+        rm "$HOME/.local/bin/init-project-agents"
+    fi
+    ln -s "$DOTFILES_DIR/scripts/init-project-agents.sh" "$HOME/.local/bin/init-project-agents"
+    echo "🔗 Installed init-project-agents to PATH"
+    echo "   Usage: init-project-agents (from any project directory)"
+
+    # Check if ~/.local/bin is in PATH
+    if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
+        echo "   ⚠️  Adding ~/.local/bin to PATH in .zshrc"
+
+        # Add to zshrc if not already there
+        local_bin_config="# Local bin directory
+export PATH=\"\$HOME/.local/bin:\$PATH\""
+        add_tool_config "Local bin directory" "$local_bin_config"
+    fi
+else
+    echo "⚠️  init-project-agents.sh not found, skipping"
 fi
 echo ""
 
@@ -589,6 +631,10 @@ if [ -L "$AI_DIR" ] && [ -d "$AI_DIR" ] && [ -L "$CLAUDE_DIR" ] && [ -d "$CLAUDE
     echo "   - GitHub Copilot: Opens instructions from ~/.copilot/instructions.md"
     echo "   - Cursor: Opens rules from ~/.cursor/rules.md"
     echo "   - Gemini: Opens config from ~/.gemini/config.md"
+    echo ""
+    echo "📋 Initialize AGENTS.md in projects:"
+    echo "   cd your-project && init-project-agents"
+    echo "   (Enables agent discovery across all AI tools)"
     echo ""
     echo "📖 For more info: cat ~/Projects/dotfiles/README.md"
     echo ""

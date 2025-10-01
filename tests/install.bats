@@ -220,7 +220,7 @@ teardown() {
     mkdir -p "$TEST_HOME/old_target"
     ln -s "$TEST_HOME/old_target" "$TEST_HOME/.ai"
 
-    run bash "$BATS_TEST_DIRNAME/../install.sh" <<< $'n\nn\nn\nn\nn\nn\nn\n'
+    run bash "$BATS_TEST_DIRNAME/../install.sh" <<< $'Y\nn\nn\nn\nn\nn\nn\nn\n'
     [ "$status" -eq 0 ]
 
     # Check that backup was created
@@ -242,8 +242,9 @@ teardown() {
     # Remove the mock .gitconfig created in setup
     rm "$TEST_HOME/.gitconfig"
 
-    # Provide input for git name and email, skip signing, skip all optional installs
+    # Provide input for backup prompt, git name and email, skip signing, skip all optional installs
     run bash "$BATS_TEST_DIRNAME/../install.sh" <<'INPUT'
+Y
 Test User
 test@example.com
 n
@@ -264,6 +265,7 @@ INPUT
     rm "$TEST_HOME/.gitconfig"
 
     run bash "$BATS_TEST_DIRNAME/../install.sh" <<'INPUT'
+Y
 John Doe
 john@example.com
 n
@@ -319,6 +321,7 @@ INPUT
     rm "$TEST_HOME/.gitconfig"
 
     run bash "$BATS_TEST_DIRNAME/../install.sh" <<'INPUT'
+Y
 Test User
 test@example.com
 y
@@ -364,6 +367,7 @@ INPUT
     rm "$TEST_HOME/.gitconfig"
 
     run bash "$BATS_TEST_DIRNAME/../install.sh" <<'INPUT'
+Y
 Test User
 
 test@example.com

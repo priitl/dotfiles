@@ -2,6 +2,8 @@
 
 This document defines the **non-negotiable principles** for Priit's dotfiles repository.
 
+**This is the WHY and WHAT. For HOW (commands, workflows), see `AGENTS.md`**
+
 ## Project Overview
 
 **Purpose**: Agent-agnostic AI development environment configuration
@@ -77,7 +79,9 @@ tech_stack_secondary: ai  # Agent definitions, workflows, CLAUDE.md
 ### Directory Structure
 ```
 dotfiles/
+├── AGENTS.md              # AGENTS.md for THIS dotfiles repo
 ├── .ai/                   # Agent-agnostic core (source of truth)
+│   ├── AGENTS.md          # Generic template (for OTHER projects)
 │   ├── 0_core/            # Standards, principles, workflows
 │   ├── 1_workflows/       # Process definitions
 │   ├── 3_agents/          # Specialized agents
@@ -86,6 +90,8 @@ dotfiles/
 ├── .copilot/              # Copilot wrapper
 ├── .gemini/               # Gemini wrapper
 ├── .cursor/               # Cursor wrapper
+├── scripts/               # Helper scripts
+│   └── init-project-agents.sh  # Initialize AGENTS.md in projects
 └── shell configs...       # zshrc, gitconfig, etc.
 ```
 
@@ -187,6 +193,76 @@ Use Priit's 🟢🟡🔴 framework for changes:
 - README.md must be current
 - All templates must have usage examples
 - Breaking changes require migration guide
+
+## AGENTS.md Strategy
+
+### Purpose
+`AGENTS.md` follows the https://agents.md/ specification - it provides **instructions for AI coding agents** working on the project (setup commands, code style, testing, PR guidelines).
+
+**NOT a registry of AI agents** - that information is in:
+- `.ai/3_agents/` - Actual agent definitions (Socrates, Dale, Rex, etc.)
+- `README.md` - Documentation about available agents
+- `CLAUDE.md` - Claude-specific agent invocation
+
+### For This Dotfiles Repository
+- **Root `AGENTS.md`**: Instructions for working on the dotfiles repo itself
+- **Template `.ai/AGENTS.md`**: Generic template for OTHER projects to copy and customize
+- **No duplication**: Template is generic, root file is specific to dotfiles
+- **Helper script**: `scripts/init-project-agents.sh` copies `.ai/AGENTS.md` to projects
+
+### For Projects Using These Dotfiles
+Projects get `AGENTS.md` with project-specific instructions:
+
+**Setup:**
+```bash
+# Option 1: Use helper script (recommended)
+init-project-agents
+
+# Option 2: Manual copy
+cp ~/.ai/AGENTS.md ./AGENTS.md
+```
+
+**What you get:**
+The template (`.ai/AGENTS.md`) has placeholder sections:
+```markdown
+# AGENTS Instructions
+
+**Note:** This is a template. Customize all sections for your specific project.
+
+## Repository Layout
+[Customize this section with your project structure]
+
+## Setup Commands
+[Replace with your project's setup commands]
+# npm install
+# ./gradlew build
+
+## Code Style
+[Define your project's code style]
+
+## Specialized AI Agents
+[This section is pre-filled with agent info]
+Socrates, Dale, Rex, Shane, etc.
+```
+
+**Customization:**
+1. Copy template: `init-project-agents` (or `cp ~/.ai/AGENTS.md ./AGENTS.md`)
+2. Replace placeholders with your project specifics
+3. Keep "Specialized AI Agents" section (already complete)
+4. Remove customization checklist when done
+
+**How it works:**
+- AI tools read `AGENTS.md` at project root
+- Learn project-specific setup, style, testing, PR workflow
+- Also learn about available specialized agents (Socrates, Dale, Rex, etc.)
+- `constitution.md` has principles, `AGENTS.md` has practical instructions
+
+**Benefits:**
+- ✅ Standard compliant (AGENTS.md at project root per spec)
+- ✅ Practical workflow instructions for AI tools
+- ✅ Tool agnostic (works with Claude, Copilot, Gemini, Cursor)
+- ✅ Complementary to constitution.md
+- ✅ Easy to customize per project
 
 ## Spec-Kit Alignment (This Repo)
 

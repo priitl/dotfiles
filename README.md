@@ -41,6 +41,7 @@ The install script dynamically builds your `.zshrc` based on installed tools:
 ```
 dotfiles/
 ├── .ai/                                # 🎯 Agent-agnostic core (works with all tools)
+│   ├── AGENTS.md                       # 📋 Agent registry template (for projects)
 │   ├── 0_core/
 │   │   ├── priit-personality.md        # Buddy-cop relationship
 │   │   ├── coding-standards.md         # TDD, quality standards
@@ -306,6 +307,77 @@ Reads rules from `~/.cursor/rules.md`
 - cmd+k (or ctrl+k) applies standards
 - TDD workflow enforcement
 - Agent delegation suggestions
+
+## Using AGENTS.md in Projects
+
+Following the https://agents.md/ specification, projects can have an `AGENTS.md` file providing instructions for AI coding agents.
+
+### What is AGENTS.md?
+
+`AGENTS.md` is **NOT** about listing AI agents - it's about **teaching AI tools how to work on your project**:
+- Setup commands
+- Code style guidelines
+- Testing instructions
+- PR requirements
+
+Think of it as a README specifically for AI tools.
+
+### Initialize AGENTS.md in a New Project
+
+```bash
+# Option 1: Use helper script (recommended)
+init-project-agents
+
+# Option 2: Manual copy
+cp ~/.ai/AGENTS.md ./AGENTS.md
+```
+
+This creates an `AGENTS.md` template you should customize for your project:
+
+```markdown
+# AI Agent Instructions
+
+## Setup Commands
+npm install
+npm run dev
+
+## Code Style
+- TypeScript strict mode
+- Use functional patterns
+- Single quotes, no semicolons
+
+## Testing Instructions
+npm test
+npm run test:e2e
+
+## PR Instructions
+- Run tests before committing
+- Commit format: [PROJ-123] Description
+- Get 2 approvals before merge
+```
+
+### How It Works With constitution.md
+
+**constitution.md** - Principles (what the project believes):
+- Tech stack
+- Architecture decisions
+- Non-negotiable constraints
+- `tech_stack: spring`
+
+**AGENTS.md** - Practical instructions (how to work on it):
+- Setup commands
+- Code style
+- Testing workflow
+- PR requirements
+
+**Together:** AI tools read both files to understand project principles AND practical workflow.
+
+### Benefits
+
+- ✅ **Standardized** - Follows agents.md specification
+- ✅ **Tool agnostic** - Works with Claude, Copilot, Gemini, Cursor
+- ✅ **Practical** - Actionable instructions for AI agents
+- ✅ **Complementary** - Works alongside constitution.md
 
 ## Project-Level Configuration
 
