@@ -4,7 +4,7 @@
 @import ../.ai/0_core/priit-personality.md
 @import ../.ai/0_core/coding-standards.md
 @import ../.ai/0_core/decision-framework.md
-@import ../.ai/0_core/git-workflow.md
+@import ../.ai/1_workflows/git-workflow.md
 @import ../.ai/1_workflows/tdd-workflow.md
 @import ../.ai/1_workflows/pre-commit-protocol.md
 
@@ -17,6 +17,7 @@ Agents handle their own code quality standards - don't duplicate those rules her
 Available agents (organized by workflow phase):
 
 **Speccing** (Requirements → Specs):
+- **Archivist Aurora** (project-bootstrapper) - Generates AGENTS.md + constitution.md for projects
 - **Valdis the Translator** (jira-to-spec) - Translates Jira tasks into technical specs
 - **Socrates the Questioner** (conversational-spec) - Refines vague ideas into specs through dialogue
 
@@ -35,6 +36,7 @@ Available agents (organized by workflow phase):
 
 To use agents with Claude Code:
 ```
+"Bootstrap documentation for ~/Projects/my-project"  # Archivist Aurora
 "Help me spec out migrating to Ansible"  # Socrates
 "Create spec from Jira task PROJ-789"  # Valdis
 "Create implementation plan for specs/PROJ-789/spec.md"  # Decomposer Dale

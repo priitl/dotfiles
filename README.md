@@ -45,9 +45,9 @@ dotfiles/
 │   ├── 0_core/
 │   │   ├── priit-personality.md        # Buddy-cop relationship
 │   │   ├── coding-standards.md         # TDD, quality standards
-│   │   ├── decision-framework.md       # 🟢🟡🔴 action framework
-│   │   └── git-workflow.md             # Pre-commit discipline
+│   │   └── decision-framework.md       # 🟢🟡🔴 action framework
 │   ├── 1_workflows/
+│   │   ├── git-workflow.md             # Pre-commit discipline
 │   │   ├── tdd-workflow.md             # Red-Green-Refactor process
 │   │   ├── pre-commit-protocol.md      # Quality gate protocol
 │   │   └── spec-driven-workflow.md     # Spec → Plan → Build → Verify
@@ -72,8 +72,7 @@ dotfiles/
 │   └── 4_specs/
 │       ├── spec-template.md            # Specification template
 │       ├── plan-template.md            # Implementation plan template
-│       ├── tasks-template.md           # Task breakdown template
-│       └── constitution-template.md    # Project principles template
+│       └── tasks-template.md           # Task breakdown template
 │
 ├── .claude/
 │   ├── CLAUDE.md                       # Claude-specific wrapper
@@ -322,20 +321,26 @@ Following the https://agents.md/ specification, projects can have an `AGENTS.md`
 
 Think of it as a README specifically for AI tools.
 
-### Initialize AGENTS.md in a New Project
+### Bootstrap Documentation for New Projects
+
+Use **Archivist Aurora** to generate project documentation:
 
 ```bash
-# Option 1: Use helper script (recommended)
-init-project-agents
-
-# Option 2: Manual copy
-cp ~/.ai/AGENTS.md ./AGENTS.md
+# Invoke Archivist Aurora to analyze and generate docs
+"Bootstrap documentation for ~/Projects/my-project" → Archivist Aurora
 ```
 
-This creates an `AGENTS.md` template you should customize for your project:
+Aurora analyzes your codebase and generates:
+- **`constitution.md`** - Timeless architectural principles (spec-kit Article format)
+- **`AGENTS.md`** - Concise, tool-agnostic agent instructions (agents.md spec)
+- **`guidelines.md`** - Tech stack details and coding standards
+
+All docs customized to your project's tech stack and architecture patterns.
+
+Example generated `AGENTS.md`:
 
 ```markdown
-# AI Agent Instructions
+# My Project AI Agents
 
 ## Setup Commands
 npm install
@@ -444,7 +449,7 @@ your-project/
 # Import global Priit settings
 @import ~/.ai/0_core/priit-personality.md
 @import ~/.ai/0_core/coding-standards.md
-@import ~/.ai/0_core/git-workflow.md
+@import ~/.ai/1_workflows/git-workflow.md
 
 # Import project-specific files
 @import tech-stack.md

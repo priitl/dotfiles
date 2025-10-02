@@ -4,15 +4,21 @@
 @import ../.ai/0_core/priit-personality.md
 @import ../.ai/0_core/coding-standards.md
 @import ../.ai/0_core/decision-framework.md
-@import ../.ai/0_core/git-workflow.md
+@import ../.ai/1_workflows/git-workflow.md
 @import ../.ai/1_workflows/tdd-workflow.md
+@import ../.ai/1_workflows/pre-commit-protocol.md
 
 ## Specialized Agents
 
 Available agents in `.ai/3_agents/`:
-- Constructor Conway (project bootstrapper)
+- Archivist Aurora (project documentation bootstrapper)
+- Constructor Conway (Spring Boot project bootstrapper)
 - Valdis the Translator (Jira to specs)
+- Socrates the Questioner (conversational spec refinement)
+- Decomposer Dale (spec to implementation plan)
 - Rex the Red-Green-Refactor (TDD developer)
+- Script Shepherd Shane (dotfiles developer)
+- Architect Anya (AI configuration architect)
 - Judge Dredd Code (code reviewer)
 - Dr. Debugsworth McFixit (test fixer)
 

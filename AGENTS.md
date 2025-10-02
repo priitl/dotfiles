@@ -1,160 +1,161 @@
-# AI Agents Guide
+# Dotfiles AI Agents
 
-<!--
-Context-Optimized Declaration:
-This is an agents.md compliant file focusing on HOW to use agents.
-See constitution.md for project values (WHY) and vision (WHAT).
--->
+Purpose: Instructions for AI agents to assist in this project.
 
-## Metadata
-- **Updated by:** Architect Anya
-- **Date:** 2025-10-01
-- **Reason:** agents.md spec compliance, remove duplication, add metadata
-
-## Purpose
-Practical guide for AI assistants on HOW to use specialized agents in this dotfiles repository. Focuses on discovery, invocation, and workflow coordination.
-
-## Agent Discovery
-
-### Available Agents
-Agents are organized in `.ai/3_agents/` by workflow phase:
-
-**Speccing** (Requirements → Specs):
-- `conversational-spec.md` - Socrates the Questioner - Refines vague ideas through dialogue
-- `jira-to-spec.md` - Valdis the Translator - Translates Jira tasks into technical specs
-
-**Planning** (Specs → Implementation Plans):
-- `planner.md` - Decomposer Dale - Breaks specs into actionable plans and tasks
-
-**Engineering** (Build Features):
-- `spring-hex-bootstrapper.md` - Constructor Conway - Hexagonal architecture bootstrapper
-- `spring-hex-tdd-developer.md` - Rex the Red-Green-Refactor - TDD for Spring Boot
-- `dotfiles-developer.md` - Script Shepherd Shane - Shell scripts & dotfiles specialist
-- `ai-dotfiles-architect.md` - Architect Anya - AI configuration architect
-
-**Quality** (Review & Fix):
-- `code-reviewer.md` - Judge Dredd Code - Rigorous code reviewer
-- `test-fixer.md` - Dr. Debugsworth McFixit - Test failure diagnostician
-
-### Finding Agent Details
-```bash
-# List all agents
-ls .ai/3_agents/*/
-
-# Read agent definition
-cat .ai/3_agents/2_engineering/dotfiles-developer.md
-```
-
-## Agent Invocation
-
-### Claude Code Task Tool
-Delegate to specialized agents using the Task tool:
-
-```
-"Create spec from conversation about Ansible migration" → Socrates
-"Translate PROJ-789 to technical spec" → Valdis
-"Create implementation plan for specs/PROJ-789/spec.md" → Dale
-"Implement specs/PROJ-789/ using Shane" → Shane (dotfiles)
-"Have Judge Dredd review src/install/brew.sh" → Dredd
-"Fix failing test: test_git_config_valid" → Dr. Debugsworth
-```
-
-### Direct Agent Reading
-When YOU need to act as an agent:
-
-1. **Read the agent definition:**
-   ```bash
-   cat .ai/3_agents/2_engineering/dotfiles-developer.md
-   ```
-
-2. **Follow the agent's process**
-3. **Load required context** (agent imports core patterns)
-
-## Workflow Coordination
-
-### Standard Flow
-```
-User Request
-    ↓
-Socrates/Valdis (if spec needed)
-    ↓
-specs/NNN-feature/spec.md created
-    ↓
-Decomposer Dale
-    ↓
-specs/NNN-feature/plan.md & tasks.md created
-    ↓
-Shane/Rex/Anya (implementation)
-    ↓
-Judge Dredd (review)
-    ↓
-Dr. Debugsworth (if tests fail)
-```
-
-### Handoff Points
-- **Spec → Plan:** Dale reads spec.md, creates plan.md + tasks.md
-- **Plan → Build:** Shane/Rex reads plan.md + tasks.md, implements
-- **Build → Review:** Dredd reads implementation, issues approval/rejection
-- **Review → Fix:** Dr. Debugsworth reads failures, implements fixes
-
-### When to Skip Agents
-Per `.ai/0_core/decision-framework.md`:
-- 🟢 **Autonomous:** Simple changes (typo fixes, comments) - proceed directly
-- 🟡 **Collaborative:** Medium complexity (refactoring) - use agents
-- 🔴 **Always Ask:** Breaking changes, architecture - always use agents
-
-## Agent Context Loading
-
-### What Agents Auto-Import
-All agents automatically load:
-- `constitution.md` - Project values and vision
-- `.ai/0_core/priit-personality.md` - Communication style
-- `.ai/0_core/coding-standards.md` - Code quality standards
-- `.ai/0_core/decision-framework.md` - When to ask vs. act
-
-### What You Must Load
-When acting as an agent, explicitly read:
-- Agent definition: `.ai/3_agents/[phase]/[agent-name].md`
-- Relevant workflows: `.ai/1_workflows/*.md`
-- Tech stack context: `.ai/2_tech_stacks/tech-stack-[domain].md`
-- Task spec: `specs/[TASK_ID]/*.md`
-
-## Anti-Patterns
-
-**DON'T:**
-- ❌ Duplicate agent instructions in AGENTS.md (read from `.ai/3_agents/`)
-- ❌ Mix WHY/WHAT (constitution.md) with HOW (AGENTS.md)
-- ❌ Skip quality checklists when acting as agent
-- ❌ Assume context - always verify what agent imports
-
-**DO:**
-- ✅ Discover agents via filesystem (`ls .ai/3_agents/`)
-- ✅ Read agent.md files for latest instructions
-- ✅ Follow agent's restrictions absolutely
-- ✅ Update specs/tasks.md after completing work
-
-## Tool-Specific Notes
-
-### Claude Code
-- Use Task tool for agent delegation
-- Use TodoWrite for complex multi-step tasks
-- Persist completed todos to specs/tasks.md
-
-### Other AI Tools (Copilot/Gemini/Cursor)
-- Read agent.md files directly (agent-agnostic markdown)
-- Follow agent process manually
-- Maintain same quality standards
-
-## References
-
-**For detailed processes, see:**
-- `.ai/1_workflows/spec-driven-workflow.md` - When to use specs
-- `.ai/1_workflows/tdd-workflow.md` - Red-Green-Refactor process
-- `.ai/1_workflows/pre-commit-protocol.md` - Git commit flow
-
-**For tech context:**
-- `.ai/2_tech_stacks/` - Domain-specific technology guides
+References: [`constitution.md`](constitution.md), [`guidelines.md`](guidelines.md)
 
 ---
 
-*This file explains HOW to use agents. See `constitution.md` for WHY we have these agents and WHAT values guide them.*
+## Agent Roles and Tasks
+
+| Agent | Phase | Role | Invocation |
+|-------|-------|------|------------|
+| **Socrates the Questioner** | Speccing | Refines vague ideas into detailed specs | `act as socrates` |
+| **Valdis the Translator** | Speccing | Translates Jira tasks into technical specs | `act as valdis` |
+| **Archivist Aurora** | Speccing | Bootstraps project documentation | `act as archivist aurora` |
+| **Decomposer Dale** | Planning | Breaks specs into actionable tasks | `act as decomposer dale` |
+| **Rex the Red-Green-Refactor** | Engineering | Spring Boot TDD specialist | `act as rex` |
+| **Script Shepherd Shane** | Engineering | Shell script & dotfiles specialist | `act as script shepherd shane` |
+| **Architect Anya** | Engineering | AI configuration architect | `act as architect anya` |
+| **Constructor Conway** | Engineering | Spring Boot project bootstrapper | `act as constructor conway` |
+| **Judge Dredd Code** | Quality | Code reviewer | `act as judge dredd` |
+| **Dr. Debugsworth McFixit** | Quality | Test failure fixer | `act as dr debugsworth` |
+
+---
+
+## Invocation Instructions
+
+```
+"Help me spec out migrating to Ansible"  # Socrates
+"Create spec from Jira task PROJ-789"    # Valdis
+"Bootstrap documentation for this project" # Aurora
+"Create implementation plan for specs/PROJ-789/spec.md"  # Dale
+"Implement specs/PROJ-789/ using Shane"  # Shane
+"Use Anya to create a new quality agent" # Anya
+"Have Judge Dredd review this"  # Judge Dredd
+"Use Dr. Debugsworth to fix tests"  # Dr. Debugsworth
+```
+
+---
+
+## Agent Context
+
+All agents automatically load from `~/.ai/`:
+
+- **0_core/** - Personality, standards, decision framework
+- **1_workflows/** - TDD, git, pre-commit, spec-driven
+- **2_tech_stacks/** - Shell patterns, Spring patterns, AI patterns
+
+---
+
+## Build and Test Commands
+
+```bash
+./install.sh                           # Install
+bats tests/install.bats                # Run all tests
+bats tests/install.bats -f "pattern"   # Specific test
+shellcheck install.sh                  # Lint
+```
+
+**CI:** GitHub Actions runs macOS + Linux tests on every push.
+
+---
+
+## Development Tips
+
+### Add Shell Script
+1. Write BATS test: `tests/feature.bats`
+2. Implement function
+3. Run: `bats tests/feature.bats`
+4. Lint: `shellcheck script.sh`
+
+### Fix Failing Test
+1. `bats tests/install.bats -f "test name"`
+2. Fix implementation or test
+3. Verify: `bats tests/install.bats`
+4. Test idempotency (run twice)
+
+### Add Agent
+1. Check `.ai/3_agents/` structure
+2. Identify phase: 0_speccing/1_planning/2_engineering/3_quality
+3. Follow existing pattern
+4. Import from `.ai/1_workflows/`
+
+---
+
+## Code Style Quick Reference
+
+```bash
+#!/usr/bin/env bash
+set -euo pipefail  # MANDATORY
+
+backup_file() {     # snake_case
+    local file="$1" # snake_case
+    [[ -z "$file" ]] && { echo "Error" >&2; return 1; }
+}
+
+readonly DEFAULT="value"  # UPPER_CASE
+```
+
+See [`guidelines.md`](guidelines.md) for complete patterns.
+
+---
+
+## PR Checklist
+
+**Tests:**
+- [ ] BATS pass: `bats tests/install.bats`
+- [ ] macOS CI passes
+- [ ] Linux CI passes
+- [ ] New code has tests
+- [ ] Idempotency verified
+
+**Quality:**
+- [ ] shellcheck passes
+- [ ] No `--no-verify` used
+- [ ] Functions in `lib/` if reusable
+- [ ] Error handling present
+- [ ] Inputs validated
+
+**Platform:**
+- [ ] Works on macOS
+- [ ] Works on Linux
+- [ ] Uses `uname -s` detection
+
+**Git:**
+- [ ] Commit explains "why"
+- [ ] Pre-commit hooks passed
+- [ ] Atomic commits
+
+---
+
+## Environment Setup Notes
+
+**Prerequisites:** macOS/Linux, Git 2.40+, one AI tool
+
+```bash
+git clone <repo-url> ~/Projects/dotfiles
+cd ~/Projects/dotfiles
+./install.sh
+source ~/.zshrc
+```
+
+**Install BATS:**
+```bash
+# macOS
+brew install bats-core bats-support bats-assert
+
+# Linux
+git clone https://github.com/bats-core/bats-core.git
+cd bats-core && ./install.sh /usr/local
+```
+
+---
+
+## Decision Framework
+
+🟢 **Do:** Fix lint/tests, add coverage, docs, typos
+🟡 **Propose:** Refactoring, features, architecture
+🔴 **Ask:** Security, deletion, integrations, business logic
+
+See [`constitution.md`](constitution.md) Article IV for details.

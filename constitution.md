@@ -1,304 +1,455 @@
-# Dotfiles Repository Constitution
+---
+title: "Dotfiles Constitution"
+version: "1.0"
+type: "constitution"
+tech_stack: "dotfiles"
+---
 
-This document defines the **non-negotiable principles** for Priit's dotfiles repository.
+# Dotfiles Constitution
 
-**This is the WHY and WHAT. For HOW (commands, workflows), see `AGENTS.md`**
+## Purpose
 
-## Project Overview
+Agent-agnostic AI development environment configuration working across all AI tools (Claude, Copilot, Gemini, Cursor). This constitution defines foundational principles, architecture decisions, and non-negotiable standards.
 
-**Purpose**: Agent-agnostic AI development environment configuration
-**Scope**: Personal dotfiles that work across Claude, Copilot, Gemini, and Cursor
-**Philosophy**: Write once, use everywhere
+## Vision
 
-## Core Principles
-
-### 1. Agent-Agnostic First
-- ALL core content lives in `.ai/` (agent-agnostic)
-- Tool-specific folders (`.claude/`, `.copilot/`, etc.) are thin wrappers
-- Changes to `.ai/` automatically affect all AI tools (via symlinks)
-- No duplication between tool configs
-
-### 2. Single Source of Truth
-- Agents: `.ai/3_agents/` only (`.claude/agents/` is symlink)
-- Standards: `.ai/0_core/` defines all rules
-- Workflows: `.ai/1_workflows/` contains all processes
-- Templates: `.ai/4_specs/` for spec-driven development
-
-### 3. Backward Compatibility
-- Original agent filenames preserved (`spring-hex-bootstrapper.md`, not `constructor-conway.md`)
-- Existing `.claude/agents/` path works via symlink
-- No breaking changes to agent references
-
-### 4. Quality Over Convenience
-- NEVER bypass pre-commit hooks (`--no-verify` forbidden)
-- NEVER commit changes without testing
-- All templates must be validated before adding
-- Documentation updates required for structural changes
-
-### 5. Symlink-Based Installation
-- `install.sh` creates symlinks, not copies
-- Changes in repo are immediately live in `~/`
-- No need to reinstall after edits
-- Backups created before symlink creation
-
-## Technology Stack
-
-**Primary Tech Stack**: <!-- Used by Decomposer Dale for planning -->
-```
-tech_stack: dotfiles  # Shell scripts, BATS testing, Unix tooling
-```
-
-**Secondary Tech Stack**: <!-- For AI configuration work in .ai/ -->
-```
-tech_stack_secondary: ai  # Agent definitions, workflows, CLAUDE.md
-```
-
-**Reference Files**:
-- Dotfiles patterns: `.ai/2_tech_stacks/tech-stack-dotfiles.md`
-- AI config patterns: `.ai/2_tech_stacks/tech-stack-ai.md`
-
-### Shell & Environment
-- **Shell**: Zsh with oh-my-zsh
-- **Theme**: Powerlevel10k
-- **Platform**: macOS (primary), Linux (compatible)
-- **Package Manager**: Homebrew (macOS)
-
-### AI Tools Supported
-- **Claude Code**: Primary IDE integration
-- **GitHub Copilot**: Inline code completion
-- **Google Gemini**: Large-context analysis
-- **Cursor IDE**: AI-powered editor
-
-### Version Control
-- **Git**: All configs version controlled
-- **Branch Strategy**: main branch (stable), feature branches for changes
-- **Commit Format**: Conventional commits with tracking IDs
-
-## Architecture Patterns
-
-### Directory Structure
-```
-dotfiles/
-├── AGENTS.md              # AGENTS.md for THIS dotfiles repo
-├── .ai/                   # Agent-agnostic core (source of truth)
-│   ├── AGENTS.md          # Generic template (for OTHER projects)
-│   ├── 0_core/            # Standards, principles, workflows
-│   ├── 1_workflows/       # Process definitions
-│   ├── 3_agents/          # Specialized agents
-│   └── 4_specs/           # Spec-kit templates
-├── .claude/               # Claude wrapper (imports from .ai/)
-├── .copilot/              # Copilot wrapper
-├── .gemini/               # Gemini wrapper
-├── .cursor/               # Cursor wrapper
-├── scripts/               # Helper scripts
-│   └── init-project-agents.sh  # Initialize AGENTS.md in projects
-└── shell configs...       # zshrc, gitconfig, etc.
-```
-
-### Import Pattern
-All tool configs use `@import` to pull from `.ai/`:
-```markdown
-@import ../.ai/0_core/priit-personality.md
-@import ../.ai/0_core/coding-standards.md
-```
-
-## Coding Standards
-
-### File Naming
-- **Agent files**: Original names (e.g., `spring-hex-bootstrapper.md`)
-- **Work logs**: Dated format `YYYYMMDD-agent-topic.md` (when used in projects)
-- **Templates**: Descriptive names (`spec-template.md`, `plan-template.md`)
-
-### Documentation Style
-- **Markdown**: All documentation in markdown
-- **Headers**: H1 for title, H2 for sections, H3 for subsections
-- **Code blocks**: Always specify language (```bash, ```markdown)
-- **Links**: Use relative paths within repo
-
-### Personality & Tone
-- **Address user as**: "Priit" (or fun variants)
-- **Relationship**: Buddy-cop collaboration
-- **Humor**: Welcome and encouraged
-- **Quality**: Non-negotiable, never compromised
-
-## Prohibited Actions
-
-### NEVER
-1. Create duplicate agents (use symlinks)
-2. Commit secrets or credentials
-3. Break backward compatibility without migration guide
-4. Use `--no-verify` when committing
-5. Create tool-specific agents (keep in `.ai/3_agents/`)
-6. Hardcode paths (use relative imports)
-
-### AVOID
-1. Adding dependencies without justification
-2. Complex installation scripts (keep it simple)
-3. OS-specific code without fallbacks
-4. Removing existing features without deprecation notice
-
-## Required Actions
-
-### ALWAYS
-1. Test install.sh after changes
-2. Update README.md when structure changes
-3. Keep all tool wrappers in sync with `.ai/` changes
-4. Preserve existing agent names and references
-5. Document breaking changes in commit messages
-
-### BEFORE COMMIT
-1. Run shellcheck on install.sh
-2. Verify symlinks work correctly
-3. Test with at least one AI tool (Claude)
-4. Update version in README if applicable
-
-## Decision Framework
-
-Use Priit's 🟢🟡🔴 framework for changes:
-
-### 🟢 Autonomous (Proceed Immediately)
-- Fix typos in documentation
-- Add comments to existing code
-- Update examples in templates
-- Format markdown files
-- Fix broken links
-
-### 🟡 Collaborative (Propose First)
-- Add new agents to `.ai/3_agents/`
-- Modify existing templates
-- Change install.sh logic
-- Add new tool support (e.g., add `.windsurf/`)
-- Restructure directories
-
-### 🔴 Always Ask Permission
-- Remove existing agents
-- Change symlink strategy
-- Break backward compatibility
-- Modify core principles (this file)
-- Change repository structure fundamentally
-
-## Compliance Requirements
-
-### Version Control
-- All changes must have clear commit messages
-- Use conventional commits: `feat:`, `fix:`, `docs:`, `refactor:`
-- Reference issues when applicable
-
-### Testing
-- Install script must be tested on clean system
-- Symlinks must resolve correctly
-- All AI tools must read configs successfully
-
-### Documentation
-- README.md must be current
-- All templates must have usage examples
-- Breaking changes require migration guide
-
-## AGENTS.md Strategy
-
-### Purpose
-`AGENTS.md` follows the https://agents.md/ specification - it provides **instructions for AI coding agents** working on the project (setup commands, code style, testing, PR guidelines).
-
-**NOT a registry of AI agents** - that information is in:
-- `.ai/3_agents/` - Actual agent definitions (Socrates, Dale, Rex, etc.)
-- `README.md` - Documentation about available agents
-- `CLAUDE.md` - Claude-specific agent invocation
-
-### For This Dotfiles Repository
-- **Root `AGENTS.md`**: Instructions for working on the dotfiles repo itself
-- **Template `.ai/AGENTS.md`**: Generic template for OTHER projects to copy and customize
-- **No duplication**: Template is generic, root file is specific to dotfiles
-- **Helper script**: `scripts/init-project-agents.sh` copies `.ai/AGENTS.md` to projects
-
-### For Projects Using These Dotfiles
-Projects get `AGENTS.md` with project-specific instructions:
-
-**Setup:**
-```bash
-# Option 1: Use helper script (recommended)
-init-project-agents
-
-# Option 2: Manual copy
-cp ~/.ai/AGENTS.md ./AGENTS.md
-```
-
-**What you get:**
-The template (`.ai/AGENTS.md`) has placeholder sections:
-```markdown
-# AGENTS Instructions
-
-**Note:** This is a template. Customize all sections for your specific project.
-
-## Repository Layout
-[Customize this section with your project structure]
-
-## Setup Commands
-[Replace with your project's setup commands]
-# npm install
-# ./gradlew build
-
-## Code Style
-[Define your project's code style]
-
-## Specialized AI Agents
-[This section is pre-filled with agent info]
-Socrates, Dale, Rex, Shane, etc.
-```
-
-**Customization:**
-1. Copy template: `init-project-agents` (or `cp ~/.ai/AGENTS.md ./AGENTS.md`)
-2. Replace placeholders with your project specifics
-3. Keep "Specialized AI Agents" section (already complete)
-4. Remove customization checklist when done
-
-**How it works:**
-- AI tools read `AGENTS.md` at project root
-- Learn project-specific setup, style, testing, PR workflow
-- Also learn about available specialized agents (Socrates, Dale, Rex, etc.)
-- `constitution.md` has principles, `AGENTS.md` has practical instructions
-
-**Benefits:**
-- ✅ Standard compliant (AGENTS.md at project root per spec)
-- ✅ Practical workflow instructions for AI tools
-- ✅ Tool agnostic (works with Claude, Copilot, Gemini, Cursor)
-- ✅ Complementary to constitution.md
-- ✅ Easy to customize per project
-
-## Spec-Kit Alignment (This Repo)
-
-### For This Dotfiles Repository
-- `constitution.md` (this file) at root
-- Changes tracked via git (not `specs/` folder needed)
-- Issues tracked via GitHub issues
-- Work is done directly on files (not spec-driven workflow)
-
-### For Projects Using These Dotfiles
-- Projects SHOULD create `constitution.md` using template
-- Projects SHOULD use `specs/` folder structure
-- Projects reference `~/.ai/4_specs/` templates
-- See `.ai/0_core/spec-kit-alignment.md` for guidance
-
-## Maintenance
-
-### Update Frequency
-- Review this constitution: Every 6 months
-- Update agent definitions: As needed
-- Update templates: When spec-kit changes
-- Update tool wrappers: When AI tools update
-
-### Versioning
-- **Current Version**: 2.0 (agent-agnostic)
-- **Previous Version**: 1.0 (Claude-only)
-- **Next Version**: TBD
-
-### Deprecation Policy
-- 2 version grace period for breaking changes
-- Migration guides required
-- Clear deprecation warnings in commits
+Create a unified development environment that:
+- Works consistently across all AI coding tools
+- Enables consistent collaboration patterns
+- Maintains portability across macOS and Linux
+- Emphasizes modularity, testability, and maintainability
 
 ---
 
-**Version**: 2.0
-**Last Updated**: 2025-09-30
-**Owner**: Priit
-**Status**: Active
+# The Five Articles of Development
+
+## Article I: Agent Agnosticism (Write Once, Use Everywhere)
+
+AI configuration shall be tool-agnostic, allowing reuse across different AI platforms without duplication.
+
+### Section 1.1: Shared Core Mandate
+
+All shared logic MUST reside in the `.ai/` directory with the following structure:
+
+- `0_core/` - Personality, standards, decision framework
+- `1_workflows/` - TDD, git, pre-commit, spec-driven workflows
+- `2_tech_stacks/` - Technology-specific patterns
+- `3_agents/` - Specialized agents organized by workflow phase
+- `4_specs/` - Specification templates
+
+### Section 1.2: Tool Configuration
+
+Tool-specific configurations (`.claude/`, `.copilot/`, `.gemini/`, `.cursor/`) MUST:
+
+- Import from shared core via `@import` directives
+- Contain ONLY tool-specific features
+- NEVER duplicate shared logic
+
+### Section 1.3: Agent Definitions
+
+Agent definitions MUST:
+
+- Be tool-agnostic and work with any AI platform
+- Reference shared workflows from `.ai/1_workflows/`
+- Follow the Spec → Plan → Build → Verify workflow
+
+**Rationale:** Reduces maintenance burden, ensures consistency, prevents configuration drift, enables rapid adoption of new AI tools.
+
+**Non-negotiable:**
+
+- NEVER duplicate shared logic in tool-specific configs
+- ALWAYS prefer extending shared core over creating tool-specific variations
+- Configuration changes MUST work across all supported AI tools
+
+---
+
+## Article II: Unix Philosophy for Scripts
+
+Shell scripts shall follow Unix philosophy: do one thing well, compose easily, maintain simplicity.
+
+### Section 2.1: Script Safety
+
+Every shell script MUST begin with:
+
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+```
+
+Where:
+- `-e` exits immediately on error
+- `-u` errors on undefined variables
+- `-o pipefail` fails pipeline if any command fails
+
+### Section 2.2: Modularity
+
+Scripts MUST:
+
+- Follow Single Responsibility Principle
+- Extract reusable logic into `lib/` functions
+- Maintain clear separation between config templates, installation logic, and utilities
+
+### Section 2.3: Idempotency
+
+All scripts MUST be safe to run multiple times without adverse effects.
+
+**Rationale:** Enhances testability, improves maintainability, enables reuse and composition, reduces cognitive load.
+
+**Non-negotiable:**
+
+- NEVER create monolithic scripts that do multiple unrelated things
+- ALWAYS extract reusable logic into `lib/` functions
+- Scripts MUST be idempotent
+
+---
+
+## Article III: Test-First Development
+
+All shell scripts must have BATS tests written before or during implementation. This is NON-NEGOTIABLE.
+
+### Section 3.1: Test Framework
+
+All shell script testing MUST use BATS (Bash Automated Testing System) with:
+
+- bats-support library for additional helpers
+- bats-assert library for assertions
+- shellcheck for linting
+
+### Section 3.2: Test Types Required
+
+Every shell script implementation MUST include:
+
+1. **Unit tests** - Individual functions in isolation
+2. **Integration tests** - Complete workflows
+3. **Idempotency tests** - Scripts run twice safely
+4. **Platform tests** - Behavior on macOS and Linux
+
+### Section 3.3: Test Location
+
+Test files MUST be colocated with implementation in `tests/` directory.
+
+### Section 3.4: CI/CD Pipeline
+
+CI/CD pipeline MUST:
+
+- Run tests on both macOS and Linux
+- Execute on every push
+- Block merge if tests fail on either platform
+
+**Rationale:** Ensures scripts work correctly across different environments, provides regression protection, documents expected behavior, prevents "works on my machine™" issues.
+
+**Non-negotiable:**
+
+- NEVER commit shell script changes without corresponding tests
+- Tests MUST pass on both macOS and Linux before merge
+- NO `--no-verify` flag when committing (pre-commit hooks are mandatory)
+
+---
+
+## Article IV: Spec-Driven Workflow
+
+Complex features shall follow Spec → Plan → Build → Verify workflow using spec-kit templates.
+
+### Section 4.1: Decision Framework
+
+All actions fall into three categories:
+
+**🔴 Always Ask First** - MUST have spec:
+- Security-related changes
+- Data deletion or migration
+- External service integrations
+- Anything affecting production
+- Business logic decisions
+
+**🟡 Collaborative Actions** - SHOULD have spec:
+- Multi-file refactoring
+- New features
+- Architecture changes
+- Breaking API changes
+- Performance optimizations
+
+**🟢 Autonomous Actions** - CAN skip spec:
+- Fix linting errors
+- Fix failing tests
+- Add missing test coverage
+- Improve documentation clarity
+- Fix typos and formatting
+
+### Section 4.2: Specification Structure
+
+Specs MUST:
+
+- Live in `specs/NNN-feature/` directories
+- Include `spec.md`, `plan.md`, `tasks.md`
+- Use spec-kit Article format (timeless, no temporal references)
+
+### Section 4.3: Specialized Agents
+
+The following specialized agents handle workflow phases:
+
+**Speccing (Requirements → Specifications):**
+- Socrates the Questioner - Conversational spec refinement
+- Valdis the Translator - Jira → spec translation
+- Archivist Aurora - Bootstrap project documentation
+
+**Planning (Specifications → Plans):**
+- Decomposer Dale - Break specs into actionable tasks
+
+**Engineering (Plans → Code):**
+- Rex the Red-Green-Refactor - Spring Boot TDD specialist
+- Script Shepherd Shane - Shell script & dotfiles specialist
+- Architect Anya - AI configuration architect
+- Constructor Conway - Spring Boot project bootstrapper
+
+**Quality (Code → Review/Fix):**
+- Judge Dredd Code - Rigorous code reviewer
+- Dr. Debugsworth McFixit - Test failure diagnostician
+
+**Rationale:** Clarifies requirements before implementation, breaks complex work into manageable tasks, provides documentation trail, enables better collaboration.
+
+**Non-negotiable:**
+
+- 🔴 actions MUST have spec
+- 🟡 actions SHOULD have spec
+- Specs MUST use timeless language (no "new", "recent", "legacy")
+
+---
+
+## Article V: Portable by Default
+
+All scripts and configurations must work on both macOS and Linux without modification.
+
+### Section 5.1: Platform Detection
+
+Platform detection MUST use `uname -s`:
+
+```bash
+case "$(uname -s)" in
+    Darwin*) # macOS-specific code ;;
+    Linux*)  # Linux-specific code ;;
+    *)       # Unsupported OS ;;
+esac
+```
+
+### Section 5.2: Portable Constructs
+
+Scripts MUST:
+
+- Use `#!/usr/bin/env bash` (not `#!/bin/bash`)
+- Avoid GNU-specific flags or detect and adapt
+- Use portable shell constructs (avoid bashisms when possible)
+
+### Section 5.3: Testing Requirements
+
+All scripts MUST:
+
+- Be tested on both macOS and Linux before merging
+- Document any platform-specific limitations clearly
+
+**Rationale:** Supports developers using different operating systems, prevents vendor lock-in, ensures consistent behavior, facilitates team collaboration.
+
+**Non-negotiable:**
+
+- Test on BOTH macOS and Linux before merging
+- Use portable shell constructs
+- Document platform-specific limitations
+
+---
+
+# Architecture Decisions
+
+## Directory Structure
+
+```
+dotfiles/
+├── .ai/                     # Agent-agnostic core (shared by all tools)
+│   ├── 0_core/             # Personality, standards, decision framework
+│   ├── 1_workflows/        # TDD, git, pre-commit, spec-driven
+│   ├── 2_tech_stacks/      # Spring, dotfiles, AI config patterns
+│   ├── 3_agents/           # Specialized agents by workflow phase
+│   │   ├── 0_speccing/     # Requirements → Specs
+│   │   ├── 1_planning/     # Specs → Plans
+│   │   ├── 2_engineering/  # Plans → Code
+│   │   └── 3_quality/      # Code → Review/Fix
+│   └── 4_specs/            # Spec templates
+├── .claude/                # Claude-specific wrapper (imports .ai/)
+├── .copilot/               # Copilot-specific wrapper (imports .ai/)
+├── .gemini/                # Gemini-specific wrapper (imports .ai/)
+├── .cursor/                # Cursor-specific wrapper (imports .ai/)
+├── install.sh              # Main installation script
+├── tests/                  # BATS tests
+├── constitution.md         # This document
+├── AGENTS.md               # Project instructions for AI tools
+└── guidelines.md           # Detailed implementation standards
+```
+
+**Rationale:** Clear separation between shared core and tool-specific wrappers enables consistency while allowing tool-specific optimizations.
+
+## Template-Based Configuration
+
+Configuration files use templates with placeholders (e.g., `__GIT_USER_NAME__`) that are populated during installation.
+
+**Rationale:**
+- Prevents committing secrets or personal information
+- Enables customization without modifying source files
+- Provides clear upgrade path when pulling updates
+- Documents required configuration values
+
+## Symlink-Based Installation
+
+Dotfiles are symlinked from repository to home directory, with backups created before overwriting existing files.
+
+**Rationale:**
+- Changes in repository immediately reflect in active configuration
+- Easy updates via git pull
+- Preserves user's existing files via timestamped backups
+- Enables version control of dotfiles
+
+---
+
+# Technology Constraints
+
+## Required Tools
+
+**Shell:**
+- Bash 4.0+ (macOS ships with 3.x, upgrade via Homebrew)
+- Zsh with oh-my-zsh and Powerlevel10k
+
+**Testing:**
+- BATS (Bash Automated Testing System)
+- bats-support and bats-assert libraries
+- shellcheck for linting
+
+**Package Management:**
+- Homebrew (macOS) or apt/yum (Linux)
+
+**AI Tools (at least one):**
+- Claude Code
+- GitHub Copilot
+- Google Gemini
+- Cursor IDE
+
+## Forbidden Practices
+
+**Code Quality:**
+- ❌ NEVER use `--no-verify` when committing
+- ❌ NEVER disable functionality instead of fixing root cause
+- ❌ NEVER create duplicate files to work around issues
+- ❌ NEVER commit without tests passing
+- ❌ NEVER use temporal references in documentation ("new", "recent", "legacy")
+
+**Shell Scripting:**
+- ❌ NEVER omit `set -euo pipefail`
+- ❌ NEVER commit scripts without BATS tests
+- ❌ NEVER hardcode paths that should be configurable
+- ❌ NEVER commit secrets or credentials
+
+**Architecture:**
+- ❌ NEVER duplicate agent-agnostic logic in tool-specific configs
+- ❌ NEVER create tool-specific workarounds that could be solved in shared core
+- ❌ NEVER violate Unix philosophy (monolithic scripts)
+
+---
+
+# Quality Standards
+
+## Test Coverage Requirements
+
+**Shell Scripts:**
+- Unit tests for all functions in `lib/`
+- Integration tests for installation workflows
+- Idempotency tests (script runs twice safely)
+- Platform tests (macOS and Linux)
+
+**Success Criteria:**
+- All BATS tests pass on macOS
+- All BATS tests pass on Linux (GitHub Actions)
+- shellcheck passes with no warnings
+- Scripts are idempotent
+
+## Code Review Standards
+
+**Shell Scripts:**
+- Clear function names describing purpose
+- Comments explaining "why", not "what"
+- Error handling for all external commands
+- Input validation for all user-provided values
+- Consistent logging using logging functions
+
+**Documentation:**
+- README.md covers all major features
+- AGENTS.md provides clear instructions for AI tools
+- guidelines.md documents implementation patterns
+- constitution.md defines timeless principles
+
+## Commit Standards
+
+**Format:**
+
+```
+Brief description of change (imperative mood)
+
+Optional detailed explanation of why (not what).
+```
+
+**Requirements:**
+- Pre-commit hooks must pass (no `--no-verify`)
+- Tests must pass before committing
+- Commits should be atomic (one logical change)
+- Commit messages explain "why", not "what"
+
+---
+
+# Evolution and Maintenance
+
+## When to Update This Constitution
+
+This document should be updated when:
+- Core architectural principles change
+- New non-negotiable standards are established
+- Technology constraints shift (new tools, deprecated tools)
+- Fundamental workflow changes occur
+
+## How to Propose Changes
+
+1. Create spec in `specs/NNN-constitution-change/`
+2. Use Socrates or Valdis to clarify requirements
+3. Use Decomposer Dale to plan implementation
+4. Review with human developer before implementation
+5. Update constitution.md with rationale
+
+## Principles for Evolution
+
+- **Stability over novelty** - Don't change for change's sake
+- **Backward compatibility** - Minimize breaking changes
+- **Clear migration path** - Document how to upgrade
+- **Timeless writing** - No temporal references ("recently", "new")
+
+---
+
+# Success Metrics
+
+This dotfiles project succeeds when:
+
+✅ AI tools consistently produce high-quality, tested code
+✅ Configuration works identically across Claude, Copilot, Gemini, Cursor
+✅ Installation script works reliably on macOS and Linux
+✅ Developers can onboard new machines in under 30 minutes
+✅ Pre-commit hooks prevent low-quality commits
+✅ Test suite catches regressions before they reach main
+✅ Documentation accurately reflects current state
+✅ Specialized agents reduce context switching and improve productivity
+
+---
+
+# Conclusion
+
+This constitution provides the foundation for a maintainable, portable, agent-agnostic development environment. By adhering to these principles, we ensure consistency, quality, and long-term sustainability.
+
+**When in doubt, refer back to the Five Articles:**
+
+1. **Agent Agnosticism** - Write Once, Use Everywhere
+2. **Unix Philosophy** - Do one thing well, compose easily
+3. **Test-First Development** - Tests before code, always
+4. **Spec-Driven Workflow** - 🟢🟡🔴 decision framework
+5. **Portable by Default** - Works on macOS and Linux
