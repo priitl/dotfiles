@@ -390,7 +390,14 @@ INPUT
     run bash "$BATS_TEST_DIRNAME/../install.sh" <<< $'n\nn\nn\nn\nn\nn\nn\n'
     [ "$status" -eq 0 ]
     [ -L "$TEST_HOME/.claude/agents" ]
-    [ "$(readlink "$TEST_HOME/.claude/agents")" = "$TEST_HOME/.ai/3_agents" ]
+    [ "$(readlink "$TEST_HOME/.claude/agents")" = "$TEST_HOME/.ai/5_agents" ]
+}
+
+@test "creates commands symlink in .claude directory" {
+    run bash "$BATS_TEST_DIRNAME/../install.sh" <<< $'n\nn\nn\nn\nn\nn\nn\n'
+    [ "$status" -eq 0 ]
+    [ -L "$TEST_HOME/.claude/commands" ]
+    [ "$(readlink "$TEST_HOME/.claude/commands")" = "$TEST_HOME/.ai/3_commands" ]
 }
 
 @test "installation succeeds with all symlinks created" {

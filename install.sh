@@ -149,7 +149,7 @@ backup_and_link "$DOTFILES_DIR/.cursor" "$CURSOR_DIR" ".cursor (Cursor IDE)"
 # Symlink agents into .claude for backward compatibility
 if [ -L "$CLAUDE_DIR" ] || [ -d "$CLAUDE_DIR" ]; then
     backup_and_link "$AI_DIR/5_agents" "$CLAUDE_DIR/agents" ".claude/agents"
-    backup_and_link "$AI_DIR/4_commands" "$CLAUDE_DIR/commands" ".claude/commands"
+    backup_and_link "$AI_DIR/3_commands" "$CLAUDE_DIR/commands" ".claude/commands"
 fi
 echo ""
 
