@@ -9,8 +9,8 @@ A shared core that works with **all AI tools** - write once, use everywhere:
 - **Core standards** (`0_core/`) - Personality, coding standards, decision framework, git workflow
 - **Workflows** (`1_workflows/`) - TDD workflow, pre-commit protocol, spec-driven development
 - **Spec templates** (`2_templates/`) - Templates for specifications, plans, and tasks
-- **Tech stacks** (`3_tech_stacks/`) - Spring Boot, dotfiles, AI configuration patterns
-- **Commands** (`4_commands/`) - Spec-kit workflow commands (/constitution, /specify, /plan, /implement, /review, /fix, etc.)
+- **Commands** (`3_commands/`) - Spec-kit workflow commands (/constitution, /specify, /plan, /implement, /review, /fix, etc.)
+- **Tech stacks** (`4_tech_stacks/`) - Spring Boot, dotfiles, AI configuration patterns
 - **Specialized agents** (`5_agents/`) - 11 expert agents organized by workflow phase
 
 ### 🛠️ Tool-Specific Configurations
@@ -56,11 +56,7 @@ dotfiles/
 │   │   ├── spec-template.md            # Specification template
 │   │   ├── plan-template.md            # Implementation plan template
 │   │   └── tasks-template.md           # Task breakdown template
-│   ├── 3_tech_stacks/
-│   │   ├── tech-stack-spring-hex.md    # Spring Boot + hexagonal patterns
-│   │   ├── tech-stack-dotfiles.md      # Shell script patterns
-│   │   └── tech-stack-ai.md            # AI configuration patterns
-│   ├── 4_commands/
+│   ├── 3_commands/
 │   │   ├── constitution.md             # Bootstrap project constitution
 │   │   ├── specify.md                  # Create feature specification
 │   │   ├── clarify.md                  # Refine vague requirements
@@ -71,6 +67,10 @@ dotfiles/
 │   │   ├── implement.md                # Execute implementation
 │   │   ├── review.md                   # Code review
 │   │   └── fix.md                      # Fix failures
+│   ├── 4_tech_stacks/
+│   │   ├── tech-stack-spring-hex.md    # Spring Boot + hexagonal patterns
+│   │   ├── tech-stack-dotfiles.md      # Shell script patterns
+│   │   └── tech-stack-ai.md            # AI configuration patterns
 │   ├── 5_agents/
 │   │   ├── 0_speccing/                 # Requirements → Specs
 │   │   │   ├── project-bootstrapper.md # 📜 Founding Father Franklin
@@ -96,7 +96,7 @@ dotfiles/
 │   └── instructions.md                 # Copilot-specific wrapper
 │
 ├── .gemini/
-│   └── config.md                       # Gemini-specific wrapper
+│   └── GEMINI.md                       # Gemini-specific wrapper
 │
 ├── .cursor/
 │   └── rules.md                        # Cursor-specific wrapper
@@ -327,7 +327,7 @@ Automatically reads from `~/.copilot/instructions.md`
 - Match style of surrounding code
 
 ### Google Gemini
-Reads configuration from `~/.gemini/config.md`
+Reads configuration from `~/.gemini/GEMINI.md`
 
 **Large context analysis:**
 - Analyze entire codebase patterns

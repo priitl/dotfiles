@@ -205,7 +205,7 @@ Each `tech-stack-{name}.md` file contains:
 - `tech-stack-ai.md`: AI configuration systems (this file)
 
 ### Adding New Tech Stacks
-1. Create `.ai/3_tech_stacks/tech-stack-{name}.md`
+1. Create `.ai/4_tech_stacks/tech-stack-{name}.md`
 2. Document architecture, testing, conventions
 3. Provide code examples and patterns
 4. Add to project's `constitution.md`: `tech_stack: {name}`

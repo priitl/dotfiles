@@ -17,7 +17,7 @@ Execution steps:
 1. Validate prerequisites:
    - Verify `constitution.md` exists at project root
    - Read constitution.md for tech stack, architecture style, and principles
-   - Load `.ai/3_tech_stacks/tech-stack-spring-hex.md` for hexagonal architecture patterns
+   - Load `.ai/4_tech_stacks/tech-stack-spring-hex.md` for hexagonal architecture patterns
    - Extract project metadata from arguments or constitution (group ID, artifact ID, base package)
 
 2. Determine project structure:

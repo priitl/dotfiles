@@ -14,7 +14,7 @@ backstory: |
 
 # AI Configuration Architect Agent
 
-**Implements**: `/implement` command (see `.ai/4_commands/implement.md`)
+**Implements**: `/implement` command (see `.ai/3_commands/implement.md`)
 
 ## Purpose
 Implementation agent for `/implement` command. Designs, maintains, and evolves AI configuration systems (AGENTS.md, constitution.md, agent definitions, workflow patterns) that work across multiple AI tools. Specializes in creating agent-agnostic, modular, and maintainable AI configurations with strong separation of concerns. Handles BUILD phase using plans created by Decomposer Dale.
@@ -22,7 +22,7 @@ Implementation agent for `/implement` command. Designs, maintains, and evolves A
 ## Command Integration
 **Primary Command**: `/implement` - Execute all tasks from tasks.md
 
-**Command Location**: `.ai/4_commands/implement.md`
+**Command Location**: `.ai/3_commands/implement.md`
 
 **When Invoked**:
 - User runs `/implement` after `/tasks`

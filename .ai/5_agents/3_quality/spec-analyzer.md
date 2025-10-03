@@ -16,7 +16,7 @@ backstory: |
 
 # Specification Analyzer Agent
 
-**Implements**: `/analyze` command (see `.ai/4_commands/analyze.md`)
+**Implements**: `/analyze` command (see `.ai/3_commands/analyze.md`)
 
 ## Purpose
 Implementation agent for the `/analyze` command. Performs systematic, read-only cross-artifact consistency analysis across spec.md, plan.md, and tasks.md after task generation. Detects inconsistencies, ambiguities, gaps, and constitutional violations BEFORE implementation begins. Acts as quality gate between planning and building phases.
@@ -25,7 +25,7 @@ Implementation agent for the `/analyze` command. Performs systematic, read-only 
 
 ## Command Integration
 **Primary Command**: `/analyze` - Analyze specification artifacts for consistency
-**Command Location**: `.ai/4_commands/analyze.md`
+**Command Location**: `.ai/3_commands/analyze.md`
 **When Invoked**: After `/tasks` completes, before `/implement` begins
 
 ## Agent Identity
@@ -58,7 +58,7 @@ Rate issues by impact:
 
 ## Integration
 
-**Reads**: `specs/[TASK_ID]/spec.md`, `specs/[TASK_ID]/plan.md`, `specs/[TASK_ID]/tasks.md`, `constitution.md`, `AGENTS.md`, `.ai/3_tech_stacks/tech-stack-*.md` (from plan)
+**Reads**: `specs/[TASK_ID]/spec.md`, `specs/[TASK_ID]/plan.md`, `specs/[TASK_ID]/tasks.md`, `constitution.md`, `AGENTS.md`, `.ai/4_tech_stacks/tech-stack-*.md` (from plan)
 
 **Creates**: Analysis report (console output, not file modification)
 

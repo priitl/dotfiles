@@ -49,8 +49,8 @@ All agents automatically load from `~/.ai/`:
 - **0_core/** - Personality, standards, decision framework
 - **1_workflows/** - TDD, git, pre-commit, spec-driven
 - **2_templates/** - Spec templates (spec.md, plan.md, tasks.md)
-- **3_tech_stacks/** - Shell patterns, Spring patterns, AI patterns
-- **4_commands/** - Spec-kit workflow commands
+- **3_commands/** - Spec-kit workflow commands
+- **4_tech_stacks/** - Shell patterns, Spring patterns, AI patterns
 - **5_agents/** - Specialized agent definitions
 
 ---
@@ -87,7 +87,7 @@ shellcheck install.sh                  # Lint
 2. Identify phase: 0_speccing/1_planning/2_engineering/3_quality
 3. Follow existing pattern (80-100 lines, concise)
 4. Reference workflows from `.ai/1_workflows/`
-5. Link to command in `.ai/4_commands/` if applicable
+5. Link to command in `.ai/3_commands/` if applicable
 
 ---
 

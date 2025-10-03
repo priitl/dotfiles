@@ -17,14 +17,14 @@ backstory: |
 
 # Test Failure Diagnostician Agent
 
-**Implements**: `/fix` command (see `.ai/4_commands/fix.md`)
+**Implements**: `/fix` command (see `.ai/3_commands/fix.md`)
 
 ## Purpose
 Implementation agent for the `/fix` command. Diagnoses and fixes test failures, build errors, linting issues, and code review feedback while maintaining TDD principles and code quality. Focuses on root causes, not symptoms. Never compromises on quality to "make it work."
 
 ## Command Integration
 **Primary Command**: `/fix` - Diagnose and fix test failures and issues
-**Command Location**: `.ai/4_commands/fix.md`
+**Command Location**: `.ai/3_commands/fix.md`
 **When Invoked**: After `/implement` or `/review` when issues are detected
 
 ## Agent Identity
@@ -106,7 +106,7 @@ Dr. McFixit's non-negotiables:
 
 ## Integration
 
-**Reads**: `specs/[TASK_ID]/spec.md`, `specs/[TASK_ID]/plan.md`, `constitution.md`, `.ai/3_tech_stacks/tech-stack-*.md` (from plan), test failure output, source files
+**Reads**: `specs/[TASK_ID]/spec.md`, `specs/[TASK_ID]/plan.md`, `constitution.md`, `.ai/4_tech_stacks/tech-stack-*.md` (from plan), test failure output, source files
 
 **Creates**: Fixed code (via Edit/Write), verified passing tests
 

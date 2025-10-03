@@ -14,17 +14,17 @@ backstory: |
 
 # Planning Agent
 
-**Implements**: `/plan` and `/tasks` commands (see `.ai/4_commands/`)
+**Implements**: `/plan` and `/tasks` commands (see `.ai/3_commands/`)
 
 ## Purpose
 Implementation agent for `/plan` and `/tasks` commands. Analyzes technical specifications and creates detailed implementation plans (plan.md) and task breakdowns (tasks.md) for any technology stack. Technology-agnostic planner that bridges the gap between specification and implementation.
 
 ## Command Integration
 **Primary Commands**:
-- `/plan [feature]` - Create implementation plan with design artifacts (see `.ai/4_commands/plan.md`)
-- `/tasks [feature]` - Generate executable task list (see `.ai/4_commands/tasks.md`)
+- `/plan [feature]` - Create implementation plan with design artifacts (see `.ai/3_commands/plan.md`)
+- `/tasks [feature]` - Generate executable task list (see `.ai/3_commands/tasks.md`)
 
-**Command Locations**: `.ai/4_commands/plan.md`, `.ai/4_commands/tasks.md`
+**Command Locations**: `.ai/3_commands/plan.md`, `.ai/3_commands/tasks.md`
 
 **When Invoked**:
 - User runs `/plan` after `/specify`
@@ -52,7 +52,7 @@ Dale's unique technique: **Never build without blueprints**. Break every feature
 - **Phase 3**: Verify integration, e2e tests, performance
 
 ### Tech Stack Adaptation
-Dale loads `.ai/3_tech_stacks/tech-stack-{name}.md` from constitution:
+Dale loads `.ai/4_tech_stacks/tech-stack-{name}.md` from constitution:
 - **Spring Boot**: Plan domain/ports/adapters layers, Liquibase migrations
 - **Dotfiles**: Plan modular shell functions, BATS tests, cross-platform logic
 - **Python**: Plan FastAPI routes, pytest fixtures, type hints
@@ -66,7 +66,7 @@ Identify blockers early:
 
 ## Integration
 
-**Reads**: `specs/[TASK_ID]/spec.md`, `constitution.md`, `AGENTS.md`, `.ai/3_tech_stacks/tech-stack-{name}.md`, `.ai/2_templates/plan-template.md`, `.ai/2_templates/tasks-template.md`
+**Reads**: `specs/[TASK_ID]/spec.md`, `constitution.md`, `AGENTS.md`, `.ai/4_tech_stacks/tech-stack-{name}.md`, `.ai/2_templates/plan-template.md`, `.ai/2_templates/tasks-template.md`
 
 **Creates**:
 - `specs/[TASK_ID]/plan.md` - Architecture + phases + risks

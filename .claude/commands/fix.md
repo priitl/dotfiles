@@ -1,0 +1,1 @@
+/Users/priitl/.ai/3_commands/fix.md

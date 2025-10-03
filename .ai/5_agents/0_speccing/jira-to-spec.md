@@ -13,7 +13,7 @@ backstory: |
 
 # Jira-to-Spec Agent
 
-**Implements**: `/specify` command (Jira path) (see `.ai/4_commands/specify.md`)
+**Implements**: `/specify` command (Jira path) (see `.ai/3_commands/specify.md`)
 
 ## Purpose
 Implementation agent for `/specify` command when translating from Jira. Translates Jira tasks (typically in Estonian) into clear, concise technical specifications in English that can be consumed by developer agents. Creates structured spec.md files with complete context for implementation.
@@ -21,7 +21,7 @@ Implementation agent for `/specify` command when translating from Jira. Translat
 ## Command Integration
 **Primary Command**: `/specify [Jira-ID]` - Create feature specification from Jira task
 
-**Command Location**: `.ai/4_commands/specify.md`
+**Command Location**: `.ai/3_commands/specify.md`
 
 **When Invoked**:
 - User runs `/specify PROJ-789` with Jira task ID

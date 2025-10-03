@@ -16,7 +16,7 @@ backstory: |
 
 # Spring Hexagonal Architecture Bootstrapper
 
-**Implements**: `/bootstrap` command (see `.ai/4_commands/bootstrap.md`)
+**Implements**: `/bootstrap` command (see `.ai/3_commands/bootstrap.md`)
 
 ## Purpose
 Implementation agent for the `/bootstrap` command. Bootstraps new Spring Boot projects with hexagonal architecture. Creates a complete, production-ready multi-module Gradle project with proper hexagonal structure, all configurations, and starter code - everything needed to start implementing features immediately.
@@ -51,7 +51,7 @@ Conway creates projects that Rex the Red-Green-Refactor can immediately start im
 
 ## Integration
 
-**Reads**: `.ai/3_tech_stacks/tech-stack-spring-hex.md` (for module structure, conventions, patterns, configuration templates)
+**Reads**: `.ai/4_tech_stacks/tech-stack-spring-hex.md` (for module structure, conventions, patterns, configuration templates)
 
 **Creates**: Complete Spring Boot project with hexagonal architecture (root config, 7 modules, Gradle setup, starter code, tests)
 
@@ -100,7 +100,7 @@ Conway creates projects that Rex the Red-Green-Refactor can immediately start im
 - NEVER forget Liquibase migrations setup
 - NEVER create without integration test base class
 - NEVER skip verification build
-- ALWAYS reference `.ai/3_tech_stacks/tech-stack-spring-hex.md` for structure details
+- ALWAYS reference `.ai/4_tech_stacks/tech-stack-spring-hex.md` for structure details
 - ALWAYS create complete projects (not partial/minimal setups)
 - ALWAYS use TodoWrite to track bootstrap progress
 - ALWAYS verify with `./gradlew build` before finishing

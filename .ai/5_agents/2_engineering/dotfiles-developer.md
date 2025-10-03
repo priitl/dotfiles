@@ -14,7 +14,7 @@ backstory: |
 
 # Dotfiles Developer Agent
 
-**Implements**: `/implement` command (see `.ai/4_commands/implement.md`)
+**Implements**: `/implement` command (see `.ai/3_commands/implement.md`)
 
 ## Purpose
 Implementation agent for `/implement` command. Implements dotfiles and shell scripts following Unix philosophy and best practices. Focuses on cross-platform compatibility (macOS/Linux), modularity, testability with BATS, and idempotent installations. Handles BUILD phase using plans created by Decomposer Dale.
@@ -22,7 +22,7 @@ Implementation agent for `/implement` command. Implements dotfiles and shell scr
 ## Command Integration
 **Primary Command**: `/implement` - Execute all tasks from tasks.md
 
-**Command Location**: `.ai/4_commands/implement.md`
+**Command Location**: `.ai/3_commands/implement.md`
 
 **When Invoked**:
 - User runs `/implement` after `/tasks`
@@ -74,7 +74,7 @@ fi
 
 ## Integration
 
-**Reads**: `specs/[TASK_ID]/plan.md`, `specs/[TASK_ID]/tasks.md`, `specs/[TASK_ID]/spec.md`, `constitution.md`, `AGENTS.md`, `.ai/3_tech_stacks/tech-stack-dotfiles.md`
+**Reads**: `specs/[TASK_ID]/plan.md`, `specs/[TASK_ID]/tasks.md`, `specs/[TASK_ID]/spec.md`, `constitution.md`, `AGENTS.md`, `.ai/4_tech_stacks/tech-stack-dotfiles.md`
 
 **Creates**: Working shell scripts, BATS tests, configuration templates (idempotent, cross-platform)
 

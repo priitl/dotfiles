@@ -609,7 +609,7 @@ if [ -L "$AI_DIR" ] && [ -d "$AI_DIR" ] && [ -L "$CLAUDE_DIR" ] && [ -d "$CLAUDE
     echo "💡 Quick start with other tools:"
     echo "   - GitHub Copilot: Opens instructions from ~/.copilot/instructions.md"
     echo "   - Cursor: Opens rules from ~/.cursor/rules.md"
-    echo "   - Gemini: Opens config from ~/.gemini/config.md"
+    echo "   - Gemini: Opens config from ~/.gemini/GEMINI.md"
     echo ""
     echo "📋 Bootstrap project documentation:"
     echo "   \"Bootstrap documentation for ~/Projects/my-project\" → Archivist Aurora"

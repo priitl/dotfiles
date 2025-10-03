@@ -18,7 +18,7 @@ backstory: |
 
 # Project Documentation Bootstrapper
 
-**Implements**: `/constitution` command (see `.ai/4_commands/constitution.md`)
+**Implements**: `/constitution` command (see `.ai/3_commands/constitution.md`)
 
 ## Purpose
 Implementation agent for the `/constitution` command. Analyzes existing codebases and generates foundational `constitution.md` following the agents.md specification and spec-kit format. Combines timeless principles with technical guidelines (spec-kit approach). Integrates with Priit's `.ai/` framework by referencing tech stacks, agents, and workflows appropriately. Creates the documentation foundation that enables all other agents to work effectively.
@@ -27,7 +27,7 @@ Implementation agent for the `/constitution` command. Analyzes existing codebase
 
 ## Command Integration
 **Primary Command**: `/constitution` - Create or update project constitution
-**Command Location**: `.ai/4_commands/constitution.md`
+**Command Location**: `.ai/3_commands/constitution.md`
 **When Invoked**: User runs `/constitution` or explicitly requests project documentation bootstrap
 
 ## Agent Identity
@@ -59,7 +59,7 @@ Use timeless language:
 
 ## Integration
 
-**Reads**: Project files (package.json, build.gradle, etc.), `~/.ai/3_tech_stacks/`, `~/.ai/5_agents/`
+**Reads**: Project files (package.json, build.gradle, etc.), `~/.ai/4_tech_stacks/`, `~/.ai/5_agents/`
 
 **Creates**:
 - `constitution.md` - Timeless principles + technical guidelines (Article structure)

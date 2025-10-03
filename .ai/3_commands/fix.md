@@ -37,7 +37,7 @@ Execution steps:
    - Read constitution.md for coding standards and restrictions
    - Read relevant source files causing failures
    - Read relevant test files to understand test intent
-   - Load tech stack documentation from `.ai/3_tech_stacks/`
+   - Load tech stack documentation from `.ai/4_tech_stacks/`
 
 4. Analyze root cause:
    - **For test failures**:

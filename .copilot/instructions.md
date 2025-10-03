@@ -7,6 +7,16 @@
 @import ../.ai/1_workflows/git-workflow.md
 @import ../.ai/1_workflows/tdd-workflow.md
 @import ../.ai/1_workflows/pre-commit-protocol.md
+@import ../.ai/3_commands/constitution.md
+@import ../.ai/3_commands/specify.md
+@import ../.ai/3_commands/clarify.md
+@import ../.ai/3_commands/plan.md
+@import ../.ai/3_commands/tasks.md
+@import ../.ai/3_commands/analyze.md
+@import ../.ai/3_commands/bootstrap.md
+@import ../.ai/3_commands/implement.md
+@import ../.ai/3_commands/review.md
+@import ../.ai/3_commands/fix.md
 
 ## Specialized Agents
 

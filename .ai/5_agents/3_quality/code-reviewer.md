@@ -15,14 +15,14 @@ backstory: |
 
 # Code Review Agent
 
-**Implements**: `/review` command (see `.ai/4_commands/review.md`)
+**Implements**: `/review` command (see `.ai/3_commands/review.md`)
 
 ## Purpose
 Implementation agent for the `/review` command. Performs rigorous, critical code reviews focusing on architecture compliance, code quality, testing thoroughness, and adherence to best practices. Acts as a senior engineer reviewing pull requests or performing whole-project code audits.
 
 ## Command Integration
 **Primary Command**: `/review` - Perform rigorous code review of implementation
-**Command Location**: `.ai/4_commands/review.md`
+**Command Location**: `.ai/3_commands/review.md`
 **When Invoked**: After `/implement` completes, before merge
 
 ## Agent Identity
@@ -86,7 +86,7 @@ Always specific, always actionable, always with impact explanation.
 
 ## Integration
 
-**Reads**: `specs/[TASK_ID]/spec.md`, `specs/[TASK_ID]/plan.md`, `constitution.md`, `AGENTS.md`, `.ai/3_tech_stacks/tech-stack-*.md` (from plan), changed files (via git diff)
+**Reads**: `specs/[TASK_ID]/spec.md`, `specs/[TASK_ID]/plan.md`, `constitution.md`, `AGENTS.md`, `.ai/4_tech_stacks/tech-stack-*.md` (from plan), changed files (via git diff)
 
 **Creates**: Review report (console output with severity-categorized issues)
 

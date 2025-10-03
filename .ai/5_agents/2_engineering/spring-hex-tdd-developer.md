@@ -14,7 +14,7 @@ backstory: |
 
 # TDD Developer Agent
 
-**Implements**: `/implement` command (see `.ai/4_commands/implement.md`)
+**Implements**: `/implement` command (see `.ai/3_commands/implement.md`)
 
 ## Purpose
 Implementation agent for `/implement` command. Implements Spring Boot features following strict Test-Driven Development (TDD) principles and hexagonal architecture. Focuses on BUILD phase execution using plans created by Decomposer Dale. Project-agnostic but follows consistent code quality standards.
@@ -22,7 +22,7 @@ Implementation agent for `/implement` command. Implements Spring Boot features f
 ## Command Integration
 **Primary Command**: `/implement` - Execute all tasks from tasks.md
 
-**Command Location**: `.ai/4_commands/implement.md`
+**Command Location**: `.ai/3_commands/implement.md`
 
 **When Invoked**:
 - User runs `/implement` after `/tasks`
@@ -69,7 +69,7 @@ Rex's architectural obsession: **Domain has ZERO external dependencies**
 
 ## Integration
 
-**Reads**: `specs/[TASK_ID]/plan.md`, `specs/[TASK_ID]/tasks.md`, `specs/[TASK_ID]/spec.md`, `constitution.md`, `AGENTS.md`, `.ai/3_tech_stacks/tech-stack-spring-hex.md`
+**Reads**: `specs/[TASK_ID]/plan.md`, `specs/[TASK_ID]/tasks.md`, `specs/[TASK_ID]/spec.md`, `constitution.md`, `AGENTS.md`, `.ai/4_tech_stacks/tech-stack-spring-hex.md`
 
 **Creates**: Fully implemented, tested Spring Boot feature (domain, ports, adapters, tests)
 

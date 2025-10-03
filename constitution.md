@@ -34,8 +34,8 @@ All shared logic MUST reside in the `.ai/` directory with the following structur
 - `0_core/` - Personality, standards, decision framework
 - `1_workflows/` - TDD, git, pre-commit, spec-driven workflows
 - `2_templates/` - Specification templates (spec.md, plan.md, tasks.md)
-- `3_tech_stacks/` - Technology-specific patterns
-- `4_commands/` - Spec-kit workflow commands
+- `3_commands/` - Spec-kit workflow commands
+- `4_tech_stacks/` - Technology-specific patterns
 - `5_agents/` - Specialized agents organized by workflow phase
 
 ### Section 1.2: Tool Configuration
@@ -268,8 +268,8 @@ dotfiles/
 │   ├── 0_core/             # Personality, standards, decision framework
 │   ├── 1_workflows/        # TDD, git, pre-commit, spec-driven
 │   ├── 2_templates/        # Spec templates (spec.md, plan.md, tasks.md)
-│   ├── 3_tech_stacks/      # Spring, dotfiles, AI config patterns
-│   ├── 4_commands/         # Spec-kit workflow commands
+│   ├── 3_commands/         # Spec-kit workflow commands
+│   ├── 4_tech_stacks/      # Spring, dotfiles, AI config patterns
 │   ├── 5_agents/           # Specialized agents by workflow phase
 │   │   ├── 0_speccing/     # Requirements → Specs
 │   │   ├── 1_planning/     # Specs → Plans

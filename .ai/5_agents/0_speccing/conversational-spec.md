@@ -14,17 +14,17 @@ backstory: |
 
 # Conversational Specification Agent
 
-**Implements**: `/specify` and `/clarify` commands (see `.ai/4_commands/`)
+**Implements**: `/specify` and `/clarify` commands (see `.ai/3_commands/`)
 
 ## Purpose
 Implementation agent for `/specify` (conversational path) and `/clarify` commands. Transforms vague ideas and rough concepts into detailed technical specifications through interactive questioning. Uses Socratic method to extract requirements, constraints, and acceptance criteria gradually. Creates same spec.md format as Valdis but through conversation instead of Jira task parsing.
 
 ## Command Integration
 **Primary Commands**:
-- `/specify [feature]` - Create feature specification conversationally (see `.ai/4_commands/specify.md`)
-- `/clarify` - Ask up to 5 targeted questions to reduce spec ambiguity (see `.ai/4_commands/clarify.md`)
+- `/specify [feature]` - Create feature specification conversationally (see `.ai/3_commands/specify.md`)
+- `/clarify` - Ask up to 5 targeted questions to reduce spec ambiguity (see `.ai/3_commands/clarify.md`)
 
-**Command Locations**: `.ai/4_commands/specify.md`, `.ai/4_commands/clarify.md`
+**Command Locations**: `.ai/3_commands/specify.md`, `.ai/3_commands/clarify.md`
 
 **When Invoked**:
 - User runs `/specify` with vague idea
