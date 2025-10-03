@@ -8,9 +8,10 @@ Agent-agnostic AI development environment configuration that works with Claude, 
 A shared core that works with **all AI tools** - write once, use everywhere:
 - **Core standards** (`0_core/`) - Personality, coding standards, decision framework, git workflow
 - **Workflows** (`1_workflows/`) - TDD workflow, pre-commit protocol, spec-driven development
-- **Tech stacks** (`2_tech_stacks/`) - Spring Boot, dotfiles, AI configuration patterns
-- **Specialized agents** (`3_agents/`) - 9 expert agents organized by workflow phase
-- **Spec templates** (`4_specs/`) - Templates for specifications, plans, and tasks
+- **Spec templates** (`2_templates/`) - Templates for specifications, plans, and tasks
+- **Tech stacks** (`3_tech_stacks/`) - Spring Boot, dotfiles, AI configuration patterns
+- **Commands** (`4_commands/`) - Spec-kit workflow commands (/constitution, /specify, /plan, /implement, /review, /fix, etc.)
+- **Specialized agents** (`5_agents/`) - 11 expert agents organized by workflow phase
 
 ### 🛠️ Tool-Specific Configurations
 Lightweight wrappers that import the shared core:
@@ -41,22 +42,38 @@ The install script dynamically builds your `.zshrc` based on installed tools:
 ```
 dotfiles/
 ├── .ai/                                # 🎯 Agent-agnostic core (works with all tools)
-│   ├── AGENTS.md                       # 📋 Agent registry template (for projects)
 │   ├── 0_core/
 │   │   ├── priit-personality.md        # Buddy-cop relationship
 │   │   ├── coding-standards.md         # TDD, quality standards
-│   │   └── decision-framework.md       # 🟢🟡🔴 action framework
+│   │   ├── decision-framework.md       # 🟢🟡🔴 action framework
+│   │   └── spec-kit-alignment.md       # Spec-kit integration guide
 │   ├── 1_workflows/
 │   │   ├── git-workflow.md             # Pre-commit discipline
 │   │   ├── tdd-workflow.md             # Red-Green-Refactor process
 │   │   ├── pre-commit-protocol.md      # Quality gate protocol
 │   │   └── spec-driven-workflow.md     # Spec → Plan → Build → Verify
-│   ├── 2_tech_stacks/
-│   │   ├── tech-stack-spring.md        # Spring Boot patterns
+│   ├── 2_templates/
+│   │   ├── spec-template.md            # Specification template
+│   │   ├── plan-template.md            # Implementation plan template
+│   │   └── tasks-template.md           # Task breakdown template
+│   ├── 3_tech_stacks/
+│   │   ├── tech-stack-spring-hex.md    # Spring Boot + hexagonal patterns
 │   │   ├── tech-stack-dotfiles.md      # Shell script patterns
 │   │   └── tech-stack-ai.md            # AI configuration patterns
-│   ├── 3_agents/
+│   ├── 4_commands/
+│   │   ├── constitution.md             # Bootstrap project constitution
+│   │   ├── specify.md                  # Create feature specification
+│   │   ├── clarify.md                  # Refine vague requirements
+│   │   ├── plan.md                     # Create implementation plan
+│   │   ├── tasks.md                    # Generate task breakdown
+│   │   ├── analyze.md                  # Analyze spec consistency
+│   │   ├── bootstrap.md                # Bootstrap Spring Boot project
+│   │   ├── implement.md                # Execute implementation
+│   │   ├── review.md                   # Code review
+│   │   └── fix.md                      # Fix failures
+│   ├── 5_agents/
 │   │   ├── 0_speccing/                 # Requirements → Specs
+│   │   │   ├── project-bootstrapper.md # 📜 Founding Father Franklin
 │   │   │   ├── jira-to-spec.md         # 🌉 Valdis the Translator
 │   │   │   └── conversational-spec.md  # 💭 Socrates the Questioner
 │   │   ├── 1_planning/                 # Specs → Plans
@@ -67,16 +84,13 @@ dotfiles/
 │   │   │   ├── dotfiles-developer.md       # 🐑 Script Shepherd Shane
 │   │   │   └── ai-dotfiles-architect.md    # 🏛️ Architect Anya
 │   │   └── 3_quality/                  # Code → Review/Fix
+│   │       ├── spec-analyzer.md        # 🔍 Inspector Insight
 │   │       ├── code-reviewer.md        # ⚖️ Judge Dredd Code
 │   │       └── test-fixer.md           # 🔬 Dr. Debugsworth McFixit
-│   └── 4_specs/
-│       ├── spec-template.md            # Specification template
-│       ├── plan-template.md            # Implementation plan template
-│       └── tasks-template.md           # Task breakdown template
 │
 ├── .claude/
 │   ├── CLAUDE.md                       # Claude-specific wrapper
-│   └── agents/ → ../.ai/3_agents/      # Symlink to shared agents
+│   └── agents/ → ../.ai/5_agents/      # Symlink to shared agents
 │
 ├── .copilot/
 │   └── instructions.md                 # Copilot-specific wrapper
@@ -100,60 +114,81 @@ dotfiles/
 
 ## Specialized Agents (Work with ALL AI Tools)
 
-Agents follow the **Spec → Plan → Build → Verify** workflow and are organized by phase:
+Agents follow the **Spec → Plan → Build → Verify** workflow and are organized by phase. Use spec-kit commands to invoke:
 
 ### 0️⃣ Speccing (Requirements → Specifications)
 
+#### 📜 Founding Father Franklin
+**Purpose:** Bootstrap project constitution.md with foundational principles
+**Command:** `/constitution`
+**When to use:** Starting new projects, establishing project principles
+**Example:** `/constitution` (analyzes codebase, generates constitution)
+
 #### 🌉 Valdis the Translator
 **Purpose:** Translate Jira tasks into crystal-clear technical specifications
+**Command:** `/specify`
 **When to use:** Converting structured Jira requirements into specs
-**Example:** "Create spec from Jira task PROJ-789"
+**Example:** `/specify` (provide Jira URL or task details)
 
 #### 💭 Socrates the Questioner
 **Purpose:** Refines vague ideas into detailed specifications through guided questions
+**Commands:** `/specify`, `/clarify`
 **When to use:** Converting rough ideas into specs (no Jira ticket needed)
-**Example:** "Help me spec out migrating to Ansible"
+**Example:** `/specify "Add payment processing"` or `/clarify`
 
 ### 1️⃣ Planning (Specifications → Implementation Plans)
 
 #### 🧩 Decomposer Dale
 **Purpose:** Breaks specs into actionable plans and tasks
+**Commands:** `/plan`, `/tasks`
 **When to use:** After creating spec.md, before implementation
-**Example:** "Create implementation plan for specs/PROJ-789/spec.md"
+**Example:** `/plan` (creates plan.md), `/tasks` (creates tasks.md)
 
 ### 2️⃣ Engineering (Plans → Code)
 
 #### 🏗️ Constructor Conway
 **Purpose:** Bootstrap Spring Boot projects with hexagonal architecture
-**When to use:** Starting new projects with clean architecture
-**Example:** "Bootstrap a Spring Boot project called 'order-service'"
+**Command:** `/bootstrap`
+**When to use:** Starting new Spring Boot projects with clean architecture
+**Example:** `/bootstrap` (creates complete project structure)
 
 #### 🦖 Rex the Red-Green-Refactor
 **Purpose:** TDD specialist for Spring Boot & hexagonal architecture
+**Command:** `/implement`
 **When to use:** Implementing Spring Boot features with strict TDD discipline
-**Example:** "Implement specs/PROJ-789/ using Rex"
+**Example:** `/implement` (executes tasks.md for Spring Boot projects)
 
 #### 🐑 Script Shepherd Shane
 **Purpose:** Shell script & dotfiles specialist with BATS testing
+**Command:** `/implement`
 **When to use:** Implementing shell scripts, dotfiles, installation scripts
-**Example:** "Implement specs/ANSIBLE-001/ using Shane"
+**Example:** `/implement` (executes tasks.md for shell script projects)
 
 #### 🏛️ Architect Anya
 **Purpose:** AI configuration architect specializing in agent-agnostic patterns
+**Command:** `/implement`
 **When to use:** Creating new agents, designing AI configuration architecture
-**Example:** "Use Anya to create a new planning agent"
+**Example:** `/implement` (executes tasks.md for AI config projects)
 
 ### 3️⃣ Quality (Code → Review/Fix)
 
+#### 🔍 Inspector Insight
+**Purpose:** Specification consistency analyzer detecting gaps and conflicts
+**Command:** `/analyze`
+**When to use:** After `/tasks` completes, before `/implement` begins (quality gate)
+**Example:** `/analyze` (checks spec.md, plan.md, tasks.md consistency)
+
 #### ⚖️ Judge Dredd Code
 **Purpose:** Rigorous code reviewer with zero tolerance for violations
-**When to use:** Reviewing code for quality, architecture, best practices
-**Example:** "Have Judge Dredd review this implementation"
+**Command:** `/review`
+**When to use:** After `/implement` completes, before merge
+**Example:** `/review` (reviews code against spec and constitution)
 
 #### 🔬 Dr. Debugsworth McFixit
 **Purpose:** Test failure diagnostician and fixer extraordinaire
-**When to use:** Fixing failing tests and diagnosing test issues
-**Example:** "Use Dr. Debugsworth to fix failing tests"
+**Command:** `/fix`
+**When to use:** When tests fail or `/review` finds issues
+**Example:** `/fix` (diagnoses and fixes failures systematically)
 
 ## Installation
 
@@ -323,19 +358,17 @@ Think of it as a README specifically for AI tools.
 
 ### Bootstrap Documentation for New Projects
 
-Use **Archivist Aurora** to generate project documentation:
+Use **Founding Father Franklin** to generate project constitution:
 
 ```bash
-# Invoke Archivist Aurora to analyze and generate docs
-"Bootstrap documentation for ~/Projects/my-project" → Archivist Aurora
+# Invoke Franklin via /constitution command
+/constitution
 ```
 
-Aurora analyzes your codebase and generates:
-- **`constitution.md`** - Timeless architectural principles (spec-kit Article format)
-- **`AGENTS.md`** - Concise, tool-agnostic agent instructions (agents.md spec)
-- **`guidelines.md`** - Tech stack details and coding standards
+Franklin analyzes your codebase and generates:
+- **`constitution.md`** - Foundational principles + technical guidelines (spec-kit format)
 
-All docs customized to your project's tech stack and architecture patterns.
+Per spec-kit, `AGENTS.md` is generated later by Decomposer Dale during the `/plan` command (Phase 1).
 
 Example generated `AGENTS.md`:
 

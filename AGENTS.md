@@ -2,7 +2,7 @@
 
 Purpose: Instructions for AI agents to assist in this project.
 
-References: [`constitution.md`](constitution.md), [`guidelines.md`](guidelines.md)
+References: [`constitution.md`](constitution.md)
 
 ---
 
@@ -10,30 +10,34 @@ References: [`constitution.md`](constitution.md), [`guidelines.md`](guidelines.m
 
 | Agent | Phase | Role | Invocation |
 |-------|-------|------|------------|
-| **Socrates the Questioner** | Speccing | Refines vague ideas into detailed specs | `act as socrates` |
-| **Valdis the Translator** | Speccing | Translates Jira tasks into technical specs | `act as valdis` |
-| **Archivist Aurora** | Speccing | Bootstraps project documentation | `act as archivist aurora` |
-| **Decomposer Dale** | Planning | Breaks specs into actionable tasks | `act as decomposer dale` |
-| **Rex the Red-Green-Refactor** | Engineering | Spring Boot TDD specialist | `act as rex` |
-| **Script Shepherd Shane** | Engineering | Shell script & dotfiles specialist | `act as script shepherd shane` |
-| **Architect Anya** | Engineering | AI configuration architect | `act as architect anya` |
-| **Constructor Conway** | Engineering | Spring Boot project bootstrapper | `act as constructor conway` |
-| **Judge Dredd Code** | Quality | Code reviewer | `act as judge dredd` |
-| **Dr. Debugsworth McFixit** | Quality | Test failure fixer | `act as dr debugsworth` |
+| **Socrates the Questioner** | Speccing | Refines vague ideas into detailed specs | `/specify` or `/clarify` |
+| **Valdis the Translator** | Speccing | Translates Jira tasks into technical specs | `/specify` |
+| **Founding Father Franklin** | Speccing | Bootstraps project constitution | `/constitution` |
+| **Decomposer Dale** | Planning | Breaks specs into actionable tasks | `/plan` or `/tasks` |
+| **Inspector Insight** | Quality Gate | Analyzes specification consistency | `/analyze` |
+| **Constructor Conway** | Engineering | Spring Boot project bootstrapper | `/bootstrap` |
+| **Rex the Red-Green-Refactor** | Engineering | Spring Boot TDD specialist | `/implement` |
+| **Script Shepherd Shane** | Engineering | Shell script & dotfiles specialist | `/implement` |
+| **Architect Anya** | Engineering | AI configuration architect | `/implement` |
+| **Judge Dredd Code** | Quality | Code reviewer | `/review` |
+| **Dr. Debugsworth McFixit** | Quality | Test failure fixer | `/fix` |
 
 ---
 
 ## Invocation Instructions
 
-```
-"Help me spec out migrating to Ansible"  # Socrates
-"Create spec from Jira task PROJ-789"    # Valdis
-"Bootstrap documentation for this project" # Aurora
-"Create implementation plan for specs/PROJ-789/spec.md"  # Dale
-"Implement specs/PROJ-789/ using Shane"  # Shane
-"Use Anya to create a new quality agent" # Anya
-"Have Judge Dredd review this"  # Judge Dredd
-"Use Dr. Debugsworth to fix tests"  # Dr. Debugsworth
+**Spec-Driven Workflow Commands:**
+```bash
+/constitution                    # Franklin - Bootstrap project constitution
+/specify "Add payment feature"   # Socrates/Valdis - Create specification
+/clarify                         # Socrates - Refine vague requirements
+/plan                            # Dale - Create implementation plan
+/tasks                           # Dale - Generate task breakdown
+/analyze                         # Insight - Analyze spec consistency
+/bootstrap                       # Conway - Bootstrap Spring Boot project
+/implement                       # Rex/Shane/Anya - Execute implementation
+/review                          # Judge Dredd - Code review
+/fix                             # Dr. Debugsworth - Fix failures
 ```
 
 ---
@@ -44,7 +48,10 @@ All agents automatically load from `~/.ai/`:
 
 - **0_core/** - Personality, standards, decision framework
 - **1_workflows/** - TDD, git, pre-commit, spec-driven
-- **2_tech_stacks/** - Shell patterns, Spring patterns, AI patterns
+- **2_templates/** - Spec templates (spec.md, plan.md, tasks.md)
+- **3_tech_stacks/** - Shell patterns, Spring patterns, AI patterns
+- **4_commands/** - Spec-kit workflow commands
+- **5_agents/** - Specialized agent definitions
 
 ---
 
@@ -76,10 +83,11 @@ shellcheck install.sh                  # Lint
 4. Test idempotency (run twice)
 
 ### Add Agent
-1. Check `.ai/3_agents/` structure
+1. Check `.ai/5_agents/` structure
 2. Identify phase: 0_speccing/1_planning/2_engineering/3_quality
-3. Follow existing pattern
-4. Import from `.ai/1_workflows/`
+3. Follow existing pattern (80-100 lines, concise)
+4. Reference workflows from `.ai/1_workflows/`
+5. Link to command in `.ai/4_commands/` if applicable
 
 ---
 
@@ -97,7 +105,7 @@ backup_file() {     # snake_case
 readonly DEFAULT="value"  # UPPER_CASE
 ```
 
-See [`guidelines.md`](guidelines.md) for complete patterns.
+See [`constitution.md`](constitution.md) for complete standards.
 
 ---
 

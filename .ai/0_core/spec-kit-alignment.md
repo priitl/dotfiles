@@ -7,14 +7,17 @@ How to align your current workflow with GitHub Spec-Kit patterns.
 ### Adopt from Spec-Kit
 ✅ **specs/** folder structure - Feature-centric organization
 ✅ **Simple file names** - spec.md, plan.md, tasks.md inside feature folders
-✅ **Constitution at root** - Project principles
+✅ **Constitution at root** - Project principles AND technical guidelines (single file)
+✅ **AGENTS.md at root** - Runtime context (auto-generated from feature plans)
 ✅ **Feature numbering** - 001-feature-name pattern
+✅ **No guidelines.md** - Spec-kit merges everything into constitution.md
 
-## Recommended Folder Structure
+## File Structure (Spec-Kit Standard)
 
 ```
 your-project/
-├── constitution.md                    # Project principles (Spec-Kit)
+├── constitution.md                    # Principles + Technical Guidelines (Spec-Kit)
+├── AGENTS.md                          # Runtime context (auto-generated, Spec-Kit)
 │
 ├── specs/                             # Feature specifications (Spec-Kit)
 │   ├── 001-user-auth/
@@ -31,6 +34,30 @@ your-project/
 │
 └── src/                               # Source code
 ```
+
+## Key Files Explained
+
+### constitution.md
+**Purpose**: Single source of truth for BOTH principles AND technical guidelines
+
+**Contains**:
+- Core Principles (Article I, II, III...) - e.g., TDD, Clean Architecture, Security
+- Technical Guidelines - Tech stack, versions, project structure, coding standards
+- Governance - Amendment process, versioning
+
+**Why combined**: Spec-kit treats constitution as the complete project rulebook, not split between "timeless" and "changeable"
+
+### AGENTS.md
+**Purpose**: Runtime context for AI agents (auto-generated from feature plans)
+
+**Contains**:
+- Active Technologies (extracted from plan.md files)
+- Project Structure (actual structure from plans)
+- Commands (build/test commands for active tech only)
+- Code Style (language-specific, only for languages in use)
+- Recent Changes (last 3 features)
+
+**Auto-generation**: Updated by plan.md generation process (Phase 1, step 5)
 
 ## Feature-Level Tracking
 
@@ -97,7 +124,7 @@ After completing work with TodoWrite, **sync to tasks.md**:
 mkdir -p specs/001-user-auth
 
 # 2. Copy spec template
-cp ~/.ai/4_specs/spec-template.md specs/001-user-auth/spec.md
+cp ~/.ai/2_templates/spec-template.md specs/001-user-auth/spec.md
 
 # 3. Fill in requirements
 # (Or delegate to Valdis)
@@ -107,7 +134,7 @@ cp ~/.ai/4_specs/spec-template.md specs/001-user-auth/spec.md
 ```bash
 # 4. Generate plan
 "Read specs/001-user-auth/spec.md and constitution.md,
-create plan.md and tasks.md using templates from ~/.ai/4_specs/"
+create plan.md and tasks.md using templates from ~/.ai/2_templates/"
 ```
 
 ### BUILD Phase
@@ -144,9 +171,9 @@ mkdir -p specs
 **Step 2: Set up first feature**
 ```bash
 mkdir -p specs/001-feature-name
-cp ~/.ai/4_specs/spec-template.md specs/001-feature-name/spec.md
-cp ~/.ai/4_specs/plan-template.md specs/001-feature-name/plan.md
-cp ~/.ai/4_specs/tasks-template.md specs/001-feature-name/tasks.md
+cp ~/.ai/2_templates/spec-template.md specs/001-feature-name/spec.md
+cp ~/.ai/2_templates/plan-template.md specs/001-feature-name/plan.md
+cp ~/.ai/2_templates/tasks-template.md specs/001-feature-name/tasks.md
 ```
 
 ## Tool Support
@@ -166,7 +193,7 @@ specify new "Add payment processing"
 ```bash
 # Create feature manually
 mkdir -p specs/003-dashboard
-cp ~/.ai/4_specs/spec-template.md specs/003-dashboard/spec.md
+cp ~/.ai/2_templates/spec-template.md specs/003-dashboard/spec.md
 
 # Edit spec, ask AI to generate plan
 "Read specs/003-dashboard/spec.md, create plan.md and tasks.md"

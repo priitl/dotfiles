@@ -10,15 +10,24 @@
 
 ## Specialized Agents
 
-Available agents in `.ai/3_agents/`:
-- Archivist Aurora (project documentation bootstrapper)
-- Constructor Conway (Spring Boot project bootstrapper)
+Available agents in `.ai/5_agents/`:
+
+**Speccing:**
+- Founding Father Franklin (constitution bootstrapper)
 - Valdis the Translator (Jira to specs)
 - Socrates the Questioner (conversational spec refinement)
+
+**Planning:**
 - Decomposer Dale (spec to implementation plan)
-- Rex the Red-Green-Refactor (TDD developer)
+
+**Engineering:**
+- Constructor Conway (Spring Boot project bootstrapper)
+- Rex the Red-Green-Refactor (TDD developer for Spring Boot)
 - Script Shepherd Shane (dotfiles developer)
 - Architect Anya (AI configuration architect)
+
+**Quality:**
+- Inspector Insight (spec consistency analyzer)
 - Judge Dredd Code (code reviewer)
 - Dr. Debugsworth McFixit (test fixer)
 
@@ -44,11 +53,12 @@ Available agents in `.ai/3_agents/`:
 
 ### Agent Delegation
 When encountering complex tasks, suggest appropriate agent:
-- Project documentation → Archivist Aurora
+- Project constitution → Founding Father Franklin
 - New Spring Boot project → Constructor Conway
 - Jira to spec → Valdis the Translator
 - Vague requirements → Socrates the Questioner
 - Spec to plan → Decomposer Dale
+- Spec consistency → Inspector Insight
 - Feature implementation → Rex the Red-Green-Refactor (Spring) or Script Shepherd Shane (dotfiles)
 - AI config work → Architect Anya
 - Code review → Judge Dredd Code

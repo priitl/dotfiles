@@ -10,14 +10,14 @@
 
 ## Specialized Agents
 
-I have a team of specialized AI agents in `.ai/3_agents/` for specific workflows.
+I have a team of specialized AI agents in `.ai/5_agents/` for specific workflows.
 When tackling complex tasks, suggest using the appropriate agent if one exists.
 Agents handle their own code quality standards - don't duplicate those rules here.
 
 Available agents (organized by workflow phase):
 
 **Speccing** (Requirements → Specs):
-- **Archivist Aurora** (project-bootstrapper) - Generates AGENTS.md + constitution.md for projects
+- **Founding Father Franklin** (project-bootstrapper) - Generates constitution.md for projects
 - **Valdis the Translator** (jira-to-spec) - Translates Jira tasks into technical specs
 - **Socrates the Questioner** (conversational-spec) - Refines vague ideas into specs through dialogue
 
@@ -31,12 +31,13 @@ Available agents (organized by workflow phase):
 - **Architect Anya** (ai-dotfiles-architect) - AI configuration architect
 
 **Quality** (Review & Fix):
+- **Inspector Insight** (spec-analyzer) - Analyzes specification consistency before implementation
 - **Judge Dredd Code** (code-reviewer) - Rigorous code reviewer with zero tolerance for violations
 - **Dr. Debugsworth McFixit** (test-fixer) - Test failure diagnostician and fixer
 
 To use agents with Claude Code:
 ```
-"Bootstrap documentation for ~/Projects/my-project"  # Archivist Aurora
+"Bootstrap constitution for ~/Projects/my-project"  # Founding Father Franklin
 "Help me spec out migrating to Ansible"  # Socrates
 "Create spec from Jira task PROJ-789"  # Valdis
 "Create implementation plan for specs/PROJ-789/spec.md"  # Decomposer Dale
@@ -48,7 +49,7 @@ To use agents with Claude Code:
 
 Follow the spec-driven development workflow when appropriate:
 - Read about it: `../.ai/1_workflows/spec-driven-workflow.md`
-- Templates: `../.ai/4_specs/`
+- Templates: `../.ai/2_templates/`
 - Alignment guide: `../.ai/0_core/spec-kit-alignment.md`
 
 **When to use specs:**

@@ -33,9 +33,10 @@ All shared logic MUST reside in the `.ai/` directory with the following structur
 
 - `0_core/` - Personality, standards, decision framework
 - `1_workflows/` - TDD, git, pre-commit, spec-driven workflows
-- `2_tech_stacks/` - Technology-specific patterns
-- `3_agents/` - Specialized agents organized by workflow phase
-- `4_specs/` - Specification templates
+- `2_templates/` - Specification templates (spec.md, plan.md, tasks.md)
+- `3_tech_stacks/` - Technology-specific patterns
+- `4_commands/` - Spec-kit workflow commands
+- `5_agents/` - Specialized agents organized by workflow phase
 
 ### Section 1.2: Tool Configuration
 
@@ -190,7 +191,7 @@ The following specialized agents handle workflow phases:
 **Speccing (Requirements → Specifications):**
 - Socrates the Questioner - Conversational spec refinement
 - Valdis the Translator - Jira → spec translation
-- Archivist Aurora - Bootstrap project documentation
+- Founding Father Franklin - Bootstrap project constitution
 
 **Planning (Specifications → Plans):**
 - Decomposer Dale - Break specs into actionable tasks
@@ -202,6 +203,7 @@ The following specialized agents handle workflow phases:
 - Constructor Conway - Spring Boot project bootstrapper
 
 **Quality (Code → Review/Fix):**
+- Inspector Insight - Specification consistency analyzer
 - Judge Dredd Code - Rigorous code reviewer
 - Dr. Debugsworth McFixit - Test failure diagnostician
 
@@ -265,22 +267,22 @@ dotfiles/
 ├── .ai/                     # Agent-agnostic core (shared by all tools)
 │   ├── 0_core/             # Personality, standards, decision framework
 │   ├── 1_workflows/        # TDD, git, pre-commit, spec-driven
-│   ├── 2_tech_stacks/      # Spring, dotfiles, AI config patterns
-│   ├── 3_agents/           # Specialized agents by workflow phase
+│   ├── 2_templates/        # Spec templates (spec.md, plan.md, tasks.md)
+│   ├── 3_tech_stacks/      # Spring, dotfiles, AI config patterns
+│   ├── 4_commands/         # Spec-kit workflow commands
+│   ├── 5_agents/           # Specialized agents by workflow phase
 │   │   ├── 0_speccing/     # Requirements → Specs
 │   │   ├── 1_planning/     # Specs → Plans
 │   │   ├── 2_engineering/  # Plans → Code
 │   │   └── 3_quality/      # Code → Review/Fix
-│   └── 4_specs/            # Spec templates
 ├── .claude/                # Claude-specific wrapper (imports .ai/)
 ├── .copilot/               # Copilot-specific wrapper (imports .ai/)
 ├── .gemini/                # Gemini-specific wrapper (imports .ai/)
 ├── .cursor/                # Cursor-specific wrapper (imports .ai/)
 ├── install.sh              # Main installation script
 ├── tests/                  # BATS tests
-├── constitution.md         # This document
-├── AGENTS.md               # Project instructions for AI tools
-└── guidelines.md           # Detailed implementation standards
+├── constitution.md         # This document (principles + technical guidelines)
+└── AGENTS.md               # Project instructions for AI tools
 ```
 
 **Rationale:** Clear separation between shared core and tool-specific wrappers enables consistency while allowing tool-specific optimizations.
@@ -379,8 +381,7 @@ Dotfiles are symlinked from repository to home directory, with backups created b
 **Documentation:**
 - README.md covers all major features
 - AGENTS.md provides clear instructions for AI tools
-- guidelines.md documents implementation patterns
-- constitution.md defines timeless principles
+- constitution.md defines timeless principles AND technical guidelines (spec-kit approach)
 
 ## Commit Standards
 
