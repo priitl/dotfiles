@@ -1,1 +1,0 @@
-/Users/priitl/.ai/3_commands/tasks.md
