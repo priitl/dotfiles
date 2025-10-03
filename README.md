@@ -55,7 +55,11 @@ dotfiles/
 │   ├── 2_templates/
 │   │   ├── spec-template.md            # Specification template
 │   │   ├── plan-template.md            # Implementation plan template
-│   │   └── tasks-template.md           # Task breakdown template
+│   │   ├── tasks-template.md           # Task breakdown template
+│   │   ├── bootstrap-template.md       # Project bootstrap template
+│   │   ├── review-template.md          # Code review template
+│   │   ├── constitution-template.md    # Constitution template
+│   │   └── agents-template.md          # AGENTS.md template
 │   ├── 3_commands/
 │   │   ├── constitution.md             # Bootstrap project constitution
 │   │   ├── specify.md                  # Create feature specification
@@ -63,7 +67,7 @@ dotfiles/
 │   │   ├── plan.md                     # Create implementation plan
 │   │   ├── tasks.md                    # Generate task breakdown
 │   │   ├── analyze.md                  # Analyze spec consistency
-│   │   ├── bootstrap.md                # Bootstrap Spring Boot project
+│   │   ├── bootstrap.md                # Bootstrap new project
 │   │   ├── implement.md                # Execute implementation
 │   │   ├── review.md                   # Code review
 │   │   └── fix.md                      # Fix failures
@@ -147,9 +151,9 @@ Agents follow the **Spec → Plan → Build → Verify** workflow and are organi
 ### 2️⃣ Engineering (Plans → Code)
 
 #### 🏗️ Constructor Conway
-**Purpose:** Bootstrap Spring Boot projects with hexagonal architecture
+**Purpose:** Bootstrap new projects following constitutional principles
 **Command:** `/bootstrap`
-**When to use:** Starting new Spring Boot projects with clean architecture
+**When to use:** Starting new projects (detects tech stack from constitution or asks)
 **Example:** `/bootstrap` (creates complete project structure)
 
 #### 🦖 Rex the Red-Green-Refactor
@@ -567,10 +571,10 @@ com.example.orders/
 - No duplication across tool configs
 
 ### Specialized Agents
-- 9 expert agents organized by workflow phase
+- 11 expert agents organized by workflow phase
 - Work consistently across all AI tools
 - Clear Spec → Plan → Build → Verify workflow
-- Tech stack agnostic (Spring Boot, dotfiles, AI configs)
+- Tech stack agnostic (Spring Boot, dotfiles, AI configs, and more)
 
 ### TDD Workflow
 - Red-Green-Refactor enforcement

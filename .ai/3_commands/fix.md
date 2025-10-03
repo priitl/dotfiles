@@ -21,23 +21,15 @@ Execution steps:
    - Derive context:
      - SPEC = `specs/[branch-name]/spec.md`
      - PLAN = `specs/[branch-name]/plan.md`
-     - CONSTITUTION = `constitution.md`
-     - AGENTS = `AGENTS.md`
 
-2. Identify failure type:
+2. Read the constitution at `constitution.md` to understand coding standards and restrictions.
+
+3. Identify failure type:
    - **Test failures**: Run tests, capture output, identify failing tests
    - **Build errors**: Run build, capture compilation/linking errors
    - **Linting issues**: Run linters (checkstyle, spotbugs, eslint), capture violations
    - **Review feedback**: If `/review` was run, parse review report for critical/major issues
    - **Runtime errors**: If provided, analyze stack traces and error logs
-
-3. Load diagnostic context:
-   - Read spec.md for requirements and expected behavior
-   - Read plan.md for architecture and design decisions
-   - Read constitution.md for coding standards and restrictions
-   - Read relevant source files causing failures
-   - Read relevant test files to understand test intent
-   - Load tech stack documentation from `.ai/4_tech_stacks/`
 
 4. Analyze root cause:
    - **For test failures**:

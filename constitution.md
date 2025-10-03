@@ -454,3 +454,7 @@ This constitution provides the foundation for a maintainable, portable, agent-ag
 3. **Test-First Development** - Tests before code, always
 4. **Spec-Driven Workflow** - 🟢🟡🔴 decision framework
 5. **Portable by Default** - Works on macOS and Linux
+
+---
+
+**Version**: 1.0.0 | **Ratified**: 2025-01-15 | **Last Amended**: 2025-01-15

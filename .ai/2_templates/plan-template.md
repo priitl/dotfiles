@@ -151,7 +151,9 @@ directories captured above]
    - Quickstart test = story validation steps
 
 5. **Update AGENTS.md at project root** (incremental, O(1) operation):
-   - Read current `AGENTS.md` (create from template if doesn't exist)
+   - Check if `AGENTS.md` exists at project root:
+     - **If NO**: Load `.ai/2_templates/agents-template.md` and create initial AGENTS.md
+     - **If YES**: Read current `AGENTS.md` for updating
    - Extract technology stack from Technical Context above:
      - Language/Version + Primary Dependencies = tech stack entry
      - Storage (if not N/A) = additional tech entry
