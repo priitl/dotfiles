@@ -24,6 +24,8 @@
 .claude/statsig/
 .claude/todos/
 .claude/settings.local.json
+.claude/agents
+.claude/commands
 
 # Copilot
 .copilot/command-history-state.json
