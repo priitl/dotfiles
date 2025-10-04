@@ -189,10 +189,11 @@ if [[ "$remove_symlinks" =~ ^[Yy]$ ]] || [[ "$remove_files" =~ ^[Yy]$ ]]; then
     remove_log=${remove_log:-N}
 
     if [[ "$remove_log" =~ ^[Yy]$ ]]; then
-        if rm "$LOG_FILE" 2>/dev/null; then
+        if rm -f "$LOG_FILE"; then
             echo "🗑️  Installation log removed: $LOG_FILE"
         else
             echo "❌ Failed to remove log file"
+            exit 1
         fi
     else
         echo "ℹ️  Keeping installation log: $LOG_FILE"
