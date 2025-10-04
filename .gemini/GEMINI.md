@@ -15,7 +15,7 @@
 @import ../.ai/3_commands/analyze.md
 @import ../.ai/3_commands/bootstrap.md
 @import ../.ai/3_commands/implement.md
-@import ../.ai/3_commands/review.md
+@import ../.ai/3_commands/spec-review.md
 @import ../.ai/3_commands/fix.md
 
 ## Specialized Agents

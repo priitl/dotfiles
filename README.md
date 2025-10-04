@@ -9,7 +9,7 @@ A shared core that works with **all AI tools** - write once, use everywhere:
 - **Core standards** (`0_core/`) - Personality, coding standards, decision framework, git workflow
 - **Workflows** (`1_workflows/`) - TDD workflow, pre-commit protocol, spec-driven development
 - **Spec templates** (`2_templates/`) - Templates for specifications, plans, and tasks
-- **Commands** (`3_commands/`) - Spec-kit workflow commands (/constitution, /specify, /plan, /implement, /review, /fix, etc.)
+- **Commands** (`3_commands/`) - Spec-kit workflow commands (/constitution, /specify, /plan, /implement, /spec-review, /fix, etc.)
 - **Tech stacks** (`4_tech_stacks/`) - Spring Boot, dotfiles, AI configuration patterns
 - **Specialized agents** (`5_agents/`) - 11 expert agents organized by workflow phase
 
@@ -69,7 +69,7 @@ dotfiles/
 │   │   ├── analyze.md                  # Analyze spec consistency
 │   │   ├── bootstrap.md                # Bootstrap new project
 │   │   ├── implement.md                # Execute implementation
-│   │   ├── review.md                   # Code review
+│   │   ├── spec-review.md              # Spec-driven code review
 │   │   └── fix.md                      # Fix failures
 │   ├── 4_tech_stacks/
 │   │   ├── tech-stack-spring-hex.md    # Spring Boot + hexagonal patterns
@@ -184,14 +184,14 @@ Agents follow the **Spec → Plan → Build → Verify** workflow and are organi
 
 #### ⚖️ Judge Dredd Code
 **Purpose:** Rigorous code reviewer with zero tolerance for violations
-**Command:** `/review`
+**Command:** `/spec-review`
 **When to use:** After `/implement` completes, before merge
-**Example:** `/review` (reviews code against spec and constitution)
+**Example:** `/spec-review` (reviews code against spec and constitution)
 
 #### 🔬 Dr. Debugsworth McFixit
 **Purpose:** Test failure diagnostician and fixer extraordinaire
 **Command:** `/fix`
-**When to use:** When tests fail or `/review` finds issues
+**When to use:** When tests fail or `/spec-review` finds issues
 **Example:** `/fix` (diagnoses and fixes failures systematically)
 
 ## Installation

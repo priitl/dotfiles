@@ -11,9 +11,46 @@ CLAUDE_DIR="$HOME/.claude"
 COPILOT_DIR="$HOME/.copilot"
 GEMINI_DIR="$HOME/.gemini"
 CURSOR_DIR="$HOME/.cursor"
+LOG_FILE="$HOME/.dotfiles_install.log"
 
 echo "🤖 Installing Priit's Dotfiles..."
 echo ""
+
+# Initialize installation log
+init_log() {
+    cat > "$LOG_FILE" <<EOF
+# Dotfiles Installation Log
+# Generated: $(date -u +"%Y-%m-%dT%H:%M:%SZ")
+# This file tracks what was installed and can be used by uninstaller.sh
+INSTALL_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+DOTFILES_DIR=$DOTFILES_DIR
+EOF
+}
+
+# Log an action
+log_action() {
+    local action_type="$1"
+    local target="$2"
+    local source="${3:-}"
+
+    case "$action_type" in
+        SYMLINK)
+            echo "SYMLINK=$target:$source" >> "$LOG_FILE"
+            ;;
+        FILE)
+            echo "FILE=$target" >> "$LOG_FILE"
+            ;;
+        BACKUP)
+            echo "BACKUP=$target" >> "$LOG_FILE"
+            ;;
+        OPTION)
+            echo "$target=$source" >> "$LOG_FILE"
+            ;;
+    esac
+}
+
+# Initialize log file
+init_log
 
 # Ask about backups
 echo "Do you want to create backups of existing files before symlinking?"
@@ -69,6 +106,7 @@ backup_and_link() {
             BACKUP="$target.backup.$(date +%Y%m%d_%H%M%S)"
             echo "📦 Backing up existing $name to: $BACKUP"
             mv "$target" "$BACKUP"
+            log_action "BACKUP" "$BACKUP"
         else
             echo "⚠️  Removing existing $name (no backup)"
             rm -rf "$target"
@@ -77,6 +115,7 @@ backup_and_link() {
 
     echo "🔗 Creating symlink: $target -> $source"
     ln -s "$source" "$target"
+    log_action "SYMLINK" "$target" "$source"
     echo "   ✓ $name linked"
 }
 
@@ -135,23 +174,34 @@ add_tool_config() {
     fi
 }
 
-echo "=== Installing Agent-Agnostic AI Core ==="
 echo ""
-backup_and_link "$DOTFILES_DIR/.ai" "$AI_DIR" ".ai (agent-agnostic core)"
-echo ""
+read -r -p "🤖 Install AI agent configurations (.ai, .claude, .copilot, etc.)? [Y/n]: " install_ai
+install_ai=${install_ai:-Y}
+log_action "OPTION" "AI_CONFIGS" "$install_ai"
 
-echo "=== Installing Tool-Specific Configurations ==="
-echo ""
-backup_and_link "$DOTFILES_DIR/.claude" "$CLAUDE_DIR" ".claude (Claude Code)"
-backup_and_link "$DOTFILES_DIR/.copilot" "$COPILOT_DIR" ".copilot (GitHub Copilot)"
-backup_and_link "$DOTFILES_DIR/.gemini" "$GEMINI_DIR" ".gemini (Google Gemini)"
-backup_and_link "$DOTFILES_DIR/.cursor" "$CURSOR_DIR" ".cursor (Cursor IDE)"
-# Symlink agents into .claude for backward compatibility
-if [ -L "$CLAUDE_DIR" ] || [ -d "$CLAUDE_DIR" ]; then
-    backup_and_link "$AI_DIR/5_agents" "$CLAUDE_DIR/agents" ".claude/agents"
-    backup_and_link "$AI_DIR/3_commands" "$CLAUDE_DIR/commands" ".claude/commands"
+if [[ "$install_ai" =~ ^[Yy]$ ]]; then
+    echo ""
+    echo "=== Installing Agent-Agnostic AI Core ==="
+    echo ""
+    backup_and_link "$DOTFILES_DIR/.ai" "$AI_DIR" ".ai (agent-agnostic core)"
+    echo ""
+
+    echo "=== Installing Tool-Specific Configurations ==="
+    echo ""
+    backup_and_link "$DOTFILES_DIR/.claude" "$CLAUDE_DIR" ".claude (Claude Code)"
+    backup_and_link "$DOTFILES_DIR/.copilot" "$COPILOT_DIR" ".copilot (GitHub Copilot)"
+    backup_and_link "$DOTFILES_DIR/.gemini" "$GEMINI_DIR" ".gemini (Google Gemini)"
+    backup_and_link "$DOTFILES_DIR/.cursor" "$CURSOR_DIR" ".cursor (Cursor IDE)"
+    # Symlink agents into .claude for backward compatibility
+    if [ -L "$CLAUDE_DIR" ] || [ -d "$CLAUDE_DIR" ]; then
+        backup_and_link "$AI_DIR/5_agents" "$CLAUDE_DIR/agents" ".claude/agents"
+        backup_and_link "$AI_DIR/3_commands" "$CLAUDE_DIR/commands" ".claude/commands"
+    fi
+    echo ""
+else
+    echo "⏭️  Skipping AI configurations"
+    echo ""
 fi
-echo ""
 
 echo "=== Installing Developer Tools ==="
 echo ""
@@ -197,58 +247,69 @@ else
 fi
 
 echo ""
+read -r -p "🐚 Install Zsh configurations (Oh My Zsh, Powerlevel10k, .zshrc)? [Y/n]: " install_zsh
+install_zsh=${install_zsh:-Y}
+log_action "OPTION" "ZSH_CONFIGS" "$install_zsh"
 
-echo "=== Installing Oh My Zsh ==="
-echo ""
-if [ ! -d "$HOME/.oh-my-zsh" ]; then
-    echo "📥 Installing Oh My Zsh..."
-    RUNZSH=no KEEP_ZSHRC=yes CHSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" || true
-    echo "   ✓ Oh My Zsh installed"
-else
-    echo "ℹ️  Oh My Zsh already installed"
-fi
-echo ""
+if [[ "$install_zsh" =~ ^[Yy]$ ]]; then
+    echo ""
+    echo "=== Installing Oh My Zsh ==="
+    echo ""
+    if [ ! -d "$HOME/.oh-my-zsh" ]; then
+        echo "📥 Installing Oh My Zsh..."
+        RUNZSH=no KEEP_ZSHRC=yes CHSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" || true
+        echo "   ✓ Oh My Zsh installed"
+    else
+        echo "ℹ️  Oh My Zsh already installed"
+    fi
+    echo ""
 
-echo "=== Installing Powerlevel10k ==="
-echo ""
+    echo "=== Installing Powerlevel10k ==="
+    echo ""
 
-# Check if Powerlevel10k is already installed
-if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k" ]; then
-    echo "📥 Cloning Powerlevel10k theme..."
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k" || true
-    echo "   ✓ Powerlevel10k installed"
-else
-    echo "ℹ️  Powerlevel10k already installed"
-fi
-echo ""
+    # Check if Powerlevel10k is already installed
+    if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k" ]; then
+        echo "📥 Cloning Powerlevel10k theme..."
+        git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k" || true
+        echo "   ✓ Powerlevel10k installed"
+    else
+        echo "ℹ️  Powerlevel10k already installed"
+    fi
+    echo ""
 
-echo "=== Installing Shell Configuration ==="
-echo ""
+    echo "=== Installing Shell Configuration ==="
+    echo ""
 
-# Generate zshrc from template
-if [ -f "$DOTFILES_DIR/zshrc.template" ]; then
-    # Backup existing .zshrc if it exists
-    if [ -e "$HOME/.zshrc" ] || [ -L "$HOME/.zshrc" ]; then
-        backup_file=$(mktemp "${HOME}/.zshrc.backup.$(date +%Y%m%d_%H%M%S).XXXXXX")
-        mv "$HOME/.zshrc" "$backup_file"
-        echo "📦 Backing up existing .zshrc to $backup_file"
+    # Generate zshrc from template
+    if [ -f "$DOTFILES_DIR/zshrc.template" ]; then
+        # Backup existing .zshrc if it exists
+        if [ -e "$HOME/.zshrc" ] || [ -L "$HOME/.zshrc" ]; then
+            backup_file=$(mktemp "${HOME}/.zshrc.backup.$(date +%Y%m%d_%H%M%S).XXXXXX")
+            mv "$HOME/.zshrc" "$backup_file"
+            echo "📦 Backing up existing .zshrc to $backup_file"
+            log_action "BACKUP" "$backup_file"
+        fi
+
+        # Copy template to ~/.zshrc (not symlink, so we can modify it)
+        cp "$DOTFILES_DIR/zshrc.template" "$HOME/.zshrc"
+        log_action "FILE" "$HOME/.zshrc"
+        echo "🔗 Created .zshrc from template"
+        echo "   📝 Using modular zshrc template"
+    else
+        # Fallback to old zshrc if template doesn't exist
+        backup_and_link "$DOTFILES_DIR/zshrc" "$HOME/.zshrc" "zshrc"
+        echo "   ⚠️  Using legacy zshrc (consider migrating to zshrc.template)"
     fi
 
-    # Copy template to ~/.zshrc (not symlink, so we can modify it)
-    cp "$DOTFILES_DIR/zshrc.template" "$HOME/.zshrc"
-    echo "🔗 Created .zshrc from template"
-    echo "   📝 Using modular zshrc template"
+    # Symlink plugin configuration
+    if [ -f "$DOTFILES_DIR/zsh_plugins.txt" ]; then
+        backup_and_link "$DOTFILES_DIR/zsh_plugins.txt" "$HOME/.zsh_plugins.txt" "zsh_plugins.txt"
+    fi
 else
-    # Fallback to old zshrc if template doesn't exist
-    backup_and_link "$DOTFILES_DIR/zshrc" "$HOME/.zshrc" "zshrc"
-    echo "   ⚠️  Using legacy zshrc (consider migrating to zshrc.template)"
+    echo "⏭️  Skipping Zsh configurations"
 fi
 
-# Symlink plugin configuration
-if [ -f "$DOTFILES_DIR/zsh_plugins.txt" ]; then
-    backup_and_link "$DOTFILES_DIR/zsh_plugins.txt" "$HOME/.zsh_plugins.txt" "zsh_plugins.txt"
-fi
-
+echo ""
 backup_and_link "$DOTFILES_DIR/gitignore_global" "$HOME/.gitignore_global" "gitignore_global"
 
 # Check if gitconfig exists
@@ -284,6 +345,7 @@ if [ ! -f "$HOME/.gitconfig" ]; then
 
     # Copy the template to ~/.gitconfig
     cp "$DOTFILES_DIR/gitconfig.template" "$HOME/.gitconfig"
+    log_action "FILE" "$HOME/.gitconfig"
 
     # Set the user name and email
     git config --global user.name "$git_name"
@@ -381,12 +443,14 @@ if [[ "$install_java" =~ ^[Yy]$ ]]; then
         [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
         echo "   ✓ SDKMAN installed"
 
-        # Add SDKMAN configuration to zshrc
-        sdkman_config="# SDKMAN Configuration
+        # Add SDKMAN configuration to zshrc (only if zsh configs were installed)
+        if [[ "$install_zsh" =~ ^[Yy]$ ]]; then
+            sdkman_config="# SDKMAN Configuration
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR=\"\$HOME/.sdkman\"
 [[ -s \"\$HOME/.sdkman/bin/sdkman-init.sh\" ]] && source \"\$HOME/.sdkman/bin/sdkman-init.sh\""
-        add_tool_config "SDKMAN Configuration" "$sdkman_config"
+            add_tool_config "SDKMAN Configuration" "$sdkman_config"
+        fi
     else
         echo "ℹ️  SDKMAN already installed"
     fi
@@ -418,11 +482,13 @@ if [[ "$install_node" =~ ^[Yy]$ ]]; then
         export NVM_DIR="$HOME/.nvm"
         mkdir -p "$NVM_DIR"
 
-        # Add NVM configuration to zshrc
-        nvm_config="# NVM Configuration
+        # Add NVM configuration to zshrc (only if zsh configs were installed)
+        if [[ "$install_zsh" =~ ^[Yy]$ ]]; then
+            nvm_config="# NVM Configuration
 export NVM_DIR=\"\$HOME/.nvm\"
 [ -s \"\$(brew --prefix)/opt/nvm/nvm.sh\" ] && source \"\$(brew --prefix)/opt/nvm/nvm.sh\""
-        add_tool_config "NVM Configuration" "$nvm_config"
+            add_tool_config "NVM Configuration" "$nvm_config"
+        fi
 
         # Source nvm for current session
         # shellcheck disable=SC1091
@@ -465,18 +531,20 @@ if [ -f "$DOTFILES_DIR/npm_packages.txt" ] && command -v npm &> /dev/null; then
     fi
 fi
 
-# Optional: Install Zsh plugins
-echo ""
-read -r -p "🎨 Install zsh-syntax-highlighting and zsh-autosuggestions? [y/N]: " install_zsh_plugins
-if [[ "$install_zsh_plugins" =~ ^[Yy]$ ]]; then
-    echo "📥 Installing zsh plugins..."
-    brew install zsh-syntax-highlighting zsh-autosuggestions || true
+# Optional: Install Zsh plugins (only if zsh configs were installed)
+if [[ "$install_zsh" =~ ^[Yy]$ ]]; then
+    echo ""
+    read -r -p "🎨 Install zsh-syntax-highlighting and zsh-autosuggestions? [y/N]: " install_zsh_plugins
+    if [[ "$install_zsh_plugins" =~ ^[Yy]$ ]]; then
+        echo "📥 Installing zsh plugins..."
+        brew install zsh-syntax-highlighting zsh-autosuggestions || true
 
-    # Add zsh plugins configuration to zshrc
-    zsh_plugins_config="# Zsh Plugins
+        # Add zsh plugins configuration to zshrc
+        zsh_plugins_config="# Zsh Plugins
 source \$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source \$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
-    add_tool_config "Zsh Plugins" "$zsh_plugins_config"
+        add_tool_config "Zsh Plugins" "$zsh_plugins_config"
+    fi
 fi
 
 # Detect and configure already-installed tools
@@ -484,8 +552,8 @@ echo ""
 echo "=== Detecting Installed Tools ==="
 echo ""
 
-# Check for Docker/Colima
-if command -v docker &>/dev/null && command -v colima &>/dev/null; then
+# Check for Docker/Colima (only add to zshrc if zsh configs were installed)
+if [[ "$install_zsh" =~ ^[Yy]$ ]] && command -v docker &>/dev/null && command -v colima &>/dev/null; then
     echo "🐳 Docker and Colima detected"
 
     # Always add basic Docker/Colima config
@@ -507,16 +575,16 @@ fi"
     add_tool_config "Docker/Colima Configuration" "$docker_colima_config"
 fi
 
-# Check for NVM
-if [ -d "$HOME/.nvm" ] || command -v nvm &>/dev/null; then
+# Check for NVM (only add to zshrc if zsh configs were installed)
+if [[ "$install_zsh" =~ ^[Yy]$ ]] && { [ -d "$HOME/.nvm" ] || command -v nvm &>/dev/null; }; then
     nvm_config="# NVM Configuration
 export NVM_DIR=\"\$HOME/.nvm\"
 [ -s \"\$(brew --prefix)/opt/nvm/nvm.sh\" ] && source \"\$(brew --prefix)/opt/nvm/nvm.sh\""
     add_tool_config "NVM Configuration" "$nvm_config"
 fi
 
-# Check for SDKMAN
-if [ -d "$HOME/.sdkman" ]; then
+# Check for SDKMAN (only add to zshrc if zsh configs were installed)
+if [[ "$install_zsh" =~ ^[Yy]$ ]] && [ -d "$HOME/.sdkman" ]; then
     sdkman_config="# SDKMAN Configuration
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR=\"\$HOME/.sdkman\"
@@ -524,8 +592,8 @@ export SDKMAN_DIR=\"\$HOME/.sdkman\"
     add_tool_config "SDKMAN Configuration" "$sdkman_config"
 fi
 
-# Check for zsh plugins
-if [ -f "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] 2>/dev/null; then
+# Check for zsh plugins (only add to zshrc if zsh configs were installed)
+if [[ "$install_zsh" =~ ^[Yy]$ ]] && [ -f "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] 2>/dev/null; then
     zsh_plugins_config="# Zsh Plugins
 source \$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
@@ -584,50 +652,64 @@ fi
 echo ""
 
 # Verify installation
-if [ -L "$AI_DIR" ] && [ -d "$AI_DIR" ] && [ -L "$CLAUDE_DIR" ] && [ -d "$CLAUDE_DIR" ]; then
-    echo "✅ Installation complete!"
-    echo ""
-    echo "🎯 Agent-Agnostic AI Framework Installed:"
-    echo "   ~/.ai/            - Shared core (works with all AI tools)"
-    echo "   ~/.claude/        - Claude Code configuration"
-    echo "   ~/.copilot/       - GitHub Copilot configuration"
-    echo "   ~/.gemini/        - Google Gemini configuration"
-    echo "   ~/.cursor/        - Cursor IDE configuration"
-    echo ""
-    echo "📚 Available agents (work with all AI tools):"
-    echo "   🏗️ Constructor Conway         - Bootstrap Spring Boot projects"
-    echo "   🌉 Valdis the Translator      - Jira to technical specs"
-    echo "   🦖 Rex the Red-Green-Refactor - TDD implementation"
-    echo "   ⚖️ Judge Dredd Code           - Code reviews"
-    echo "   🔬 Dr. Debugsworth McFixit    - Test failure diagnosis"
-    echo "   🏛️ Architect Anya             - AI dotfiles architecture"
-    echo ""
-    echo "🚀 Quick start with Claude Code:"
-    echo "   1. Open Claude Code CLI in any project"
-    echo "   2. Try: 'Bootstrap a Spring Boot project called \"demo\" with package \"com.example.demo\"'"
-    echo ""
-    echo "💡 Quick start with other tools:"
-    echo "   - GitHub Copilot: Opens instructions from ~/.copilot/instructions.md"
-    echo "   - Cursor: Opens rules from ~/.cursor/rules.md"
-    echo "   - Gemini: Opens config from ~/.gemini/GEMINI.md"
-    echo ""
-    echo "📋 Bootstrap project documentation:"
-    echo "   \"Bootstrap documentation for ~/Projects/my-project\" → Archivist Aurora"
-    echo "   (Generates constitution.md, AGENTS.md, guidelines.md)"
-    echo ""
-    echo "📖 For more info: cat ~/Projects/dotfiles/README.md"
-    echo ""
+echo "✅ Installation complete!"
+echo ""
+echo "📋 Installation log saved to: $LOG_FILE"
+echo "   Use this log with uninstall.sh to revert changes"
+echo ""
 
-    # Report failed installations if any
-    if [ ${#FAILED_INSTALLS[@]} -gt 0 ]; then
-        echo "⚠️  Warning: Some installations failed:"
-        for item in "${FAILED_INSTALLS[@]}"; do
-            echo "   ❌ $item"
-        done
+if [[ "$install_ai" =~ ^[Yy]$ ]]; then
+    if [ -L "$AI_DIR" ] && [ -d "$AI_DIR" ] && [ -L "$CLAUDE_DIR" ] && [ -d "$CLAUDE_DIR" ]; then
+        echo "🎯 Agent-Agnostic AI Framework Installed:"
+        echo "   ~/.ai/            - Shared core (works with all AI tools)"
+        echo "   ~/.claude/        - Claude Code configuration"
+        echo "   ~/.copilot/       - GitHub Copilot configuration"
+        echo "   ~/.gemini/        - Google Gemini configuration"
+        echo "   ~/.cursor/        - Cursor IDE configuration"
         echo ""
-        echo "💡 You can retry failed installations manually or re-run this script."
+        echo "📚 Available agents (work with all AI tools):"
+        echo "   🏗️ Constructor Conway         - Bootstrap Spring Boot projects"
+        echo "   🌉 Valdis the Translator      - Jira to technical specs"
+        echo "   🦖 Rex the Red-Green-Refactor - TDD implementation"
+        echo "   ⚖️ Judge Dredd Code           - Code reviews"
+        echo "   🔬 Dr. Debugsworth McFixit    - Test failure diagnosis"
+        echo "   🏛️ Architect Anya             - AI dotfiles architecture"
+        echo ""
+        echo "🚀 Quick start with Claude Code:"
+        echo "   1. Open Claude Code CLI in any project"
+        echo "   2. Try: 'Bootstrap a Spring Boot project called \"demo\" with package \"com.example.demo\"'"
+        echo ""
+        echo "💡 Quick start with other tools:"
+        echo "   - GitHub Copilot: Opens instructions from ~/.copilot/instructions.md"
+        echo "   - Cursor: Opens rules from ~/.cursor/rules.md"
+        echo "   - Gemini: Opens config from ~/.gemini/GEMINI.md"
+        echo ""
+        echo "📋 Bootstrap project documentation:"
+        echo "   \"Bootstrap documentation for ~/Projects/my-project\" → Archivist Aurora"
+        echo "   (Generates constitution.md, AGENTS.md, guidelines.md)"
+        echo ""
+    else
+        echo "⚠️  Warning: AI configuration symlinks not created correctly"
     fi
-else
-    echo "❌ Installation failed - symlinks not created correctly"
-    exit 1
+fi
+
+if [[ "$install_zsh" =~ ^[Yy]$ ]]; then
+    echo "🐚 Zsh Configuration Installed:"
+    echo "   ~/.zshrc          - Shell configuration"
+    echo "   ~/.oh-my-zsh/     - Oh My Zsh framework"
+    echo "   Powerlevel10k     - Terminal theme"
+    echo ""
+fi
+
+echo "📖 For more info: cat ~/Projects/dotfiles/README.md"
+echo ""
+
+# Report failed installations if any
+if [ ${#FAILED_INSTALLS[@]} -gt 0 ]; then
+    echo "⚠️  Warning: Some installations failed:"
+    for item in "${FAILED_INSTALLS[@]}"; do
+        echo "   ❌ $item"
+    done
+    echo ""
+    echo "💡 You can retry failed installations manually or re-run this script."
 fi

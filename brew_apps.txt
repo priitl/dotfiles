@@ -1,5 +1,6 @@
 # Core development tools
 git
+gh
 docker
 docker-compose
 colima

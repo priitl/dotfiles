@@ -8,7 +8,7 @@ User input:
 
 $ARGUMENTS
 
-Goal: Diagnose failures (test failures, build errors, linting issues, review feedback) and systematically fix them while maintaining spec compliance and code quality. This command runs AFTER `/implement` or `/review` when issues are detected.
+Goal: Diagnose failures (test failures, build errors, linting issues, review feedback) and systematically fix them while maintaining spec compliance and code quality. This command runs AFTER `/implement` or `/spec-review` when issues are detected.
 
 Constitution Authority: The project constitution (`constitution.md`) is **non-negotiable**. Fixes MUST maintain constitutional compliance. Never compromise on architecture, testing rigor, or security to "make it work."
 
@@ -28,7 +28,7 @@ Execution steps:
    - **Test failures**: Run tests, capture output, identify failing tests
    - **Build errors**: Run build, capture compilation/linking errors
    - **Linting issues**: Run linters (checkstyle, spotbugs, eslint), capture violations
-   - **Review feedback**: If `/review` was run, parse review report for critical/major issues
+   - **Review feedback**: If `/spec-review` was run, parse review report for critical/major issues
    - **Runtime errors**: If provided, analyze stack traces and error logs
 
 4. Analyze root cause:
@@ -97,7 +97,7 @@ Execution steps:
 9. Handle unfixable issues:
    - If issue cannot be fixed without violating constitution: STOP and report
    - If issue requires spec/plan changes: Document needed changes, ask user
-   - If issue reveals architectural flaw: Escalate to `/review` or `/analyze`
+   - If issue reveals architectural flaw: Escalate to `/spec-review` or `/analyze`
    - If blocked by external dependency: Document blocker, suggest workaround
 
 10. Report fix results:
@@ -105,7 +105,7 @@ Execution steps:
     - **Remaining issues**: Any issues that could not be fixed (with reasons)
     - **Changes made**: Summary of modified files and changes
     - **Verification status**: Test results, build status, linter status
-    - **Next steps**: Recommendations (re-run `/review`, continue with merge, etc.)
+    - **Next steps**: Recommendations (re-run `/spec-review`, continue with merge, etc.)
 
 11. Update tasks.md (if applicable):
     - If fixing issues from incomplete implementation, mark tasks complete

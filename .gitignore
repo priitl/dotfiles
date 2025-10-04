@@ -12,8 +12,9 @@
 *.swo
 *~
 
-# Backup files created by install.sh
+# Backup files and installation log created by install.sh
 *.backup.*
+.dotfiles_install.log
 
 # Claude
 .claude/history.jsonl
@@ -23,6 +24,7 @@
 .claude/shell-snapshots/
 .claude/statsig/
 .claude/todos/
+.claude/settings.json
 .claude/settings.local.json
 .claude/agents
 .claude/commands

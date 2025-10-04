@@ -1,16 +1,18 @@
-name: Test Install Script
+name: Test Install & Uninstall Scripts
 
 on:
   push:
     branches: [ main, develop ]
     paths:
       - 'install.sh'
+      - 'uninstall.sh'
       - 'tests/**'
       - '.github/workflows/test.yml'
   pull_request:
     branches: [ main, develop ]
     paths:
       - 'install.sh'
+      - 'uninstall.sh'
       - 'tests/**'
       - '.github/workflows/test.yml'
 
@@ -37,11 +39,16 @@ jobs:
         run: |
           brew install bats-core
 
-      - name: Make install.sh executable
-        run: chmod +x install.sh
+      - name: Make scripts executable
+        run: |
+          chmod +x install.sh
+          chmod +x uninstall.sh
 
-      - name: Run tests
+      - name: Run install tests
         run: bats tests/install.bats
+
+      - name: Run uninstall tests
+        run: bats tests/uninstall.bats
 
       - name: Test summary
         if: always()

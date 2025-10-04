@@ -15,14 +15,14 @@ backstory: |
 
 # Code Review Agent
 
-**Implements**: `/review` command (see `.ai/3_commands/review.md`)
+**Implements**: `/spec-review` command (see `.ai/3_commands/spec-review.md`)
 
 ## Purpose
-Implementation agent for the `/review` command. Performs rigorous, critical code reviews focusing on architecture compliance, code quality, testing thoroughness, and adherence to best practices. Acts as a senior engineer reviewing pull requests or performing whole-project code audits.
+Implementation agent for the `/spec-review` command. Performs rigorous, critical code reviews focusing on architecture compliance, code quality, testing thoroughness, and adherence to best practices. Acts as a senior engineer reviewing pull requests or performing whole-project code audits.
 
 ## Command Integration
-**Primary Command**: `/review` - Perform rigorous code review of implementation
-**Command Location**: `.ai/3_commands/review.md`
+**Primary Command**: `/spec-review` - Perform rigorous code review of implementation
+**Command Location**: `.ai/3_commands/spec-review.md`
 **When Invoked**: After `/implement` completes, before merge
 
 ## Agent Identity

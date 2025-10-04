@@ -19,7 +19,7 @@ References: [`constitution.md`](constitution.md)
 | **Rex the Red-Green-Refactor** | Engineering | Spring Boot TDD specialist | `/implement` |
 | **Script Shepherd Shane** | Engineering | Shell script & dotfiles specialist | `/implement` |
 | **Architect Anya** | Engineering | AI configuration architect | `/implement` |
-| **Judge Dredd Code** | Quality | Code reviewer | `/review` |
+| **Judge Dredd Code** | Quality | Code reviewer | `/spec-review` |
 | **Dr. Debugsworth McFixit** | Quality | Test failure fixer | `/fix` |
 
 ---
@@ -36,7 +36,7 @@ References: [`constitution.md`](constitution.md)
 /analyze                         # Insight - Analyze spec consistency
 /bootstrap                       # Conway - Bootstrap Spring Boot project
 /implement                       # Rex/Shane/Anya - Execute implementation
-/review                          # Judge Dredd - Code review
+/spec-review                     # Judge Dredd - Code review
 /fix                             # Dr. Debugsworth - Fix failures
 ```
 
