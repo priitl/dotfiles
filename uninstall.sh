@@ -189,11 +189,7 @@ if [[ "$remove_symlinks" =~ ^[Yy]$ ]] || [[ "$remove_files" =~ ^[Yy]$ ]]; then
     remove_log=${remove_log:-N}
 
     if [[ "$remove_log" =~ ^[Yy]$ ]]; then
-        if rm "$LOG_FILE"; then
-            echo "🗑️  Installation log removed: $LOG_FILE"
-        else
-            echo "❌ Failed to remove log file"
-        fi
+        rm "$LOG_FILE" && echo "🗑️  Installation log removed: $LOG_FILE" || echo "❌ Failed to remove log file"
     else
         echo "ℹ️  Keeping installation log: $LOG_FILE"
         echo "   You can run this uninstaller again later"
