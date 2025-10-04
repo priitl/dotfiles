@@ -77,11 +77,11 @@ if [[ "$remove_symlinks" =~ ^[Yy]$ ]]; then
             if [ -L "$target" ]; then
                 echo "🔗 Removing symlink: $target"
                 if rm "$target"; then
-                    ((REMOVED_COUNT++))
+                    REMOVED_COUNT=$((REMOVED_COUNT + 1))
                 else
                     echo "   ❌ Failed to remove"
                     FAILED_ITEMS+=("$target")
-                    ((FAILED_COUNT++))
+                    FAILED_COUNT=$((FAILED_COUNT + 1))
                 fi
             elif [ -e "$target" ]; then
                 echo "⚠️  Skipping $target (not a symlink)"
@@ -106,11 +106,11 @@ if [[ "$remove_files" =~ ^[Yy]$ ]]; then
             if [ -f "$target" ]; then
                 echo "📄 Removing file: $target"
                 if rm "$target"; then
-                    ((REMOVED_COUNT++))
+                    REMOVED_COUNT=$((REMOVED_COUNT + 1))
                 else
                     echo "   ❌ Failed to remove"
                     FAILED_ITEMS+=("$target")
-                    ((FAILED_COUNT++))
+                    FAILED_COUNT=$((FAILED_COUNT + 1))
                 fi
             else
                 echo "ℹ️  Already removed: $target"
@@ -150,11 +150,11 @@ if [[ "${restore_backups:-N}" =~ ^[Yy]$ ]]; then
 
                     if mv "$backup_file" "$original"; then
                         echo "   ✓ Restored"
-                        ((RESTORED_COUNT++))
+                        RESTORED_COUNT=$((RESTORED_COUNT + 1))
                     else
                         echo "   ❌ Failed to restore"
                         FAILED_ITEMS+=("$backup_file")
-                        ((FAILED_COUNT++))
+                        FAILED_COUNT=$((FAILED_COUNT + 1))
                     fi
                 fi
             else
@@ -189,11 +189,7 @@ if [[ "$remove_symlinks" =~ ^[Yy]$ ]] || [[ "$remove_files" =~ ^[Yy]$ ]]; then
     remove_log=${remove_log:-N}
 
     if [[ "$remove_log" =~ ^[Yy]$ ]]; then
-        echo "DEBUG: Attempting to remove log file: $LOG_FILE"
-        ls -la "$LOG_FILE" 2>&1 || echo "DEBUG: Log file doesn't exist before rm"
         rm -f "$LOG_FILE"
-        echo "DEBUG: rm command completed with exit code: $?"
-        ls -la "$LOG_FILE" 2>&1 || echo "DEBUG: Log file doesn't exist after rm"
         echo "🗑️  Installation log removed: $LOG_FILE"
     else
         echo "ℹ️  Keeping installation log: $LOG_FILE"
