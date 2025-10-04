@@ -189,12 +189,12 @@ if [[ "$remove_symlinks" =~ ^[Yy]$ ]] || [[ "$remove_files" =~ ^[Yy]$ ]]; then
     remove_log=${remove_log:-N}
 
     if [[ "$remove_log" =~ ^[Yy]$ ]]; then
-        if rm -f "$LOG_FILE"; then
-            echo "🗑️  Installation log removed: $LOG_FILE"
-        else
-            echo "❌ Failed to remove log file"
-            exit 1
-        fi
+        echo "DEBUG: Attempting to remove log file: $LOG_FILE"
+        ls -la "$LOG_FILE" 2>&1 || echo "DEBUG: Log file doesn't exist before rm"
+        rm -f "$LOG_FILE"
+        echo "DEBUG: rm command completed with exit code: $?"
+        ls -la "$LOG_FILE" 2>&1 || echo "DEBUG: Log file doesn't exist after rm"
+        echo "🗑️  Installation log removed: $LOG_FILE"
     else
         echo "ℹ️  Keeping installation log: $LOG_FILE"
         echo "   You can run this uninstaller again later"
