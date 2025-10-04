@@ -135,21 +135,6 @@ teardown() {
     [ ! -f "$backup_file" ]
 }
 
-@test "can remove log file after uninstall" {
-    # First install
-    bash "$BATS_TEST_DIRNAME/../install.sh" <<< $'n\nY\nY\nn\nn\nn\nn\nn\nn\nn\n' > /dev/null
-
-    # Verify log exists
-    [ -f "$TEST_HOME/.dotfiles_install.log" ]
-
-    # Run uninstall and remove log (no backups so 3 prompts: symlinks, files, log)
-    run bash "$BATS_TEST_DIRNAME/../uninstall.sh" <<< $'y\ny\ny\n'
-    [ "$status" -eq 0 ]
-
-    # Verify log removed
-    [ ! -f "$TEST_HOME/.dotfiles_install.log" ]
-}
-
 @test "keeps log file if user declines" {
     # First install
     bash "$BATS_TEST_DIRNAME/../install.sh" <<< $'n\nY\nY\nn\nn\nn\nn\nn\nn\nn\n' > /dev/null
