@@ -31,36 +31,38 @@ AI configuration shall be tool-agnostic, allowing reuse across different AI plat
 
 All shared logic MUST reside in the `.ai/` directory with the following structure:
 
-- `0_core/` - Personality, standards, decision framework
-- `1_workflows/` - TDD, git, pre-commit, spec-driven workflows
-- `2_templates/` - Specification templates (spec.md, plan.md, tasks.md)
-- `3_commands/` - Spec-kit workflow commands
-- `4_tech_stacks/` - Technology-specific patterns
-- `5_agents/` - Specialized agents organized by workflow phase
+- `1_templates/` - Specification templates (spec.md, plan.md, tasks.md)
+- `2_commands/` - Spec-kit commands and tools
+  - `workflows/` - Multi-agent workflow orchestration (19 workflows)
+  - `[tools]` - Single-purpose tools (48 tools)
+- `3_tech_stacks/` - Technology-specific patterns
+- `4_agents/` - Specialized agents organized by workflow phase (28 agents)
 
 ### Section 1.2: Tool Configuration
 
 Tool-specific configurations (`.claude/`, `.copilot/`, `.gemini/`, `.cursor/`) MUST:
 
-- Import from shared core via `@import` directives
-- Contain ONLY tool-specific features
-- NEVER duplicate shared logic
+- Be self-contained (no imports)
+- Contain all necessary standards and workflows
+- Maintain consistency with this constitution
+- Reference shared agents and commands as needed
 
 ### Section 1.3: Agent Definitions
 
 Agent definitions MUST:
 
 - Be tool-agnostic and work with any AI platform
-- Reference shared workflows from `.ai/1_workflows/`
+- Reference workflows from `.ai/2_commands/workflows/`
 - Follow the Spec → Plan → Build → Verify workflow
 
 **Rationale:** Reduces maintenance burden, ensures consistency, prevents configuration drift, enables rapid adoption of new AI tools.
 
 **Non-negotiable:**
 
-- NEVER duplicate shared logic in tool-specific configs
-- ALWAYS prefer extending shared core over creating tool-specific variations
+- Tool configs MUST be self-contained (no imports)
+- ALWAYS maintain consistency with constitution principles
 - Configuration changes MUST work across all supported AI tools
+- NEVER duplicate agent definitions across tools
 
 ---
 
@@ -265,27 +267,31 @@ All scripts MUST:
 ```
 dotfiles/
 ├── .ai/                     # Agent-agnostic core (shared by all tools)
-│   ├── 0_core/             # Personality, standards, decision framework
-│   ├── 1_workflows/        # TDD, git, pre-commit, spec-driven
-│   ├── 2_templates/        # Spec templates (spec.md, plan.md, tasks.md)
-│   ├── 3_commands/         # Spec-kit workflow commands
-│   ├── 4_tech_stacks/      # Spring, dotfiles, AI config patterns
-│   ├── 5_agents/           # Specialized agents by workflow phase
-│   │   ├── 0_speccing/     # Requirements → Specs
-│   │   ├── 1_planning/     # Specs → Plans
-│   │   ├── 2_engineering/  # Plans → Code
-│   │   └── 3_quality/      # Code → Review/Fix
-├── .claude/                # Claude-specific wrapper (imports .ai/)
-├── .copilot/               # Copilot-specific wrapper (imports .ai/)
-├── .gemini/                # Gemini-specific wrapper (imports .ai/)
-├── .cursor/                # Cursor-specific wrapper (imports .ai/)
+│   ├── 1_templates/        # Spec templates (spec.md, plan.md, tasks.md)
+│   ├── 2_commands/         # Spec-kit commands and tools (67 total)
+│   │   ├── workflows/      # Multi-agent orchestration (19 workflows)
+│   │   └── [tools]         # Single-purpose tools (48 tools)
+│   ├── 3_tech_stacks/      # Spring, dotfiles, AI config patterns
+│   ├── 4_agents/           # Specialized agents by category (28 agents)
+│   │   ├── speccing/       # Requirements → Specs (empty)
+│   │   ├── planning/       # Specs → Plans (empty)
+│   │   ├── engineering/    # Language specialists (8 agents)
+│   │   ├── quality/        # Testing, debugging, security (6 agents)
+│   │   ├── infrastructure/ # DevOps, cloud, containers (6 agents)
+│   │   ├── data/           # Data engineering, ML, analytics (5 agents)
+│   │   └── business/       # Content, support, business analysis (3 agents)
+├── .claude/                # Claude-specific config (self-contained)
+├── .copilot/               # Copilot-specific config (self-contained)
+├── .gemini/                # Gemini-specific config (self-contained)
+├── .cursor/                # Cursor-specific config (self-contained)
+├── .archive/               # Archived/deprecated files (gitignored)
 ├── install.sh              # Main installation script
 ├── tests/                  # BATS tests
 ├── constitution.md         # This document (principles + technical guidelines)
 └── AGENTS.md               # Project instructions for AI tools
 ```
 
-**Rationale:** Clear separation between shared core and tool-specific wrappers enables consistency while allowing tool-specific optimizations.
+**Rationale:** Shared agents and commands enable consistency across tools, while self-contained tool configs allow tool-specific optimizations without import dependencies.
 
 ## Template-Based Configuration
 

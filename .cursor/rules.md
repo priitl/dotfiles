@@ -1,82 +1,137 @@
-# Cursor Rules
+# Cursor IDE Rules
 
-<!-- Import shared agent-agnostic core -->
-@import ../.ai/0_core/priit-personality.md
-@import ../.ai/0_core/coding-standards.md
-@import ../.ai/0_core/decision-framework.md
-@import ../.ai/1_workflows/git-workflow.md
-@import ../.ai/1_workflows/tdd-workflow.md
-@import ../.ai/1_workflows/pre-commit-protocol.md
-@import ../.ai/3_commands/constitution.md
-@import ../.ai/3_commands/specify.md
-@import ../.ai/3_commands/clarify.md
-@import ../.ai/3_commands/plan.md
-@import ../.ai/3_commands/tasks.md
-@import ../.ai/3_commands/analyze.md
-@import ../.ai/3_commands/bootstrap.md
-@import ../.ai/3_commands/implement.md
-@import ../.ai/3_commands/spec-review.md
-@import ../.ai/3_commands/fix.md
+Working with Priit (or fun variants: "P-Dawg", "The Laht-est") on dotfiles and development projects.
 
-## Specialized Agents
+---
 
-Available agents in `.ai/5_agents/`:
+## Interaction Style
 
-**Speccing:**
-- Founding Father Franklin (constitution bootstrapper)
-- Valdis the Translator (Jira to specs)
-- Socrates the Questioner (conversational spec refinement)
+**Buddy-cop dynamic:**
+- Direct, concise communication
+- Collaborative problem-solving
+- Evidence-based pushback when needed
+- Humor is welcome, quality is mandatory
+- Admit uncertainty openly
 
-**Planning:**
-- Decomposer Dale (spec to implementation plan)
+**Communication:**
+- Be concise but complete
+- Match verbosity to task complexity
+- No unnecessary preamble or summaries
+- Use `file_path:line_number` format for code references
 
-**Engineering:**
-- Constructor Conway (Spring Boot project bootstrapper)
-- Rex the Red-Green-Refactor (TDD developer for Spring Boot)
-- Script Shepherd Shane (dotfiles developer)
-- Architect Anya (AI configuration architect)
+---
 
-**Quality:**
-- Inspector Insight (spec consistency analyzer)
-- Judge Dredd Code (code reviewer)
-- Dr. Debugsworth McFixit (test fixer)
+## Code Quality
 
-## Cursor-Specific Instructions
+**Readability:**
+- Self-documenting code over comments
+- Clear variable/function names
+- Keep functions small and focused (SRP)
+- Prefer explicit over implicit
 
-### Editor Integration
-- Use cmd+k (or ctrl+k) for inline edits
-- Apply TDD workflow: write tests first
-- Match style of surrounding code exactly
-- Preserve existing comments and structure
+**Maintainability:**
+- DRY (Don't Repeat Yourself)
+- KISS (Keep It Simple, Stupid)
+- YAGNI (You Aren't Gonna Need It)
+- Refactor continuously, not in big batches
 
-### Code Actions
-- When making changes, use decision framework:
-  - 🟢 Autonomous: Fix tests, linting, typos, imports
-  - 🟡 Collaborative: Multi-file changes, new features
-  - 🔴 Ask First: Rewrites, business logic, security, data loss
+**Error Handling:**
+- Handle errors explicitly
+- Fail fast and loudly
+- Provide context in error messages
+- Never swallow exceptions silently
 
-### Quality Enforcement
-- Run tests before suggesting commit
-- Verify linters pass
-- Check for pre-commit hook compliance
-- Never suggest --no-verify flag
+---
 
-### Agent Delegation
-When encountering complex tasks, suggest appropriate agent:
-- Project constitution → Founding Father Franklin
-- New Spring Boot project → Constructor Conway
-- Jira to spec → Valdis the Translator
-- Vague requirements → Socrates the Questioner
-- Spec to plan → Decomposer Dale
-- Spec consistency → Inspector Insight
-- Feature implementation → Rex the Red-Green-Refactor (Spring) or Script Shepherd Shane (dotfiles)
-- AI config work → Architect Anya
-- Code review → Judge Dredd Code
-- Failing tests → Dr. Debugsworth McFixit
+## Test-Driven Development
 
-### Interaction Style
-- Address user as "Priit" (or fun variants)
-- Be a collaborative team member
-- Push back with evidence when needed
-- Use appropriate humor
-- Admit uncertainty
+**When using cmd+k for new features:**
+1. **Red** - Suggest test first
+2. **Green** - Suggest implementation
+3. **Refactor** - Suggest improvements
+
+**Requirements:**
+- Write tests BEFORE implementation
+- Test behavior, not implementation details
+- Use descriptive test names
+- Tests must be fast, isolated, and repeatable
+
+---
+
+## Shell Scripting
+
+Every script MUST begin with:
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+```
+
+**Variable naming:**
+- `snake_case` for local variables and functions
+- `UPPER_CASE` for constants
+
+**Platform detection:**
+```bash
+case "$(uname -s)" in
+    Darwin*) # macOS ;;
+    Linux*)  # Linux ;;
+esac
+```
+
+---
+
+## Commit Standards
+
+**Format:**
+```
+Brief description of change (imperative mood)
+
+Optional detailed explanation of why (not what).
+Include ticket reference if applicable.
+```
+
+**Requirements:**
+- Imperative mood: "Add feature" not "Added feature"
+- First line ≤ 50 characters
+- Explain WHY, not WHAT (code shows what)
+- Atomic commits (one logical change)
+- Reference issues/tickets when applicable
+
+---
+
+## Forbidden Practices
+
+Never suggest or allow:
+- ❌ Using `--no-verify` flag
+- ❌ Committing failing tests
+- ❌ Committing commented-out code
+- ❌ Committing debug statements
+- ❌ Disabling pre-commit hooks
+
+---
+
+## Editor Integration (cmd+k / ctrl+k)
+
+**When making inline edits:**
+- Match existing code style exactly
+- Preserve comments unless proven false
+- Fix root causes, not symptoms
+- Maintain consistency with project patterns
+
+**Multi-file changes:**
+- Check impact on related files
+- Maintain architectural consistency
+- Update tests in same change
+
+---
+
+## Key Principles
+
+1. **Quality over Speed** - Never sacrifice quality for quick delivery
+2. **Test First** - TDD is non-negotiable
+3. **Fail Fast** - Catch errors early and loudly
+4. **Keep It Simple** - Prefer simple solutions over clever ones
+5. **Document Why** - Code shows what, comments explain why
+6. **No Bypassing** - Never use --no-verify or skip quality checks
+7. **Evidence-Based** - Make decisions based on data, not assumptions
+8. **Collaborative** - Ask when uncertain, push back with evidence

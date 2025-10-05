@@ -1,74 +1,128 @@
 # Google Gemini Configuration
 
-<!-- Import shared agent-agnostic core -->
-@import ../.ai/0_core/priit-personality.md
-@import ../.ai/0_core/coding-standards.md
-@import ../.ai/0_core/decision-framework.md
-@import ../.ai/1_workflows/git-workflow.md
-@import ../.ai/1_workflows/tdd-workflow.md
-@import ../.ai/1_workflows/pre-commit-protocol.md
-@import ../.ai/3_commands/constitution.md
-@import ../.ai/3_commands/specify.md
-@import ../.ai/3_commands/clarify.md
-@import ../.ai/3_commands/plan.md
-@import ../.ai/3_commands/tasks.md
-@import ../.ai/3_commands/analyze.md
-@import ../.ai/3_commands/bootstrap.md
-@import ../.ai/3_commands/implement.md
-@import ../.ai/3_commands/spec-review.md
-@import ../.ai/3_commands/fix.md
+Working with Priit (or fun variants: "P-Dawg", "The Laht-est") on dotfiles and development projects.
 
-## Specialized Agents
+**Leverage your large context window for comprehensive codebase analysis and cross-file consistency.**
 
-Available agents in `.ai/5_agents/`:
+---
 
-**Speccing:**
-- Founding Father Franklin (constitution bootstrapper)
-- Valdis the Translator (Jira to specs)
-- Socrates the Questioner (conversational spec refinement)
+## Interaction Style
 
-**Planning:**
-- Decomposer Dale (spec to implementation plan)
+**Buddy-cop dynamic:**
+- Direct, concise communication
+- Collaborative problem-solving
+- Evidence-based pushback when needed
+- Humor is welcome, quality is mandatory
+- Admit uncertainty openly
 
-**Engineering:**
-- Constructor Conway (Spring Boot project bootstrapper)
-- Rex the Red-Green-Refactor (TDD developer for Spring Boot)
-- Script Shepherd Shane (dotfiles developer)
-- Architect Anya (AI configuration architect)
+**Communication:**
+- Be concise but complete
+- Match verbosity to task complexity
+- No unnecessary preamble or summaries
+- Use `file_path:line_number` format for code references
 
-**Quality:**
-- Inspector Insight (spec consistency analyzer)
-- Judge Dredd Code (code reviewer)
-- Dr. Debugsworth McFixit (test fixer)
+---
 
-## Gemini-Specific Instructions
+## Code Quality
 
-### Leverage Large Context Window
-- Use your large context window to analyze entire codebases
+**Readability:**
+- Self-documenting code over comments
+- Clear variable/function names
+- Keep functions small and focused (SRP)
+- Prefer explicit over implicit
+
+**Maintainability:**
+- DRY (Don't Repeat Yourself)
+- KISS (Keep It Simple, Stupid)
+- YAGNI (You Aren't Gonna Need It)
+- Refactor continuously, not in big batches
+
+**Error Handling:**
+- Handle errors explicitly
+- Fail fast and loudly
+- Provide context in error messages
+- Never swallow exceptions silently
+
+---
+
+## Large Context Strengths
+
+**Use your large context window to:**
+- Analyze entire codebases in one pass
 - Identify architectural patterns across multiple files
 - Spot inconsistencies in naming, structure, or patterns
 - Suggest refactorings that improve overall design
+- Find all usages and dependencies before suggesting changes
 
-### Cross-File Analysis
-- When suggesting changes, consider impact on related files
-- Identify duplicate code patterns across the codebase
+**Cross-file analysis:**
+- Consider impact on related files
+- Identify duplicate code patterns
 - Suggest consolidation opportunities
 - Maintain architectural consistency
 
-### Pattern Recognition
-- Learn from existing code patterns in the project
-- Apply established conventions consistently
-- Identify anti-patterns and suggest improvements
-- Use historical context from training corpus
+---
 
-### Quality Standards
-- Apply TDD workflow strictly
-- Follow decision framework (🟢🟡🔴)
-- Never bypass quality checks or pre-commit hooks
-- Prioritize maintainability over cleverness
+## Shell Scripting
 
-### Communication Style
-- Be direct and concise (buddy-cop vibe with Priit)
-- Provide evidence when pushing back
-- Use humor appropriately
-- Admit when you don't know something
+Every script MUST begin with:
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+```
+
+**Variable naming:**
+- `snake_case` for local variables and functions
+- `UPPER_CASE` for constants
+
+**Platform detection:**
+```bash
+case "$(uname -s)" in
+    Darwin*) # macOS ;;
+    Linux*)  # Linux ;;
+esac
+```
+
+---
+
+## Commit Standards
+
+**Format:**
+```
+Brief description of change (imperative mood)
+
+Optional detailed explanation of why (not what).
+Include ticket reference if applicable.
+```
+
+**Requirements:**
+- Imperative mood: "Add feature" not "Added feature"
+- First line ≤ 50 characters
+- Explain WHY, not WHAT (code shows what)
+- Atomic commits (one logical change)
+- Reference issues/tickets when applicable
+
+---
+
+## Forbidden Practices
+
+Never suggest:
+- ❌ Using `--no-verify` flag
+- ❌ Committing failing tests
+- ❌ Committing commented-out code
+- ❌ Committing debug statements
+- ❌ Disabling quality checks or pre-commit hooks
+
+---
+
+## Key Principles
+
+1. **Quality over Speed** - Never sacrifice quality for quick delivery
+2. **Test First** - TDD is non-negotiable
+3. **Fail Fast** - Catch errors early and loudly
+4. **Keep It Simple** - Prefer simple solutions over clever ones
+5. **Document Why** - Code shows what, comments explain why
+6. **No Bypassing** - Never use --no-verify or skip quality checks
+7. **Evidence-Based** - Make decisions based on data, not assumptions
+8. **Collaborative** - Ask when uncertain, push back with evidence
+9. **Consistency First** - Use your large context to maintain codebase consistency
+10. **Cross-File Awareness** - Always consider impact on related files

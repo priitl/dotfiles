@@ -5,20 +5,18 @@ Agent-agnostic AI development environment configuration that works with Claude, 
 ## What's Inside
 
 ### 🤖 Agent-Agnostic AI Framework (`.ai/`)
-A shared core that works with **all AI tools** - write once, use everywhere:
-- **Core standards** (`0_core/`) - Personality, coding standards, decision framework, git workflow
-- **Workflows** (`1_workflows/`) - TDD workflow, pre-commit protocol, spec-driven development
-- **Spec templates** (`2_templates/`) - Templates for specifications, plans, and tasks
-- **Commands** (`3_commands/`) - Spec-kit workflow commands (/constitution, /specify, /plan, /implement, /spec-review, /fix, etc.)
-- **Tech stacks** (`4_tech_stacks/`) - Spring Boot, dotfiles, AI configuration patterns
-- **Specialized agents** (`5_agents/`) - 11 expert agents organized by workflow phase
+A shared core that works with **all AI tools** - agents and commands reusable everywhere:
+- **Spec templates** (`1_templates/`) - Templates for specifications, plans, and tasks (7 templates)
+- **Commands** (`2_commands/`) - Spec-kit commands and tools (67 total: 48 tools + 19 workflows)
+- **Tech stacks** (`3_tech_stacks/`) - Spring Boot, dotfiles, AI configuration patterns (3 references)
+- **Specialized agents** (`4_agents/`) - 27 expert agents organized by workflow phase
 
 ### 🛠️ Tool-Specific Configurations
-Lightweight wrappers that import the shared core:
-- **`.claude/`** - Claude Code configuration with Task delegation
-- **`.copilot/`** - GitHub Copilot inline suggestions
-- **`.gemini/`** - Google Gemini large-context analysis
-- **`.cursor/`** - Cursor IDE integration
+Self-contained configs optimized for each tool:
+- **`.claude/`** - Claude Code configuration with Task delegation and TodoWrite
+- **`.copilot/`** - GitHub Copilot inline suggestions and pattern matching
+- **`.gemini/`** - Google Gemini large-context analysis and cross-file consistency
+- **`.cursor/`** - Cursor IDE integration with cmd+k optimization
 
 ### 🐚 Shell Configuration
 - **zshrc.template** - Modular Zsh configuration with oh-my-zsh & Powerlevel10k
@@ -42,17 +40,7 @@ The install script dynamically builds your `.zshrc` based on installed tools:
 ```
 dotfiles/
 ├── .ai/                                # 🎯 Agent-agnostic core (works with all tools)
-│   ├── 0_core/
-│   │   ├── priit-personality.md        # Buddy-cop relationship
-│   │   ├── coding-standards.md         # TDD, quality standards
-│   │   ├── decision-framework.md       # 🟢🟡🔴 action framework
-│   │   └── spec-kit-alignment.md       # Spec-kit integration guide
-│   ├── 1_workflows/
-│   │   ├── git-workflow.md             # Pre-commit discipline
-│   │   ├── tdd-workflow.md             # Red-Green-Refactor process
-│   │   ├── pre-commit-protocol.md      # Quality gate protocol
-│   │   └── spec-driven-workflow.md     # Spec → Plan → Build → Verify
-│   ├── 2_templates/
+│   ├── 1_templates/                    # Spec templates (7)
 │   │   ├── spec-template.md            # Specification template
 │   │   ├── plan-template.md            # Implementation plan template
 │   │   ├── tasks-template.md           # Task breakdown template
@@ -60,50 +48,77 @@ dotfiles/
 │   │   ├── review-template.md          # Code review template
 │   │   ├── constitution-template.md    # Constitution template
 │   │   └── agents-template.md          # AGENTS.md template
-│   ├── 3_commands/
-│   │   ├── constitution.md             # Bootstrap project constitution
-│   │   ├── specify.md                  # Create feature specification
-│   │   ├── clarify.md                  # Refine vague requirements
-│   │   ├── plan.md                     # Create implementation plan
-│   │   ├── tasks.md                    # Generate task breakdown
-│   │   ├── analyze.md                  # Analyze spec consistency
-│   │   ├── bootstrap.md                # Bootstrap new project
-│   │   ├── implement.md                # Execute implementation
-│   │   ├── spec-review.md              # Spec-driven code review
-│   │   └── fix.md                      # Fix failures
-│   ├── 4_tech_stacks/
+│   ├── 2_commands/                     # Commands and tools (67)
+│   │   ├── workflows/                  # Multi-agent orchestration (19)
+│   │   │   ├── spec-driven.md          # Complete Spec → Plan → Build → Verify
+│   │   │   └── ...                     # 18 more workflow commands
+│   │   └── [tools]                     # Single-purpose tools (48)
+│   │       ├── constitution.md         # Bootstrap project constitution
+│   │       ├── specify.md              # Create feature specification
+│   │       ├── clarify.md              # Refine vague requirements
+│   │       ├── plan.md                 # Create implementation plan
+│   │       ├── tasks.md                # Generate task breakdown
+│   │       ├── analyze.md              # Analyze spec consistency
+│   │       ├── bootstrap.md            # Bootstrap new project
+│   │       ├── implement.md            # Execute implementation
+│   │       ├── spec-review.md          # Spec-driven code review
+│   │       ├── fix.md                  # Fix failures
+│   │       └── ...                     # 38 more tools
+│   ├── 3_tech_stacks/                  # Tech references (3)
 │   │   ├── tech-stack-spring-hex.md    # Spring Boot + hexagonal patterns
 │   │   ├── tech-stack-dotfiles.md      # Shell script patterns
 │   │   └── tech-stack-ai.md            # AI configuration patterns
-│   ├── 5_agents/
-│   │   ├── 0_speccing/                 # Requirements → Specs
-│   │   │   ├── project-bootstrapper.md # 📜 Founding Father Franklin
-│   │   │   ├── jira-to-spec.md         # 🌉 Valdis the Translator
-│   │   │   └── conversational-spec.md  # 💭 Socrates the Questioner
-│   │   ├── 1_planning/                 # Specs → Plans
-│   │   │   └── planner.md              # 🧩 Decomposer Dale
-│   │   ├── 2_engineering/              # Plans → Code
-│   │   │   ├── spring-hex-bootstrapper.md  # 🏗️ Constructor Conway
-│   │   │   ├── spring-hex-tdd-developer.md # 🦖 Rex the Red-Green-Refactor
-│   │   │   ├── dotfiles-developer.md       # 🐑 Script Shepherd Shane
-│   │   │   └── ai-dotfiles-architect.md    # 🏛️ Architect Anya
-│   │   └── 3_quality/                  # Code → Review/Fix
-│   │       ├── spec-analyzer.md        # 🔍 Inspector Insight
-│   │       ├── code-reviewer.md        # ⚖️ Judge Dredd Code
-│   │       └── test-fixer.md           # 🔬 Dr. Debugsworth McFixit
+│   ├── 4_agents/                       # Specialized agents (28)
+│   │   ├── speccing/                   # Requirements → Specs (empty)
+│   │   ├── planning/                   # Specs → Plans (empty)
+│   │   ├── engineering/                # Language specialists (8)
+│   │   │   ├── backend-architect.md
+│   │   │   ├── frontend-developer.md
+│   │   │   ├── golang-pro.md
+│   │   │   ├── java-pro.md
+│   │   │   ├── javascript-pro.md
+│   │   │   ├── python-pro.md
+│   │   │   ├── rust-pro.md
+│   │   │   └── typescript-pro.md
+│   │   ├── quality/                    # Testing & review (6)
+│   │   │   ├── code-reviewer.md
+│   │   │   ├── debugger.md
+│   │   │   ├── error-detective.md
+│   │   │   ├── security-auditor.md
+│   │   │   ├── tdd-orchestrator.md
+│   │   │   └── test-automator.md
+│   │   ├── infrastructure/             # DevOps, cloud (6)
+│   │   │   ├── cloud-architect.md
+│   │   │   ├── deployment-engineer.md
+│   │   │   ├── devops-troubleshooter.md
+│   │   │   ├── kubernetes-architect.md
+│   │   │   ├── network-engineer.md
+│   │   │   └── terraform-specialist.md
+│   │   ├── data/                       # Data engineering, ML (5)
+│   │   │   ├── ai-engineer.md
+│   │   │   ├── data-engineer.md
+│   │   │   ├── data-scientist.md
+│   │   │   ├── ml-engineer.md
+│   │   │   └── mlops-engineer.md
+│   │   └── business/                   # Content, support, analysis (3)
+│   │       ├── business-analyst.md
+│   │       ├── content-marketer.md
+│   │       └── customer-support.md
 │
 ├── .claude/
-│   ├── CLAUDE.md                       # Claude-specific wrapper
-│   └── agents/ → ../.ai/5_agents/      # Symlink to shared agents
+│   ├── CLAUDE.md                       # Claude-specific config (self-contained)
+│   └── agents/ → ../.ai/4_agents/      # Symlink to shared agents
 │
 ├── .copilot/
-│   └── instructions.md                 # Copilot-specific wrapper
+│   └── instructions.md                 # Copilot-specific config (self-contained)
 │
 ├── .gemini/
-│   └── GEMINI.md                       # Gemini-specific wrapper
+│   └── GEMINI.md                       # Gemini-specific config (self-contained)
 │
 ├── .cursor/
-│   └── rules.md                        # Cursor-specific wrapper
+│   └── rules.md                        # Cursor-specific config (self-contained)
+│
+├── .archive/                           # Archived files (gitignored)
 │
 ├── zshrc.template                      # Modular zsh configuration
 ├── zsh_plugins.txt                     # Oh-My-Zsh plugins list
@@ -116,83 +131,16 @@ dotfiles/
 └── README.md                           # This file
 ```
 
-## Specialized Agents (Work with ALL AI Tools)
+## Specialized Agents
 
-Agents follow the **Spec → Plan → Build → Verify** workflow and are organized by phase. Use spec-kit commands to invoke:
+28 specialized agents available in `.ai/4_agents/`:
+- **Engineering (8):** Language specialists (Python, Java, TypeScript, JavaScript, Golang, Rust, backend, frontend)
+- **Quality (6):** Testing, debugging, security, code review
+- **Infrastructure (6):** Cloud, Kubernetes, DevOps, networking, Terraform, deployment
+- **Data (5):** ML, MLOps, AI, data engineering, data science
+- **Business (3):** Business analysis, content marketing, customer support
 
-### 0️⃣ Speccing (Requirements → Specifications)
-
-#### 📜 Founding Father Franklin
-**Purpose:** Bootstrap project constitution.md with foundational principles
-**Command:** `/constitution`
-**When to use:** Starting new projects, establishing project principles
-**Example:** `/constitution` (analyzes codebase, generates constitution)
-
-#### 🌉 Valdis the Translator
-**Purpose:** Translate Jira tasks into crystal-clear technical specifications
-**Command:** `/specify`
-**When to use:** Converting structured Jira requirements into specs
-**Example:** `/specify` (provide Jira URL or task details)
-
-#### 💭 Socrates the Questioner
-**Purpose:** Refines vague ideas into detailed specifications through guided questions
-**Commands:** `/specify`, `/clarify`
-**When to use:** Converting rough ideas into specs (no Jira ticket needed)
-**Example:** `/specify "Add payment processing"` or `/clarify`
-
-### 1️⃣ Planning (Specifications → Implementation Plans)
-
-#### 🧩 Decomposer Dale
-**Purpose:** Breaks specs into actionable plans and tasks
-**Commands:** `/plan`, `/tasks`
-**When to use:** After creating spec.md, before implementation
-**Example:** `/plan` (creates plan.md), `/tasks` (creates tasks.md)
-
-### 2️⃣ Engineering (Plans → Code)
-
-#### 🏗️ Constructor Conway
-**Purpose:** Bootstrap new projects following constitutional principles
-**Command:** `/bootstrap`
-**When to use:** Starting new projects (detects tech stack from constitution or asks)
-**Example:** `/bootstrap` (creates complete project structure)
-
-#### 🦖 Rex the Red-Green-Refactor
-**Purpose:** TDD specialist for Spring Boot & hexagonal architecture
-**Command:** `/implement`
-**When to use:** Implementing Spring Boot features with strict TDD discipline
-**Example:** `/implement` (executes tasks.md for Spring Boot projects)
-
-#### 🐑 Script Shepherd Shane
-**Purpose:** Shell script & dotfiles specialist with BATS testing
-**Command:** `/implement`
-**When to use:** Implementing shell scripts, dotfiles, installation scripts
-**Example:** `/implement` (executes tasks.md for shell script projects)
-
-#### 🏛️ Architect Anya
-**Purpose:** AI configuration architect specializing in agent-agnostic patterns
-**Command:** `/implement`
-**When to use:** Creating new agents, designing AI configuration architecture
-**Example:** `/implement` (executes tasks.md for AI config projects)
-
-### 3️⃣ Quality (Code → Review/Fix)
-
-#### 🔍 Inspector Insight
-**Purpose:** Specification consistency analyzer detecting gaps and conflicts
-**Command:** `/analyze`
-**When to use:** After `/tasks` completes, before `/implement` begins (quality gate)
-**Example:** `/analyze` (checks spec.md, plan.md, tasks.md consistency)
-
-#### ⚖️ Judge Dredd Code
-**Purpose:** Rigorous code reviewer with zero tolerance for violations
-**Command:** `/spec-review`
-**When to use:** After `/implement` completes, before merge
-**Example:** `/spec-review` (reviews code against spec and constitution)
-
-#### 🔬 Dr. Debugsworth McFixit
-**Purpose:** Test failure diagnostician and fixer extraordinaire
-**Command:** `/fix`
-**When to use:** When tests fail or `/spec-review` finds issues
-**Example:** `/fix` (diagnoses and fixes failures systematically)
+Access agents via your AI tool's agent delegation features.
 
 ## Installation
 
@@ -301,26 +249,12 @@ After running `install.sh`:
 ## Using with Different AI Tools
 
 ### Claude Code
-Automatically reads from `~/.claude/CLAUDE.md` which imports from `~/.ai/`
+Automatically reads from `~/.claude/CLAUDE.md`
 
-**Delegate to agents (full workflow):**
-```
-# Speccing phase
-"Create spec from Jira task PROJ-789"  # Valdis
-"Help me spec out migrating to Ansible"  # Socrates
-
-# Planning phase
-"Create implementation plan for specs/PROJ-789/spec.md"  # Decomposer Dale
-
-# Engineering phase
-"Implement specs/PROJ-789/ using Rex"  # Rex (Spring Boot)
-"Implement specs/ANSIBLE-001/ using Shane"  # Shane (dotfiles)
-"Use Anya to create a new quality agent"  # Anya (AI configs)
-
-# Quality phase
-"Have Judge Dredd review this implementation"  # Judge Dredd
-"Use Dr. Debugsworth to fix failing tests"  # Dr. Debugsworth
-```
+**Features:**
+- Task tool for agent delegation
+- TodoWrite for task tracking
+- Access to 28 specialized agents via Task tool
 
 ### GitHub Copilot
 Automatically reads from `~/.copilot/instructions.md`
@@ -362,17 +296,11 @@ Think of it as a README specifically for AI tools.
 
 ### Bootstrap Documentation for New Projects
 
-Use **Founding Father Franklin** to generate project constitution:
+Create `constitution.md` and `AGENTS.md` files for your project following the spec-kit format.
 
-```bash
-# Invoke Franklin via /constitution command
-/constitution
-```
-
-Franklin analyzes your codebase and generates:
-- **`constitution.md`** - Foundational principles + technical guidelines (spec-kit format)
-
-Per spec-kit, `AGENTS.md` is generated later by Decomposer Dale during the `/plan` command (Phase 1).
+Use the templates in `.ai/1_templates/` as starting points:
+- **`constitution-template.md`** - Foundational principles + technical guidelines
+- **`agents-template.md`** - Practical AI instructions
 
 Example generated `AGENTS.md`:
 
@@ -452,11 +380,8 @@ Your global settings in `~/.ai/` apply everywhere. For project-specific context,
 ```markdown
 # Project-Specific Configuration
 
-# Import only what you want from global settings
-@import ~/.ai/0_core/priit-personality.md
-@import ~/.ai/0_core/coding-standards.md
-
-# Skip git-workflow.md because this project uses different commit format
+# Note: Tool configs are self-contained (no imports needed)
+# Define project-specific overrides here
 
 ## Tech Stack
 - Backend: Spring Boot 3.2, Java 21
@@ -483,15 +408,17 @@ your-project/
 ```markdown
 # Project Configuration
 
-# Import global Priit settings
-@import ~/.ai/0_core/priit-personality.md
-@import ~/.ai/0_core/coding-standards.md
-@import ~/.ai/1_workflows/git-workflow.md
+Note: Global configs are already self-contained in ~/.claude/CLAUDE.md
+This file provides project-specific context only.
 
-# Import project-specific files
-@import tech-stack.md
-@import architecture.md
-@import team-conventions.md
+## Tech Stack
+See tech-stack.md
+
+## Architecture
+See architecture.md
+
+## Team Conventions
+See team-conventions.md
 ```
 
 **`.claude/tech-stack.md`**:
@@ -566,15 +493,14 @@ com.example.orders/
 ## Key Features
 
 ### Agent-Agnostic
-- Write your preferences once in `~/.ai/`
-- All AI tools automatically use them
-- No duplication across tool configs
+- Shared agents in `~/.ai/4_agents/` work with all tools
+- Tool configs are self-contained (no imports)
+- Agents and commands referenced consistently
 
 ### Specialized Agents
-- 11 expert agents organized by workflow phase
+- 28 expert agents organized by category
 - Work consistently across all AI tools
-- Clear Spec → Plan → Build → Verify workflow
-- Tech stack agnostic (Spring Boot, dotfiles, AI configs, and more)
+- Tech stack coverage: engineering, quality, infrastructure, data, business
 
 ### TDD Workflow
 - Red-Green-Refactor enforcement
