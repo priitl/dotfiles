@@ -7,9 +7,9 @@ Agent-agnostic AI development environment configuration that works with Claude, 
 ### 🤖 Agent-Agnostic AI Framework (`.ai/`)
 A shared core that works with **all AI tools** - agents and commands reusable everywhere:
 - **Spec templates** (`1_templates/`) - Templates for specifications, plans, and tasks (7 templates)
-- **Commands** (`2_commands/`) - Spec-kit commands and tools (67 total: 48 tools + 19 workflows)
+- **Commands** (`2_commands/`) - Spec-kit commands and tools (68 total: 48 tools + 20 workflows)
 - **Tech stacks** (`3_tech_stacks/`) - Spring Boot, dotfiles, AI configuration patterns (3 references)
-- **Specialized agents** (`4_agents/`) - 27 expert agents organized by workflow phase
+- **Specialized agents** (`4_agents/`) - 28 specialized agents organized by domain
 
 ### 🛠️ Tool-Specific Configurations
 Self-contained configs optimized for each tool:
