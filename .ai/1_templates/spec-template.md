@@ -1,6 +1,7 @@
 # Feature Specification: [FEATURE NAME]
 
-**Feature Branch**: `[###-feature-name]`
+**JIRA Task**: [JIRA-TASK-NUMBER or N/A]
+**Feature Branch**: `[###-feature-name]` or `[feature/JIRA-TASK-NUMBER]`
 **Created**: [DATE]
 **Status**: Draft
 **Input**: User description: "$ARGUMENTS"

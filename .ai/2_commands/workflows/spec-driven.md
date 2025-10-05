@@ -24,7 +24,7 @@ Feature to implement using spec-driven approach: $ARGUMENTS
 
 **Manual Specification**:
 1. Create feature directory: `specs/NNN-feature-name/`
-2. Copy spec template from `.ai/1_templates/spec-template.md`
+2. Copy spec template from `~/.ai/1_templates/spec-template.md` (from home directory)
 3. Fill in sections: Overview, Requirements, Acceptance Criteria, Success Metrics
 4. Review for completeness and clarity
 
@@ -129,7 +129,9 @@ Use task template format with checkboxes for tracking."
 During BUILD phase:
 - Mark tasks as 🟢 (completed), 🟡 (in progress), 🔴 (blocked)
 - Update tasks.md after each completed task
-- Commit code with spec reference: `feat(NNN): description\n\nSee specs/NNN-feature/spec.md`
+- Commit code with spec reference:
+  - With JIRA: `feat(JIRA-TASK-NUMBER): description\n\nSee specs/feature-JIRA-TASK-NUMBER/spec.md`
+  - Without JIRA: `feat(NNN): description\n\nSee specs/NNN-feature/spec.md`
 - Run tests continuously to maintain green state
 
 ### Validation Checkpoint: BUILD Phase
@@ -198,6 +200,15 @@ After successful verification:
 2. **Commit Final Changes**
    ```
    git add .
+   # If JIRA task exists:
+   git commit -m "feat(JIRA-TASK-NUMBER): Feature description
+
+   Implements specs/feature-JIRA-TASK-NUMBER/spec.md
+   All acceptance criteria validated.
+
+   Co-Authored-By: Claude <noreply@anthropic.com>"
+
+   # If no JIRA task (numbered feature):
    git commit -m "feat(NNN): Feature description
 
    Implements specs/NNN-feature/spec.md

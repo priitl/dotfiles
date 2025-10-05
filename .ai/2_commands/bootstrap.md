@@ -12,7 +12,7 @@ The text the user typed after `/bootstrap` in the triggering message **is** the 
 
 Given that project description, do this:
 
-1. Load `.ai/1_templates/bootstrap-template.md` to understand the interactive bootstrap process.
+1. Load `~/.ai/1_templates/bootstrap-template.md` (from home directory) to understand the interactive bootstrap process.
 
 2. Check if `constitution.md` exists at project root:
    - **If YES**: Read the constitution to understand constitutional requirements

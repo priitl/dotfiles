@@ -13,7 +13,7 @@ You are creating or updating the project constitution at `constitution.md`.
 Follow this execution flow:
 
 1. Check if `constitution.md` exists at project root:
-   - **If NO**: Load `.ai/1_templates/constitution-template.md` as the starting template
+   - **If NO**: Load `~/.ai/1_templates/constitution-template.md` (from home directory) as the starting template
    - **If YES**: Load the existing `constitution.md` from project root
 
 2. Identify placeholder tokens:
@@ -38,10 +38,10 @@ Follow this execution flow:
    - Ensure Governance section lists amendment procedure, versioning policy, and compliance review expectations.
 
 5. Consistency propagation checklist (convert prior checklist into active validations):
-   - Read `.ai/1_templates/plan-template.md` and ensure any "Constitution Check" or rules align with updated principles.
-   - Read `.ai/1_templates/spec-template.md` for scope/requirements alignment—update if constitution adds/removes mandatory sections or constraints.
-   - Read `.ai/1_templates/tasks-template.md` and ensure task categorization reflects new or removed principle-driven task types (e.g., observability, versioning, testing discipline).
-   - Read each command file in `.ai/3_commands/*.md` (including this one) to verify no outdated references remain when generic guidance is required.
+   - Read `~/.ai/1_templates/plan-template.md` (from home directory) and ensure any "Constitution Check" or rules align with updated principles.
+   - Read `~/.ai/1_templates/spec-template.md` (from home directory) for scope/requirements alignment—update if constitution adds/removes mandatory sections or constraints.
+   - Read `~/.ai/1_templates/tasks-template.md` (from home directory) and ensure task categorization reflects new or removed principle-driven task types (e.g., observability, versioning, testing discipline).
+   - Read each command file in `~/.ai/2_commands/*.md` (including this one) to verify no outdated references remain when generic guidance is required.
    - Read any runtime guidance docs (e.g., `README.md`, `docs/quickstart.md`, or agent-specific guidance files if present). Update references to principles changed.
 
 6. Produce a Sync Impact Report (prepend as an HTML comment at top of the constitution file after update):
