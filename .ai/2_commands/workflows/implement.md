@@ -51,8 +51,8 @@ $ARGUMENTS
    - **IMPORTANT** For completed tasks, make sure to mark the task off as [X] in the tasks file
    - **Git commits**: Include JIRA task number in commit messages if feature has one:
      - Read JIRA Task field from spec.md to determine if JIRA task exists
-     - With JIRA: `feat(JIRA-TASK-NUMBER): task description`
-     - Without JIRA: `feat: task description` or use feature number if applicable
+     - With JIRA: `feat(JIRA-TASK-NUMBER): task description\n\nSee specs/feature-JIRA-TASK-NUMBER/spec.md`
+     - Without JIRA: `feat(NNN): task description\n\nSee specs/NNN-feature/spec.md`
 
 7. Completion validation:
    - Verify all required tasks are completed

@@ -246,6 +246,49 @@ After running `install.sh`:
    ls -la ~/.ai ~/.claude ~/.copilot ~/.gemini ~/.cursor
    ```
 
+## Path Structure & Usage
+
+### Understanding `.ai/` vs `~/.ai/`
+
+This repository uses a **symlink-based setup** to make templates accessible from any project:
+
+**Setup:**
+```bash
+~/Projects/dotfiles/.ai/    # Source (git-tracked repository)
+~/.ai/ → ~/Projects/dotfiles/.ai/    # Symlink (global access)
+```
+
+**When to use which path:**
+
+| Context | Path | Example | Reason |
+|---------|------|---------|--------|
+| **Commands reference templates** | `~/.ai/` | `~/.ai/1_templates/spec-template.md` | Works from any project directory |
+| **Project-local specs** | `.ai/` or `specs/` | `specs/001-feature/spec.md` | Project-specific artifacts |
+| **Documentation/examples** | Either | Both work | Preference for clarity |
+
+**Key principle:**
+- **Global templates & commands**: Use `~/.ai/` (from dotfiles, shared across all projects)
+- **Project-specific files**: Use project root paths (specs, constitution.md, AGENTS.md)
+
+**Example workflow:**
+```bash
+# In any project directory
+cd ~/Projects/my-app/
+
+# Command loads template from home
+/specify PROJ-123 Add user authentication
+# → Loads: ~/.ai/1_templates/spec-template.md (global)
+# → Creates: ./specs/feature-PROJ-123/spec.md (local)
+
+# Commands reference global paths
+~/.ai/2_commands/plan.md references ~/.ai/1_templates/plan-template.md
+
+# Projects create local artifacts
+./specs/001-feature/spec.md
+./constitution.md
+./AGENTS.md
+```
+
 ## Using with Different AI Tools
 
 ### Claude Code

@@ -10,10 +10,15 @@ $ARGUMENTS
 
 The text the user typed after `/specify` in the triggering message **is** the feature description. Assume you always have it available in this conversation even if `{ARGS}` appears literally below. Do not ask the user to repeat it unless they provided an empty command.
 
+**Branch & Directory Naming:**
+- With JIRA (e.g., `PROJ-123`): Branch = `feature/PROJ-123`, Directory = `specs/feature-PROJ-123/`
+- Without JIRA: Branch = `001-feature-name`, Directory = `specs/001-feature-name/`
+- Note: Branch and directory names always match for consistency
+
 Given that feature description, do this:
 
 1. Parse JIRA task number (if present) and determine branch naming strategy:
-   - Check if feature description contains a JIRA task ID (e.g., PROJ-123, ABC-456)
+   - Check if feature description contains a JIRA task ID using pattern: `[A-Z]+-[0-9]+` (e.g., PROJ-123, ABC-456, FEATURE-789)
    - If JIRA task found:
      - Extract JIRA task number
      - Use enterprise branch format: `feature/JIRA-TASK-NUMBER` (e.g., `feature/PROJ-123`)
