@@ -1,7 +1,8 @@
 # Implementation Plan: [FEATURE]
 
-**Branch**: `[###-feature-name]` | **Date**: [DATE] | **Spec**: [link]
-**Input**: Feature specification from `/specs/[###-feature-name]/spec.md`
+**JIRA Task**: [JIRA-TASK-NUMBER or N/A]
+**Branch**: `[###-feature-name]` or `[feature/JIRA-TASK-NUMBER]` | **Date**: [DATE] | **Spec**: [link]
+**Input**: Feature specification from `/specs/[branch-name]/spec.md`
 
 ## Execution Flow (/plan command scope)
 ```
@@ -52,7 +53,7 @@
 
 ### Documentation (this feature)
 ```
-specs/[###-feature]/
+specs/[branch-name]/     # Either [###-feature] or [feature-JIRA-TASK-NUMBER]
 ├── plan.md              # This file (/plan command output)
 ├── research.md          # Phase 0 output (/plan command)
 ├── data-model.md        # Phase 1 output (/plan command)
@@ -152,7 +153,7 @@ directories captured above]
 
 5. **Update AGENTS.md at project root** (incremental, O(1) operation):
    - Check if `AGENTS.md` exists at project root:
-     - **If NO**: Load `.ai/1_templates/agents-template.md` and create initial AGENTS.md
+     - **If NO**: Load `~/.ai/1_templates/agents-template.md` (from home directory) and create initial AGENTS.md
      - **If YES**: Read current `AGENTS.md` for updating
    - Extract technology stack from Technical Context above:
      - Language/Version + Primary Dependencies = tech stack entry
@@ -173,7 +174,7 @@ directories captured above]
 *This section describes what the /tasks command will do - DO NOT execute during /plan*
 
 **Task Generation Strategy**:
-- Load `.ai/1_templates/tasks-template.md` as base
+- Load `~/.ai/1_templates/tasks-template.md` (from home directory) as base
 - Generate tasks from Phase 1 design docs (contracts, data model, quickstart)
 - Each contract → contract test task [P]
 - Each entity → model creation task [P]

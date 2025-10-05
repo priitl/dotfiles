@@ -1,7 +1,10 @@
 # Tasks: [FEATURE NAME]
 
-**Input**: Design documents from `/specs/[###-feature-name]/`
+**JIRA Task**: [JIRA-TASK-NUMBER or N/A]
+**Input**: Design documents from `/specs/[branch-name]/`
 **Prerequisites**: plan.md (required), research.md, data-model.md, contracts/
+
+**Note**: Task IDs (T001, T002, etc.) are independent of JIRA task numbers. JIRA task number applies to the feature as a whole, not individual implementation tasks.
 
 ## Execution Flow (main)
 ```

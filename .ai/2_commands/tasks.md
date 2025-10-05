@@ -27,7 +27,7 @@ $ARGUMENTS
    - Generate tasks based on what's available
 
 3. Generate tasks following the template:
-   - Use `.ai/1_templates/tasks-template.md` as the base
+   - Use `~/.ai/1_templates/tasks-template.md` (from home directory) as the base
    - Replace example tasks with actual tasks based on:
      * **Setup tasks**: Project init, dependencies, linting
      * **Test tasks [P]**: One per contract, one per integration scenario

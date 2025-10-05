@@ -20,7 +20,7 @@ Wait for user confirmation before proceeding.
 
 Given the review scope, do this:
 
-1. Load `.ai/1_templates/review-template.md` to understand the review process and report structure.
+1. Load `~/.ai/1_templates/review-template.md` (from home directory) to understand the review process and report structure.
 
 2. Determine feature context based on scope:
    - If user provided feature path (e.g., `specs/003-user-auth`), use it

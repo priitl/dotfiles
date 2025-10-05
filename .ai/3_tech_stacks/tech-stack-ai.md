@@ -218,7 +218,7 @@ Each `tech-stack-{name}.md` file contains:
 - `tech-stack-ai.md`: AI configuration systems (this file)
 
 ### Adding New Tech Stacks
-1. Create `.ai/3_tech_stacks/tech-stack-{name}.md`
+1. Create `~/.ai/3_tech_stacks/tech-stack-{name}.md` (in home directory dotfiles)
 2. Document architecture, testing, conventions
 3. Provide code examples and patterns
 4. Add to project's `constitution.md`: `tech_stack: {name}`
@@ -305,6 +305,6 @@ Each category folder must have README.md:
 - **Gather feedback**: Improve based on actual usage
 
 ## References
-- Spec-Driven Development: `.ai/2_commands/workflows/spec-driven.md`
-- Agent Categories: `.ai/4_agents/README.md`
-- Constitution Command: `.ai/2_commands/constitution.md` (Bootstrap project constitution)
+- Spec-Driven Development: `~/.ai/2_commands/workflows/spec-driven.md`
+- Agent Categories: `~/.ai/4_agents/README.md`
+- Constitution Command: `~/.ai/2_commands/constitution.md` (Bootstrap project constitution)
