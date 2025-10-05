@@ -4,7 +4,7 @@ description: TDD Refactor phase: Improve code while keeping tests green
 
 Refactor code with confidence using comprehensive test safety net:
 
-[Extended thinking: This tool uses the tdd-orchestrator agent (opus model) for sophisticated refactoring while maintaining all tests green. It applies design patterns, improves code quality, and optimizes performance with the safety of comprehensive test coverage.]
+[Extended thinking: This tool uses the tdd-orchestrator agent (sonnet model) for sophisticated refactoring while maintaining all tests green. It applies design patterns, improves code quality, and optimizes performance with the safety of comprehensive test coverage.]
 
 ## Refactoring Process
 
