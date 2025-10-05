@@ -4,26 +4,6 @@ Purpose: Instructions for AI agents to assist in this project.
 
 References: [`constitution.md`](constitution.md)
 
----
-
-## Agent Roles and Tasks
-
-| Agent | Phase | Role | Invocation |
-|-------|-------|------|------------|
-| **Socrates the Questioner** | Speccing | Refines vague ideas into detailed specs | `/specify` or `/clarify` |
-| **Valdis the Translator** | Speccing | Translates Jira tasks into technical specs | `/specify` |
-| **Founding Father Franklin** | Speccing | Bootstraps project constitution | `/constitution` |
-| **Decomposer Dale** | Planning | Breaks specs into actionable tasks | `/plan` or `/tasks` |
-| **Inspector Insight** | Quality Gate | Analyzes specification consistency | `/analyze` |
-| **Constructor Conway** | Engineering | Spring Boot project bootstrapper | `/bootstrap` |
-| **Rex the Red-Green-Refactor** | Engineering | Spring Boot TDD specialist | `/implement` |
-| **Script Shepherd Shane** | Engineering | Shell script & dotfiles specialist | `/implement` |
-| **Architect Anya** | Engineering | AI configuration architect | `/implement` |
-| **Judge Dredd Code** | Quality | Code reviewer | `/spec-review` |
-| **Dr. Debugsworth McFixit** | Quality | Test failure fixer | `/fix` |
-
----
-
 ## Invocation Instructions
 
 **Spec-Driven Workflow Commands:**
@@ -44,14 +24,14 @@ References: [`constitution.md`](constitution.md)
 
 ## Agent Context
 
-All agents automatically load from `~/.ai/`:
+All agents access shared resources from `~/.ai/`:
 
-- **0_core/** - Personality, standards, decision framework
-- **1_workflows/** - TDD, git, pre-commit, spec-driven
-- **2_templates/** - Spec templates (spec.md, plan.md, tasks.md)
-- **3_commands/** - Spec-kit workflow commands
-- **4_tech_stacks/** - Shell patterns, Spring patterns, AI patterns
-- **5_agents/** - Specialized agent definitions
+- **1_templates/** - Spec templates (spec.md, plan.md, tasks.md) - 7 templates
+- **2_commands/** - Spec-kit commands and tools - 67 total
+  - **workflows/** - Multi-agent orchestration - 19 workflows
+  - **[tools]** - Single-purpose tools - 48 tools
+- **3_tech_stacks/** - Shell patterns, Spring patterns, AI patterns - 3 references
+- **4_agents/** - Specialized agent definitions - 28 agents
 
 ---
 
@@ -83,11 +63,12 @@ shellcheck install.sh                  # Lint
 4. Test idempotency (run twice)
 
 ### Add Agent
-1. Check `.ai/5_agents/` structure
-2. Identify phase: 0_speccing/1_planning/2_engineering/3_quality
-3. Follow existing pattern (80-100 lines, concise)
-4. Reference workflows from `.ai/1_workflows/`
-5. Link to command in `.ai/3_commands/` if applicable
+1. Check `.ai/4_agents/` structure
+2. Identify phase: speccing/planning/engineering/quality/infrastructure/data/business
+3. Follow existing pattern with frontmatter (name, description, model, backstory)
+4. Reference workflows from `.ai/2_commands/workflows/`
+5. Link to command in `.ai/2_commands/` if applicable
+6. Keep agents concise (focus on capabilities, not full workflows)
 
 ---
 

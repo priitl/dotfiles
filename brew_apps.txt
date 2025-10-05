@@ -7,6 +7,7 @@ colima
 
 # Node.js version manager
 nvm
+pnpm
 
 # Shell enhancements
 zsh-syntax-highlighting

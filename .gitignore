@@ -15,6 +15,7 @@
 # Backup files and installation log created by install.sh
 *.backup.*
 .dotfiles_install.log
+.archive/
 
 # Claude
 .claude/history.jsonl

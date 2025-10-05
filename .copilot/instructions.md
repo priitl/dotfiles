@@ -1,68 +1,109 @@
 # GitHub Copilot Configuration
 
-<!-- Import shared agent-agnostic core -->
-@import ../.ai/0_core/priit-personality.md
-@import ../.ai/0_core/coding-standards.md
-@import ../.ai/0_core/decision-framework.md
-@import ../.ai/1_workflows/git-workflow.md
-@import ../.ai/1_workflows/tdd-workflow.md
-@import ../.ai/1_workflows/pre-commit-protocol.md
-@import ../.ai/3_commands/constitution.md
-@import ../.ai/3_commands/specify.md
-@import ../.ai/3_commands/clarify.md
-@import ../.ai/3_commands/plan.md
-@import ../.ai/3_commands/tasks.md
-@import ../.ai/3_commands/analyze.md
-@import ../.ai/3_commands/bootstrap.md
-@import ../.ai/3_commands/implement.md
-@import ../.ai/3_commands/spec-review.md
-@import ../.ai/3_commands/fix.md
+Working with Priit on dotfiles and shell scripting projects.
 
-## Specialized Agents
+---
 
-Available agents in `.ai/5_agents/`:
+## Interaction Style
 
-**Speccing:**
-- Founding Father Franklin (constitution bootstrapper)
-- Valdis the Translator (Jira to specs)
-- Socrates the Questioner (conversational spec refinement)
+**Buddy-cop dynamic:**
+- Direct and concise (match Priit's style)
+- Provide evidence when pushing back
+- Humor is welcome
+- Admit when uncertain
 
-**Planning:**
-- Decomposer Dale (spec to implementation plan)
+---
 
-**Engineering:**
-- Constructor Conway (Spring Boot project bootstrapper)
-- Rex the Red-Green-Refactor (TDD developer for Spring Boot)
-- Script Shepherd Shane (dotfiles developer)
-- Architect Anya (AI configuration architect)
+## Code Quality
 
-**Quality:**
-- Inspector Insight (spec consistency analyzer)
-- Judge Dredd Code (code reviewer)
-- Dr. Debugsworth McFixit (test fixer)
+**Readability:**
+- Self-documenting code over comments
+- Clear variable/function names
+- Keep functions small and focused (SRP)
+- Prefer explicit over implicit
 
-## Copilot-Specific Instructions
+**Maintainability:**
+- DRY (Don't Repeat Yourself)
+- KISS (Keep It Simple, Stupid)
+- YAGNI (You Aren't Gonna Need It)
+- Refactor continuously, not in big batches
 
-### Code Completion Focus
-- Provide inline code suggestions that match surrounding code style
-- Apply TDD patterns: suggest tests before implementation
-- Use decision framework: 🟢 = suggest immediately, 🟡 = propose options, 🔴 = ask first
+**Error Handling:**
+- Handle errors explicitly
+- Fail fast and loudly
+- Provide context in error messages
+- Never swallow exceptions silently
+
+---
+
+## Code Completion Focus
 
 ### Pattern Matching
 - Apply patterns from existing files in same directory
 - Match import order: external libs first, then internal modules
-- File naming: kebab-case.ts for files, PascalCase for classes
-- Comment style: JSDoc for public methods only
-- Test files: *.spec.ts or *.test.ts in same directory as source
+- Test files: `*.spec.ts` or `*.test.ts` co-located with source
 
-### Quality Standards
-- Suggest simple, maintainable solutions over clever ones
-- Never suggest bypassing pre-commit hooks
-- Always include error handling
-- Prefer explicit over implicit
+### Test-Driven Suggestions
+- Suggest tests before implementation when creating new functions
+- Follow Red-Green-Refactor cycle
+- Test behavior, not implementation details
 
-### When Suggesting Changes
-- Match existing code formatting exactly
-- Preserve comments unless proven false
-- Use evergreen naming (no "new", "improved", "enhanced")
-- Fix root causes, not symptoms
+---
+
+## Shell Scripting
+
+Every script MUST begin with:
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+```
+
+**Variable naming:**
+- `snake_case` for local variables and functions
+- `UPPER_CASE` for constants
+
+**Platform detection:**
+```bash
+case "$(uname -s)" in
+    Darwin*) # macOS ;;
+    Linux*)  # Linux ;;
+esac
+```
+
+---
+
+## Commit Standards
+
+**Format:**
+```
+Brief description of change (imperative mood)
+
+Optional detailed explanation of why (not what).
+```
+
+**Requirements:**
+- Imperative mood: "Add feature" not "Added feature"
+- First line ≤ 50 characters
+- Explain WHY, not WHAT
+- Atomic commits
+
+---
+
+## Forbidden Practices
+
+Never suggest:
+- ❌ Using `--no-verify` flag
+- ❌ Committing failing tests
+- ❌ Committing commented-out code
+- ❌ Committing debug statements
+- ❌ Disabling quality checks
+
+---
+
+## Key Principles
+
+1. **Test First** - TDD is non-negotiable
+2. **Quality over Speed** - Never bypass quality checks
+3. **Simple over Clever** - Prefer maintainable solutions
+4. **Fail Fast** - Catch errors early and loudly
+5. **Document Why** - Code shows what, comments explain why
