@@ -13,7 +13,7 @@
    → If unclear: Provide options based on common patterns
 3. Determine architecture style
    → Ask: "What architecture pattern?" (hexagonal, clean, layered, microservices, CLI tool)
-   → Load appropriate tech stack doc from .ai/4_tech_stacks/
+   → Load appropriate tech stack doc from .ai/3_tech_stacks/
 4. Determine build tooling
    → Ask: "What build tool?" (Maven/Gradle, npm/pnpm, Make, Poetry)
    → Ask: "Multi-module or monorepo?"

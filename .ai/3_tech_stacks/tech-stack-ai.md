@@ -192,8 +192,8 @@ Create memorable, personality-driven backstories that:
 - [ ] README.md updated when adding agents
 
 ### Configuration Best Practices
-- **DRY Principle**: Extract shared patterns to 0_core/, use @import
-- **Single Source of Truth**: Each concern defined once
+- **DRY Principle**: Extract shared patterns appropriately within the new structure
+- **Single Source of Truth**: Each concern defined once (no @import dependencies)
 - **Evergreen Language**: No "recently", "new", "modern" (code ages)
 - **Strong Restrictions**: Use absolute language (NEVER/ALWAYS)
 - **Clear Boundaries**: Explicit agent handoff protocols
