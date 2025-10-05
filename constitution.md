@@ -36,7 +36,7 @@ All shared logic MUST reside in the `.ai/` directory with the following structur
   - `workflows/` - Multi-agent workflow orchestration (19 workflows)
   - `[tools]` - Single-purpose tools (48 tools)
 - `3_tech_stacks/` - Technology-specific patterns
-- `4_agents/` - Specialized agents organized by workflow phase (28 agents)
+- `4_agents/` - Specialized agents organized by functional category (28 agents)
 
 ### Section 1.2: Tool Configuration
 
